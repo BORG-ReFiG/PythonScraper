@@ -1,0 +1,755 @@
+<page_url href="http://www.onecard.ualberta.ca"></page_url>
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="ie ie6 " lang="en" dir="ltr"> <![endif]-->
+<!--[if IE 7]>    <html class="ie ie7 " lang="en" dir="ltr"> <![endif]-->
+<!--[if IE 8]>    <html class="ie ie8 " lang="en" dir="ltr"> <![endif]-->
+<!--[if gt IE 8]> <!--> <html class="" lang="en" dir="ltr"> <!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="https://www.onecard.ualberta.ca/sites/default/files/favicon.ico" type="image/vnd.microsoft.icon" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content="Drupal 7 (http://drupal.org)" />
+<link rel="canonical" href="https://www.onecard.ualberta.ca/" />
+<link rel="shortlink" href="https://www.onecard.ualberta.ca/" />
+<title>ONEcard | University of Alberta</title>
+<!-- Call bootstrap.css before $scripts to resolve @import conflict with respond.js -->
+<link rel="stylesheet" href="/sites/all/themes/Porto/vendor/bootstrap/bootstrap.css">
+<style type="text/css" media="all">
+@import url("https://www.onecard.ualberta.ca/modules/system/system.base.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/modules/system/system.menus.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/modules/system/system.messages.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/modules/system/system.theme.css?oijqfy");
+</style>
+<style type="text/css" media="all">
+@import url("https://www.onecard.ualberta.ca/modules/comment/comment.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/sites/all/modules/date/date_api/date.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/sites/all/modules/date/date_popup/themes/datepicker.1.7.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/modules/field/theme/field.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/modules/node/node.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/modules/search/search.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/modules/user/user.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/modules/forum/forum.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/sites/all/modules/contrib/views/css/views.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/sites/all/modules/contrib/ckeditor/css/ckeditor.css?oijqfy");
+</style>
+<style type="text/css" media="all">
+@import url("https://www.onecard.ualberta.ca/sites/all/modules/contrib/ctools/css/ctools.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/sites/all/modules/md_slider/css/animate.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/sites/all/modules/md_slider/css/md-slider.css?oijqfy");
+</style>
+<style type="text/css" media="all">
+<!--/*--><![CDATA[/*><!--*/
+.md-layer-1-0-0{z-index:2!important;}.md-layer-1-1-0{z-index:1000!important;}.md-layer-1-3-0{z-index:1000!important;}.md-layer-1-4-0{z-index:2!important;}
+
+/*]]>*/-->
+</style>
+<style type="text/css" media="all">
+@import url("https://www.onecard.ualberta.ca/sites/all/modules/md_slider/css/md-slider-style.css?oijqfy");
+</style>
+<style type="text/css" media="all">
+<!--/*--><![CDATA[/*><!--*/
+@media (max-width:460px){.hideonmobile{display:none !important;}}
+
+/*]]>*/-->
+</style>
+<style type="text/css" media="all">
+@import url("https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/owlcarousel/owl.carousel.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/fontawesome/css/font-awesome-legacy.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/fontawesome/css/font-awesome.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/simple-line-icons/css/simple-line-icons.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/owlcarousel/owl.theme.default.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/circle-flip-slideshow/css/component.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/magnific-popup/magnific-popup.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/sites/all/themes/Porto/css/theme.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/sites/all/themes/Porto/css/theme-elements.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/sites/all/themes/Porto/css/theme-animate.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/sites/all/themes/Porto/css/theme-blog.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/sites/all/themes/Porto/css/theme-shop.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/sites/all/themes/Porto/css/drupal-styles.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/sites/default/files/less/skin.w0U0OF1zBdLH6EmkxWohQ4xMbWNQG2Eqmqbeppj4u38.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/sites/all/themes/Porto_UAsub_v11/css/custom.css?oijqfy");
+</style>
+<style type="text/css" media="all">
+@import url("https://www.onecard.ualberta.ca/sites/default/files/fontyourface/font.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/sites/default/files/fontyourface/local_fonts/DIN_Pro-normal-bold/stylesheet.css?oijqfy");
+@import url("https://www.onecard.ualberta.ca/sites/default/files/css_injector/css_injector_2.css?oijqfy");
+</style>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/modules/contrib/jquery_update/replace/jquery/1.10/jquery.min.js?v=1.10.2"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/misc/jquery.once.js?v=1.2"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/misc/drupal.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/modules/md_slider/js/jquery.touchwipe.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/modules/md_slider/js/modernizr.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/modules/md_slider/js/jquery-migrate-1.2.1.min.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/modules/md_slider/js/jquery.easing.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/modules/md_slider/js/md-slider.js?oijqfy"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function($) {
+      $(document).ready(function() {
+          effectsIn = Drupal.settings.inEffects;
+          effectsOut = Drupal.settings.outEffects;
+          var options_1 = Drupal.settings.md_slider_options_1;$('#md-slider-1-block').mdSlider(options_1);
+      });
+    })(jQuery);
+//--><!]]>
+</script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/modules/google_analytics/googleanalytics.js?oijqfy"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");ga("create", "UA-81629640-1", {"cookieDomain":"auto"});ga("set", "anonymizeIp", true);ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/modernizr/modernizr.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/jquery.appear/jquery.appear.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/jquery.easing/jquery.easing.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/jquery-cookie/jquery-cookie.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/bootstrap/bootstrap.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/common/common.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/jquery.validation/jquery.validation.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/jquery.stellar/jquery.stellar.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/jquery.gmap/jquery.gmap.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/jquery.lazyload/jquery.lazyload.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/isotope/jquery.isotope.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/owlcarousel/owl.carousel.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/jflickrfeed/jflickrfeed.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/magnific-popup/jquery.magnific-popup.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/vide/vide.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/themes/Porto/vendor/circle-flip-slideshow/js/jquery.flipshow.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/themes/Porto/js/custom.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/themes/Porto_UAsub_v11/js/quicklinks.js?oijqfy"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"porto_UAsub_v11","theme_token":"nRQL1cpN3M6KBMmhnhOIHdnHA3SbY5IV9ByNBLIQfnI","js":{"sites\/all\/themes\/Porto\/js\/theme.js":1,"sites\/all\/themes\/Porto\/js\/theme.init.js":1,"sites\/all\/themes\/Porto\/js\/views\/view.home.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/jquery\/1.10\/jquery.min.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/md_slider\/js\/jquery.touchwipe.js":1,"sites\/all\/modules\/md_slider\/js\/modernizr.js":1,"sites\/all\/modules\/md_slider\/js\/jquery-migrate-1.2.1.min.js":1,"sites\/all\/modules\/md_slider\/js\/jquery.easing.js":1,"sites\/all\/modules\/md_slider\/js\/md-slider.js":1,"0":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"1":1,"sites\/all\/themes\/Porto\/vendor\/modernizr\/modernizr.js":1,"sites\/all\/themes\/Porto\/vendor\/jquery.appear\/jquery.appear.js":1,"sites\/all\/themes\/Porto\/vendor\/jquery.easing\/jquery.easing.js":1,"sites\/all\/themes\/Porto\/vendor\/jquery-cookie\/jquery-cookie.js":1,"sites\/all\/themes\/Porto\/vendor\/bootstrap\/bootstrap.js":1,"sites\/all\/themes\/Porto\/vendor\/common\/common.js":1,"sites\/all\/themes\/Porto\/vendor\/jquery.validation\/jquery.validation.js":1,"sites\/all\/themes\/Porto\/vendor\/jquery.stellar\/jquery.stellar.js":1,"sites\/all\/themes\/Porto\/vendor\/jquery.easy-pie-chart\/jquery.easy-pie-chart.js":1,"sites\/all\/themes\/Porto\/vendor\/jquery.gmap\/jquery.gmap.js":1,"sites\/all\/themes\/Porto\/vendor\/jquery.lazyload\/jquery.lazyload.js":1,"sites\/all\/themes\/Porto\/vendor\/isotope\/jquery.isotope.js":1,"sites\/all\/themes\/Porto\/vendor\/owlcarousel\/owl.carousel.js":1,"sites\/all\/themes\/Porto\/vendor\/jflickrfeed\/jflickrfeed.js":1,"sites\/all\/themes\/Porto\/vendor\/magnific-popup\/jquery.magnific-popup.js":1,"sites\/all\/themes\/Porto\/vendor\/vide\/vide.js":1,"sites\/all\/themes\/Porto\/vendor\/circle-flip-slideshow\/js\/jquery.flipshow.js":1,"sites\/all\/themes\/Porto\/js\/custom.js":1,"sites\/all\/themes\/Porto_UAsub_v11\/js\/quicklinks.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"modules\/comment\/comment.css":1,"sites\/all\/modules\/date\/date_api\/date.css":1,"sites\/all\/modules\/date\/date_popup\/themes\/datepicker.1.7.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"modules\/search\/search.css":1,"modules\/user\/user.css":1,"modules\/forum\/forum.css":1,"sites\/all\/modules\/contrib\/views\/css\/views.css":1,"sites\/all\/modules\/contrib\/ckeditor\/css\/ckeditor.css":1,"sites\/all\/modules\/contrib\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/md_slider\/css\/animate.css":1,"sites\/all\/modules\/md_slider\/css\/md-slider.css":1,"0":1,"sites\/all\/modules\/md_slider\/css\/md-slider-style.css":1,"1":1,"sites\/all\/themes\/Porto\/vendor\/owlcarousel\/owl.carousel.css":1,"sites\/all\/themes\/Porto\/vendor\/fontawesome\/css\/font-awesome-legacy.css":1,"sites\/all\/themes\/Porto\/vendor\/fontawesome\/css\/font-awesome.css":1,"sites\/all\/themes\/Porto\/vendor\/simple-line-icons\/css\/simple-line-icons.css":1,"sites\/all\/themes\/Porto\/vendor\/owlcarousel\/owl.theme.default.css":1,"sites\/all\/themes\/Porto\/vendor\/prettyPhoto\/css\/prettyPhoto.css":1,"sites\/all\/themes\/Porto\/vendor\/circle-flip-slideshow\/css\/component.css":1,"sites\/all\/themes\/Porto\/vendor\/magnific-popup\/magnific-popup.css":1,"sites\/all\/themes\/Porto\/vendor\/isotope\/jquery.isotope.css":1,"sites\/all\/themes\/Porto\/css\/theme.css":1,"sites\/all\/themes\/Porto\/css\/theme-elements.css":1,"sites\/all\/themes\/Porto\/css\/theme-animate.css":1,"sites\/all\/themes\/Porto\/css\/theme-blog.css":1,"sites\/all\/themes\/Porto\/css\/theme-shop.css":1,"sites\/all\/themes\/Porto\/css\/drupal-styles.css":1,"sites\/all\/themes\/Porto\/css\/less\/skin.less":1,"sites\/all\/themes\/Porto_UAsub_v11\/css\/custom.css":1,"sites\/default\/files\/fontyourface\/font.css":1,"public:\/\/fontyourface\/local_fonts\/DIN_Pro-normal-bold\/stylesheet.css":1,"public:\/\/css_injector\/css_injector_2.css":1}},"inEffects":["bounceIn","bounceInDown","bounceInUp","bounceInLeft","bounceInRight","fadeIn","fadeInUp","fadeInDown","fadeInLeft","fadeInRight","fadeInUpBig","fadeInDownBig","fadeInLeftBig","fadeInRightBig","flipInX","flipInY","foolishIn","lightSpeedIn","puffIn","rollIn","rotateIn","rotateInDownLeft","rotateInDownRight","rotateInUpLeft","rotateInUpRight","twisterInDown","twisterInUp","swap","swashIn","tinRightIn","tinLeftIn","tinUpIn","tinDownIn","vanishIn"],"outEffects":["bombRightOut","bombLeftOut","bounceOut","bounceOutDown","bounceOutUp","bounceOutLeft","bounceOutRight","fadeOut","fadeOutUp","fadeOutDown","fadeOutLeft","fadeOutRight","fadeOutUpBig","fadeOutDownBig","fadeOutLeftBig","fadeOutRightBig","flipOutX","flipOutY","foolishOut","hinge","holeOut","lightSpeedOut","puffOut","rollOut","rotateOut","rotateOutDownLeft","rotateOutDownRight","rotateOutUpLeft","rotateOutUpRight","rotateDown","rotateUp","rotateLeft","rotateRight","swashOut","tinRightOut","tinLeftOut","tinUpOut","tinDownOut","vanishOut"],"md_slider_options_1":{"fullwidth":true,"transitionsSpeed":750,"width":"1200","height":"450","enableDrag":true,"responsive":true,"pauseOnHover":true,"loop":true,"showLoading":true,"loadingPosition":"bottom","showArrow":true,"showBullet":true,"posBullet":"2","showThumb":false,"posThumb":"1","slideShowDelay":"800000","slideShow":true,"styleBorder":"0","styleShadow":"0","videoBox":false},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/":true}});
+//--><!]]>
+</script>
+
+<!-- IE Fix for HTML5 Tags -->
+<!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!--[if IE]>
+  <link rel="stylesheet" href="/sites/all/themes/Porto/css/ie.css">
+<![endif]-->
+
+<!--[if lte IE 8]>
+  <script src="/sites/all/themes/Porto/vendor/respond.js"></script>
+<![endif]-->
+
+<!-- Web Fonts  -->
+<link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800&subset=latin,latin-ext" type="text/css" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'>
+
+<!-- User defined CSS --><style type='text/css'>.announce-time {
+	font-size: 12px;
+	border-bottom: 1px solid #c1c1c1;
+	padding-bottom: 5px;
+	margin-bottom: 7px;
+}
+
+#header .header-logo img {
+    position: initial;
+}
+
+.page-header h1 {
+	font-weight: bold;
+}
+
+#site-name a {
+    font-weight: bold;
+}
+
+h2, h3, h4, h5, h6 {
+	margin-top:15px;
+}
+
+h3 {
+	margin-bottom:25px;
+}</style><!-- End user defined CSS -->  
+</head>
+<body class="html front not-logged-in no-sidebars page-node page-node- page-node-9 node-type-page">
+    <div class="body">
+        <header id="header" data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": true}'>
+            <div class="blade container">
+                                <!-- uofa blade logo -->
+                <div class="header-logo">
+                    <a href="https://www.ualberta.ca" title="Home" rel="home" id="logo">
+					        <img src="https://www.onecard.ualberta.ca/sites/default/files/u-of-a-logo.svg" alt="Home" height="40" data-sticky-height="40" data-sticky-top="33" />
+					      </a>
+                </div>
+                                	
+                <!-- blade search (pulled right) -->
+                <div class="hidden-xs col-sm-3 col-md-2 col-lg-3 blade-search-style pull-right">
+	                	                      
+<form onsubmit="if(this.search_block_form.value==&#039;Search&#039;){ alert(&#039;Please enter a search&#039;); return false; }" action="/" method="post" id="search-block-form" accept-charset="UTF-8"><div>
+<div class="input-group"> 
+  <input title="Enter the terms you wish to search for." class="form-control search form-text" onblur="if (this.value == &#039;&#039;) {this.value = &#039;Search&#039;;}" onfocus="if (this.value == &#039;Search&#039;) {this.value = &#039;&#039;;}" placeholder="Search" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="40" maxlength="128" /><span class="input-group-btn"><button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button></span><input type="hidden" name="form_build_id" value="form-cIwj_oe0J-P7GyB8raBWbc_JCh0Zx3kTWsFlZ6TGSmw" />
+<input type="hidden" name="form_id" value="search_block_form" />
+</div>
+</div></form>	                
+	             </div>
+   				 <div class="col-xs-1 hidden-sm hidden-md hidden-lg pull-right">
+		        	<a href="/search" class="btn btn-primary blade-search"><i class="fa fa-search"></i></a>
+		    	</div>
+		    	
+		    	<!-- blade links (pulled right) -->
+		    	<div class="pull-right">
+		    	  <div class="region region-blade">
+    <div id="block-block-3" class="block block-block">
+
+    
+  <div class="content">
+    <div class="flex-container vertical-center">
+<div class="hidden-xs hidden-sm col-md-12 col-lg-12 blade-links"><a href="http://myualberta.ualberta.ca/">My UAlberta</a> <span class="menu-separator">|</span> <a href="http://webapps.srv.ualberta.ca/search/">Find a Person</a> <span class="menu-separator">|</span> <a href="/Homepage">ONEcard</a> <span class="menu-separator">|</span> <a href="https://www.beartracks.ualberta.ca/">Bear Tracks</a> <span class="menu-separator">|</span> <a href="http://www.campusmap.ualberta.ca/">Maps</a> <span class="menu-separator">|</span> <a href="http://apps.ualberta.ca/">Email &amp; Apps</a> <span class="menu-separator">|</span> <a href="https://eclass.srv.ualberta.ca/portal/">eClass</a> <span class="menu-separator">|</span> <a href="http://www.library.ualberta.ca/">Libraries</a></div>
+<div class="col-xs-12 col-sm-12 hidden-md hidden-lg dropdown-container">
+<div class="dropdown-btn">
+            <button onclick="myFunction()" class="dropbtn btn btn-default">Quicklinks</button>
+<div id="myDropdown" class="dropdown-content">
+<ul><li><a href="http://myualberta.ualberta.ca/">My UAlberta</a></li>
+<li><a href="http://webapps.srv.ualberta.ca/search/">Find a Person</a></li>
+<li><a href="/Homepage">ONEcard</a></li>
+<li><a href="https://www.beartracks.ualberta.ca/">Bear Tracks</a></li>
+<li><a href="http://www.campusmap.ualberta.ca/">Maps</a></li>
+<li><a href="http://apps.ualberta.ca/">Email &amp; Apps</a></li>
+<li><a href="https://eclass.srv.ualberta.ca/portal/">eClass</a></li>
+<li><a href="http://www.library.ualberta.ca/">Libraries</a></li>
+</ul></div>
+</div>
+</div>
+</div>
+  </div>
+</div>
+  </div>
+		    	</div>
+		    	<div>
+                                 </div>
+            </div>
+            <div class="header-body">
+                <div class="header-container">
+                    <div class="container">
+                        <div class="header-row">
+                            <div class="header-column">
+                                                                                                                                                                <div id="name-and-slogan" >
+                                                                                                            <div id="site-name" >
+                                        <a href="/" title="Home" rel="home"><span>ONEcard</span></a>
+                                    </div>
+                                                                                                                                                <div id="site-slogan"  class="hidden">
+                                        University of Alberta                                    </div>
+                                                                    </div>
+                                <!-- /#name-and-slogan -->
+                                                                
+                            </div>
+	                           <div class=" header-nav header-nav-push-top">
+	  
+							    <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main">
+										<i class="fa fa-bars"></i>
+									</button>
+									
+									 
+							    <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 collapse">
+							      <nav class="nav-main">
+							          
+<ul class="nav nav-pills nav-main" id="mainMenu"><li><a href="/get-a-onecard">Get a ONEcard</a></li><li><a href="/manage">Manage</a></li><li class="dropdown 724"><a href="/about-your-card" class="dropdown-toggle disabled">About Your Card</a><ul class="dropdown-menu"><li><a href="/access">Access</a></li><li><a href="/copying-and-printing">Copying &amp; Printing</a></li><li><a href="/laundry">Laundry</a></li><li><a href="/library">Library</a></li><li><a href="/meal-plan">Meal Plan</a></li><li><a href="/onecard-cash">ONEcard Cash</a></li><li><a href="/transit">Transit</a></li></ul></li><li><a href="/faqs">FAQs</a></li><li><a href="/contact" title="">Contact</a></li></ul>							      </nav>
+							    </div>  
+							  </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- end header -->
+        <div role="main" class="main">
+                          <div class="region region-before-content">
+    <div id="block-md-slider-front-page" class="block block-md-slider">
+
+    
+  <div class="content">
+    <div id="md-slider-1-block" class="md-slide-items" data-thumb-width='100' data-thumb-height='75'>
+          
+          
+          
+  <div class="md-slide-item slide-3" data-timeout='8000' data-transition="right-curtain" data-thumb-type='image' data-thumb-alt='' data-thumb='https://www.onecard.ualberta.ca/sites/default/files/styles/md_slider_1_thumb/public/hp-slider-onthego.jpg?itok=H34UzSKa'>
+    <div class="md-mainimg" style="">
+              <img src="https://www.onecard.ualberta.ca/sites/default/files/hp-slider-onthego.jpg" alt="" />
+          </div>
+        <div class="md-objects">
+          </div>
+  </div>
+          
+  <div class="md-slide-item slide-4" data-timeout='8000' data-transition="bottom-curtain" data-thumb-type='image' data-thumb-alt='' data-thumb='https://www.onecard.ualberta.ca/sites/default/files/styles/md_slider_1_thumb/public/hp-slider-laptopprint.jpg?itok=rY7dxQww'>
+    <div class="md-mainimg" style="">
+              <img src="https://www.onecard.ualberta.ca/sites/default/files/hp-slider-laptopprint.jpg" alt="" />
+          </div>
+        <div class="md-objects">
+                <div class="md-object md-layer-1-3-0 md-layer" data-x='0' data-y='0' data-width='1200' data-height='450' data-start='0' data-stop='8000'>
+                        <a href="https://www.onecard.ualberta.ca/copying-and-printing"></a>
+              </div>
+          </div>
+  </div>
+          
+  <div class="md-slide-item slide-5" data-timeout='8000' data-transition="bottom-curtain" data-thumb-type='image' data-thumb-alt='' data-thumb='https://www.onecard.ualberta.ca/sites/default/files/styles/md_slider_1_thumb/public/hp-slider-hangry.jpg?itok=tXsNq-3q'>
+    <div class="md-mainimg" style="">
+              <img src="https://www.onecard.ualberta.ca/sites/default/files/hp-slider-hangry.jpg" alt="" />
+          </div>
+        <div class="md-objects">
+                <div class="md-object md-layer-1-4-0 md-layer" data-x='0' data-y='0' data-width='1200' data-height='450' data-start='0' data-stop='8000'>
+                        <a href="https://onecard.ualberta.ca/node/44"></a>
+              </div>
+          </div>
+  </div>
+    </div>
+  </div>
+</div>
+  </div>
+            <div id="content" class="content full">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                                                    </div>
+                                                <div class="col-md-9 ">
+                                                                                                                  <div class="region region-content">
+    <div id="block-system-main" class="block block-system">
+
+    
+  <div class="content">
+    <div id="node-9" class="node node-page clearfix" about="/Homepage" typeof="foaf:Document">
+
+  
+      <span property="dc:title" content="Home" class="rdf-meta element-hidden"></span><span property="sioc:num_replies" content="0" datatype="xsd:integer" class="rdf-meta element-hidden"></span>
+  
+  <div class="content">
+    <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even" property="content:encoded"><div class="content-padding">
+<h2 align="center">Your Official University of Alberta Identification Card</h2>
+<div class="row">
+<div class="col-md-12">
+<p align="center"><a href="https://onetestapp01.onetest.ualberta.ca/myphoto/" target="_blank"><button class="btn btn-primary btn-lg" type="button" style="width: 100%;">Apply for a ONEcard</button></a></p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<p align="center"><a href="https://www.myonecard.ualberta.ca/OneWeb/Account/LogOn" target="_blank"><button class="btn btn-default btn-lg" type="button" style="width: 100%;">Add Funds</button></a></p>
+</div>
+<div class="col-md-6">
+<p align="center"><a href="https://www.myonecard.ualberta.ca/OneWeb/Account/LogOn" target="_blank"><button class="btn btn-default btn-lg" type="button" style="width: 100%;">Account Info</button></a></p>
+</div>
+</div>
+</div>
+<hr /><div class="tabs">
+<ul class="nav nav-tabs"><li class="active"><a data-toggle="tab" href="#get-started"><strong>Get A ONEcard</strong></a></li>
+<li><a data-toggle="tab" href="#manage"><strong>Manage</strong></a></li>
+<li><a data-toggle="tab" href="#about-your-card"><strong>About Your Card</strong></a></li>
+</ul><div class="tab-content">
+<div class="tab-pane active" id="get-started">
+<div class="row">
+<div class="col-md-6">
+<h4>ONEcard: Your Key to Campus</h4>
+<p>You can use your ONEcard to access a wide variety of services across campus. Get your ONEcard today!</p>
+<p><a href="get-a-onecard"><button class="btn btn-primary" type="button">more  <i class="icon icon fa-chevron-circle-right"></i></button></a></p>
+</div>
+<div class="col-md-6">
+<img class="img-thumbnail img-responsive" src="/sites/default/files/Homepage-Accordion-gs.jpg" /></div>
+</div>
+</div>
+<div class="tab-pane" id="manage">
+<div class="row">
+<div class="col-md-12">
+<div class="row">
+<p> </p>
+<div class="col-md-4">
+<div class="feature-box">
+<div class="feature-box-icon">
+              <i class="icon icon-money"></i>
+            </div>
+<div class="feature-box-info">
+<h4>Account Balance</h4>
+<p>Need to check if you have enough for a muffin and a coffee? Check your account balance before making your order.</p>
+<p><a href="https://www.myonecard.ualberta.ca/OneWeb/" target="_blank"><button class="btn btn-primary" type="button">more  <i class="icon icon fa-chevron-circle-right"></i></button></a></p>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="feature-box">
+<div class="feature-box-icon">
+              <i class="icon icon-credit-card"></i>
+            </div>
+<div class="feature-box-info">
+<h4>Deposit Funds</h4>
+<p>Running low on money? Deposit funds on your ONEcard fast online using a credit or debit card!</p>
+<p><a href="https://www.myonecard.ualberta.ca/OneWeb/" target="_blank"><button class="btn btn-primary" type="button">more  <i class="icon icon fa-chevron-circle-right"></i></button></a></p>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="feature-box">
+<div class="feature-box-icon">
+              <i class="icon icon-camera"></i>
+            </div>
+<div class="feature-box-info">
+<h4>Upload a Photo</h4>
+<p>Have a great selfie that you love? Put it on your ONEcard!</p>
+<p><a href="https://onetestapp01.onetest.ualberta.ca/myphoto/" target="_blank"><button class="btn btn-primary" type="button">more  <i class="icon icon fa-chevron-circle-right"></i></button></a></p>
+</div>
+</div>
+</div>
+</div>
+<hr /><div class="row">
+<div class="col-md-4">
+<div class="feature-box">
+<div class="feature-box-icon">
+              <i class="icon icon-credit-card"></i>
+            </div>
+<div class="feature-box-info">
+<h4>Lost/Stolen Cards</h4>
+<p>You don’t know where your card is, and want to make sure it’s not being used for nefarious purposes?</p>
+<p><a href="https://www.myonecard.ualberta.ca/OneWeb/" target="_blank"><button class="btn btn-primary" type="button">more  <i class="icon icon fa-chevron-circle-right"></i></button></a></p>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="feature-box">
+<div class="feature-box-icon">
+              <i class="icon icon-history"></i>
+            </div>
+<div class="feature-box-info">
+<h4>Account History</h4>
+<p>Manage your spending by looking over your transaction history.</p>
+<p><a href="https://www.myonecard.ualberta.ca/OneWeb/" target="_blank"><button class="btn btn-primary" type="button">more  <i class="icon icon fa-chevron-circle-right"></i></button></a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tab-pane" id="about-your-card">
+<p> </p>
+<div class="row">
+<div class="col-md-12">
+<div class="row">
+<div class="col-md-4">
+<div class="feature-box">
+<div class="feature-box-icon">
+              <i class="icon icon-money"></i>
+            </div>
+<div class="feature-box-info">
+<h4>ONEcard Cash</h4>
+<ul><li>Buy food and snacks at participating dining locations on campus.</li>
+<li>Purchase merchandise at the University of Alberta Bookstore.</li>
+</ul><p><a href="onecard-cash"><button class="btn btn-primary" type="button">more  <i class="icon icon fa-chevron-circle-right"></i></button></a></p>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="feature-box">
+<div class="feature-box-icon">
+              <i class="icon icon-print"></i>
+            </div>
+<div class="feature-box-info">
+<h4>Copying &amp; Printing</h4>
+<p>Swipe your card to print, copy or scan in colour or black and white at multifunction printers located across campus.</p>
+<p><a href="copying-and-printing"><button class="btn btn-primary" type="button">more  <i class="icon icon fa-chevron-circle-right"></i></button></a></p>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="feature-box">
+<div class="feature-box-icon">
+              <i class="icon icon-key"></i>
+            </div>
+<div class="feature-box-info">
+<h4>Access</h4>
+<ul><li>Use the Health Services* at the University of Alberta Health Centre (second floor SUB).</li>
+<li>Access the University's Pool and Fitness Centre*.</li>
+</ul><p><a href="access"><button class="btn btn-primary" type="button">more  <i class="icon icon fa-chevron-circle-right"></i></button></a></p>
+</div>
+</div>
+</div>
+</div>
+<hr /><div class="row">
+<div class="col-md-4">
+<div class="feature-box">
+<div class="feature-box-icon">
+              <i class="icon icon-cutlery"></i>
+            </div>
+<div class="feature-box-info">
+<h4>Meal Plan</h4>
+<p>Purchase food participating dining locations on campus using your Meal Plan* account.</p>
+<p>Ran out of meal plan funds? No worries - you can top up before the end of the term.</p>
+<p><a href="meal-plan"><button class="btn btn-primary" type="button">more  <i class="icon icon fa-chevron-circle-right"></i></button></a></p>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="feature-box">
+<div class="feature-box-icon">
+              <i class="icon icon-bus"></i>
+            </div>
+<div class="feature-box-info">
+<h4>Transit</h4>
+<p>Ride transit* as part of the University's U-Pass and Staff LRT Program initiatives.</p>
+<p><a href="transit"><button class="btn btn-primary" type="button">more  <i class="icon icon fa-chevron-circle-right"></i></button></a></p>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="feature-box">
+<div class="feature-box-icon">
+              <i class="icon icon-book"></i>
+            </div>
+<div class="feature-box-info">
+<h4>Library</h4>
+<p>Check out library* materials and book study spaces.</p>
+<p><a href="library"><button class="btn btn-primary" type="button">more  <i class="icon icon fa-chevron-circle-right"></i></button></a></p>
+</div>
+</div>
+</div>
+</div>
+<hr /><div class="row">
+<div class="col-md-4">
+<div class="feature-box">
+<div class="feature-box-icon">
+              <i class="icon icon-bars"></i>
+            </div>
+<div class="feature-box-info">
+<h4>Laundry</h4>
+<p>Students living in Residence can use ONEcard cash to do laundry on campus.</p>
+<p><a href="laundry"><button class="btn btn-primary" type="button">more  <i class="icon icon fa-chevron-circle-right"></i></button></a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>*access to services is based on student fee assessments and staff contracts.</p>
+</div>
+</div>
+</div>
+
+
+
+<hr /><div class="row featured-boxes">
+<!--
+<div class="col-md-4"><div class="featured-box featured-box-primary">
+<div class="box-content">
+<i class="icon-featured icon icon-camera"></i></p>
+<h4>New Students</h4>
+<p align="left">Cards for new students will be available for pickup in Riverside Lounge in HUB Mall from <strong>Aug 29 - Sept 2</strong> from <strong>8:30am - 4:30pm</strong> daily.</p>
+<p align="left">If you missed the Photo Upload deadline visit the carding event and we'll take your photo.</p>
+</div>
+</div>
+</div>
+<p>-->
+<div class="col-md-8">
+<div class="featured-box featured-box-tertiary">
+<div class="box-content">
+<i class="icon-featured icon icon-bus"></i>
+<h4>Winter U-Pass</h4>
+<p align="left">Returning students can pick up their Winter U-Pass from December 9 - December 23, 2016 and January 3- January 6, 2017 at any of the InfoLink location, including the InfoLink ONEcard Service Centre in HUB Mall. </p>
+<p align="left">Students will be able to pick up the Fall U-Pass at the InfoLink ONEcard Service Centre until December 23, 2016.</p>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="featured-box featured-box-secondary">
+<div class="box-content">
+<i class="icon-featured icon icon-credit-card"></i>
+<h4>Card Replacement</h4>
+<p align="left">Is your card replacement date August 2016? </p>
+<p align="left">Don't worry- your card won't stop working. Come visit us to exchange it for a shiny new ONEcard!</p>
+</div>
+</div>
+</div>
+</div>
+
+</div></div></div>  </div>
+
+  
+  
+</div>
+  </div>
+</div>
+  </div>
+                        </div>
+                                                <div class="col-md-3 ">
+                              <div class="region region-sidebar-right">
+    
+<div id="block-views-announcements-block" class="block block-views content-padding">
+
+    <h4>Announcements</h4>
+  
+  <div class="content">
+    <div class="view view-announcements view-id-announcements view-display-id-block view-dom-id-066848be3cd887dff5d8e462bae4d3ed">
+        
+  
+  
+      <div class="view-content">
+        <div class="views-row views-row-1 views-row-odd views-row-first views-row-last">
+      
+  <div class="views-field views-field-title">        <strong class="field-content"><a href="/node/44">Hangry Brings Mobile Food Ordering to UAlberta</a></strong>  </div>  
+  <div class="views-field views-field-field-date">        <div class="field-content announce-time"><span class="date-display-single" property="dc:date" datatype="xsd:dateTime" content="2016-10-27T00:00:00-06:00">October 27, 2016</span></div>  </div>  
+  <div class="views-field views-field-body">        <div class="field-content"><p>ONEcard is pleased to announce a partnership with <a href="/onecard-cash/hangry">Hangry</a>, a new mobile ordering app for <a href="https://itunes.apple.com/ca/app/hangry-skip-the-line/id592045257?mt=8" target="_blank">iPhone</a> and <a href="https://play.google.com/store/apps/details?id=menu.quor" target="_blank">Android</a>, now available at UAlberta.</p>
+<p align="right"><a href="/node/44"><button class="btn btn-primary" type="button">more  <i class="icon icon fa-chevron-circle-right"></i></button></a></p>
+</div>  </div>  </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div>  </div>
+</div>
+<div id="block-block-57" class="block block-block">
+
+    
+  <div class="content">
+    <hr /><h4>ONEcard on Twitter</h4>
+<script>
+<!--//--><![CDATA[// ><!--
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+//--><!]]>
+</script><p>
+<a class="twitter-timeline" href="//twitter.com/uaONEcard" data-widget-id="307591819972182017" width="100%" data-tweet-limit="3" data-chrome="noheader nofooter noborders noscrollbar transparent"><br />
+Tweets by </a><a href="https://twitter.com/intent/user?screen_name=uaONEcard">@uaONEcard</a></p>
+<hr />  </div>
+</div>  </div>
+                        </div>
+                                            </div>
+                </div>
+            </div>
+        </div>
+                <footer id="footer">
+                        <div class="container main-footer">
+                <div class="row">
+                                                            <div class="col-md-3">
+                          <div class="region region-footer-1">
+      <div class="region region-footer-1">
+      <div class="region region-footer-1">
+    <div id="block-block-14" class="block block-block">
+
+    
+  <div class="content">
+    <h2>Contact Us</h2>
+<ul class="contact"><li>
+<p><strong>InfoLink ONEcard Service Centre</strong></p>
+</li>
+<li>
+<p><i class="fa fa-map-marker"></i></p>
+<!-- DO NOT REMOVE --><p>9104 HUB Mall, Edmonton, AB</p>
+</li>
+<li>
+<p><i class="fa fa-phone"></i></p>
+<!-- DO NOT REMOVE --><p> <strong>Phone:</strong> (780) 492-7924</p>
+</li>
+<li>
+<p><i class="fa fa-envelope"></i></p>
+<!-- DO NOT REMOVE --><p> <strong>Email:</strong> <a href="mailto:onecard@ualberta.ca">onecard@ualberta.ca</a></p>
+</li>
+</ul>  </div>
+</div>
+  </div>
+  </div>
+  </div>
+                    </div>
+                                                            <div class="col-md-3">
+                          <div class="region region-footer-2">
+      <div class="region region-footer-2">
+    <div id="block-block-15" class="block block-block">
+
+    
+  <div class="content">
+    <!--
+<h2><p>Links</h2>
+<ul class="list-unstyled">
+<li><a href="/get-a-onecard">Get A ONEcard</a></li>
+<li><a href="/manage">Manage</a></li>
+<li><a href="/about-your-card">About Your Card</a></li>
+<li><a href="/faqs">FAQs</a></li>
+<li><a href="/contact-us">Contact US</a></li>
+</ul>
+<p>-->
+<h2>Additional Links</h2>
+<ul class="list-unstyled"><li><a href="/augustana-campus">Augustana Campus</a></li>
+<li><a href="/cardholder-agreement">Cardholder Agreement </a></li>
+<li><a href="/forms">Forms</a></li>
+</ul>  </div>
+</div>
+  </div>
+  </div>
+                    </div>
+                                                            <div class="col-md-4">
+                          <div class="region region-footer-3">
+      <div class="region region-footer-3">
+    <div id="block-block-16" class="block block-block">
+
+    
+  <div class="content">
+    <p> </p>
+<!--
+<h4><p> ONEcard Mobile</h4>
+<p><a href="https://itunes.apple.com/ca/app/onecard-mobile/id891440408?mt=8" target="_blank"><img src="/sites/default/files/app-store-badge.png" /></a></p>
+<p><a href="https://play.google.com/store/apps/details?id=com.onecard.onecardmobile" target="_blank"><img src="/sites/default/files/google-play-badge.png" /></a></p>
+<p>-->
+  </div>
+</div>
+  </div>
+  </div>
+                    </div>
+                                                            <div class="col-md-2">
+                          <div class="region region-footer-4">
+      <div class="region region-footer-4">
+    <div id="block-block-17" class="block block-block">
+
+    
+  <div class="content">
+    <p><img src="/sites/default/files/ONEcard-Logo.png" width="250px" /></p>
+  </div>
+</div>
+  </div>
+  </div>
+                    </div>
+                                    </div>
+            </div>
+                        <div class="footer-copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                                                          <div class="region region-sub-footer">
+    <div id="block-block-18" class="block block-block">
+
+    
+  <div class="content">
+    <p><a href="https://www.ualberta.ca/about/contact">Contact Us</a> <span class="menu-separator">|</span> <a href="https://www.surveymonkey.com/s/ualberta-web-feedback">Feedback</a> <span class="menu-separator">|</span> <a href="http://www.registrar.ualberta.ca/calendar/">University Calendar</a> <span class="menu-separator">|</span> <a href="http://www.careers.ualberta.ca/">Careers</a> <span class="menu-separator">|</span> <a href="http://www.rms.ualberta.ca/en/EmergNumbers.aspx">Emergency</a> <span class="menu-separator">|</span> <a href="https://policiesonline.ualberta.ca/">Policies</a> <span class="menu-separator">|</span> <a href="http://www.weatheroffice.gc.ca/city/pages/ab-50_metric_e.html">Weather</a> <span class="menu-separator">|</span> <a href="http://www.edmonton.ca/">Edmonton</a> <span class="menu-separator">|</span> <a href="https://www.ualberta.ca/privacy">Privacy</a> <span class="menu-separator">|</span> <a href="https://www.ualberta.ca/keepintouch">Keep in Touch</a></p>
+<p><script language="Javascript">
+<!--//--><![CDATA[// ><!--
+
+var mydate=new Date();
+var year=mydate.getYear();
+if (year < 1000) year+=1900;
+document.write('&copy; '+year+' University of Alberta 116 St. and 85 Ave., Edmonton, AB, Canada T6G 2R3')
+
+//--><!]]>
+</script></p>
+  </div>
+</div>
+  </div>
+                                                    </div>
+                        </div>
+                    <!-- <div class="row">
+                        <div class="col-md-6">
+                                                    </div>
+                        <div class="col-md-6">
+                                                    </div>
+                    </div>
+                </div> -->
+            </div>
+        </footer>
+    </div>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/themes/Porto/js/theme.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/themes/Porto/js/theme.init.js?oijqfy"></script>
+<script type="text/javascript" src="https://www.onecard.ualberta.ca/sites/all/themes/Porto/js/views/view.home.js?oijqfy"></script>
+</body>
+
+</html>

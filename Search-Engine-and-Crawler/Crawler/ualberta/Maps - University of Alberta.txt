@@ -1,0 +1,716 @@
+<page_url href="http://www.campusmap.ualberta.ca/"></page_url>
+
+
+<!DOCTYPE html> 
+<!--[if lt IE 7 ]> <html lang="en" class="ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="en" class="ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="en" class="ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="en" class="ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+<head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta property="fb:app_id" content="272249426120294" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta name="viewport" content="user-scalable=no" /><title>
+	Maps - University of Alberta
+</title>
+    <!--[if lt IE 9]>
+    <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="/css/custom/maps/styles.css" />
+    <!-- Start Visual Website Optimizer Asynchronous Code -->
+    <script type='text/javascript'>
+        var _vwo_code=(function(){
+            var account_id=36096,
+            settings_tolerance=2000,
+            library_tolerance=2500,
+            use_existing_jquery=false,
+            // DO NOT EDIT BELOW THIS LINE
+            f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);this.load('//dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());var a=d.createElement('style'),b='body{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+    </script>
+    <!-- End Visual Website Optimizer Asynchronous Code -->
+<script type="text/javascript" src="http://www.google.com/jsapi"></script><script type="text/javascript">google.load('jquery', '1');google.load('jqueryui', '1');</script></head>
+<body>
+    <script type="text/javascript">
+        var uds_strGoogleAnalyticsAccountID = "UA-21628058-1";
+    </script>
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-KR32"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KR32');</script>
+    <!-- End Google Tag Manager -->
+    <form method="post" action="./" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+</div>
+
+
+<script src="/WebResource.axd?d=d_-6pX9Z-GLcvlrotZZCKW8NK609Ut9EYaN2kWVLvw8dOu2GXvsjzcrEGJBD5MGuKfWOBYSA3yu_ip9yaS8G-AQPUeSgt7we7mnG7z6oyOC1OvVCI0k5lpY4tNI1&amp;t=635632983520000000" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="2783220C" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="CQ9EVMfN6zoh2Vv7AtnIp2/QHcTm0XWQfhEiCKfcSFbLWeWP/I87G7z/WdMHW0FQ18qm4fsQ/WYKkSbOly6vK/SRzJBUapOT/vfbbuE3vpx4Jq8tNkjewZ1Rk15Ehpo2+PWNMUweoCyB6qCO/11Aey6J/cr6HIV6Dzpoag==" />
+</div>
+
+        <!-- Header Container -->
+        <div class="top" style="display: block">
+            <div class="header">
+                <div class="header_logo"><a href="http://www.ualberta.ca/"></a></div>
+                <div class="header_title">| Campus Maps</div>
+                <div class="header_search">
+                    <div id="pnlSearch" class="searchcontainer search">
+	
+                        <input name="txtSearchTerms" type="text" maxlength="512" id="txtSearchTerms" accesskey="s" class="searchterms" placeholder="Search UAlberta Maps (eg. room 242, coffee, SUB)" style="height:1.4em;width:450px;" />
+                        <input type="submit" name="btnSearch" value="Search" id="btnSearch" class="searchbutton" />
+                    
+</div>
+                    <div id="instantSearchResults" style="display: none;"><div class='searchHeader'>Results</div><ul></ul></div>
+                </div>
+
+            </div>
+        </div>
+        
+        <!-- Map Container -->
+        <div id="map_canvas"></div>
+        
+        <!-- Interior Canvas -->
+        <canvas id="interior_canvas" style="background-color: #ffffff; display:none;"></canvas>
+        
+        <!-- Left Menu Bar Exterior -->
+        <div class="leftMenu" id="leftMenu" style="display: none;">
+            <!-- Campus Selection -->
+            <span><a href="javascript:void(0);" class="collapsed" id="leftNav_selectedCampus">Select A Campus</a></span>
+            <div class="leftMenu_list_container" style="display:none;" id="leftMenu_campusSelect">
+                <div class="leftNav_description" id="leftNav_selectedCampusDescription">Description</div>
+                <div class="leftNav_otherCampuses">Other Campuses</div>
+                <ul class='campus_list'>
+                    <li><a href="javascript:void(0)" id="leftNav_north_campus">North Campus</a></li>
+                    <li><a href="javascript:void(0)" id="leftNav_south_campus">South Campus</a></li>
+                    <li><a href="javascript:void(0)" id="leftNav_augustana_campus">Augustana Campus</a></li>
+                    <li><a href="javascript:void(0)" id="leftNav_calgary_centre">Calgary Centre</a></li>
+                    <li><a href="javascript:void(0)" id="leftNav_campus_saint_jean">Campus Saint-Jean</a></li>
+                    <li><a href="javascript:void(0)" id="leftNav_enterprise_square">Enterprise Square</a></li>
+                </ul>
+            </div>
+            <!-- Tab Selection -->
+            <div class="btn-group">
+                <a id="leftNav_buildings_btn" href="javascript:void(0);" class="btn btn_selected">Buildings</a>
+                <a id="leftNav_quickFinds_btn" href="javascript:void(0);" class="btn">Quick Finds</a>
+                <a id="leftNav_directions_btn" href="javascript:void(0);" class="btn">Directions</a>
+            </div>
+
+            <!-- Search Results Tab -->
+            <div id="leftNav_searchResults" style="display: none;">
+                <a href="Javascript:void(0);" id="search_clear"><i></i></a>
+                <span>
+                    <a id="leftNav_searchResults_link" href="Javascript:void(0)" class="">Search Results</a>
+                </span>
+                <div class="search_resultsContainer"></div>
+            </div>
+
+            <!-- Quick Finds Tab -->
+            <div id="leftNav_quickFinds" style="display: none;">
+                <p>Find what you're looking for by clicking the icons below.</p>
+                
+                <a href="Javascript:void(0)" id="leftNav_quickFinds_viewPort_prev"></a>
+
+                <div class="leftNav_quickFinds_viewPort">
+                    
+                            <ul class="leftNav_quickFinds_icons">
+                                
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_0" class="leftNav_quickLinks_food" onclick="UAlberta.Maps.Exterior.addNewLayer(2,1,{layerKey:&#39;food&#39;,displayName:&#39;Food&#39;,useCluster:true,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_servicesFood.png&#39;, displayName: &#39;Food&#39;}]});"><i></i>Food</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_1" class="leftNav_quickLinks_coffee" onclick="UAlberta.Maps.Exterior.addNewLayer(2,2,{layerKey:&#39;coffee&#39;,displayName:&#39;Coffee&#39;,useCluster:true,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_servicesCoffee.png&#39;, displayName: &#39;Coffee&#39;}]});"><i></i>Coffee</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_2" class="leftNav_quickLinks_parking" onclick="UAlberta.Maps.Exterior.addNewLayer(1,32,{layerKey:&#39;parking&#39;,displayName:&#39;Parking&#39;,useCluster:false,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_parking.png&#39;, displayName: &#39;Parking Lots&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_parkingKiosk.png&#39;, displayName: &#39;Parking Kiosk&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_parkingBus.png&#39;, displayName: &#39;Bus Parking&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_parkingMotorcycle.png&#39;, displayName: &#39;Motorcycle Parking&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_parkingMeter.png&#39;, displayName: &#39;Meter Parking&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_parkingArea.png&#39;, displayName: &#39;Parking Area&#39;}]});"><i></i>Parking</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_3" class="leftNav_quickLinks_atm" onclick="UAlberta.Maps.Exterior.addNewLayer(2,16,{layerKey:&#39;atm&#39;,displayName:&#39;ATM&#39;,useCluster:true,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_servicesATM.png&#39;, displayName: &#39;ATM&#39;}]});"><i></i>ATM</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_4" class="leftNav_quickLinks_dats" onclick="UAlberta.Maps.Exterior.addNewLayer(1,4,{layerKey:&#39;dats&#39;,displayName:&#39;DATS&#39;,useCluster:false,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_dats.png&#39;, displayName: &#39;DATS Bus Stops&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_datsVehicle.png&#39;, displayName: &#39;DATS Vehcile Paths&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_datsPedestrian.png&#39;, displayName: &#39;DATS Pedestrian Paths&#39;}]});"><i></i>DATS</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_5" class="leftNav_quickLinks_librariesstudyspaces" onclick="UAlberta.Maps.Exterior.addNewLayer(3,1,{layerKey:&#39;librariesstudyspaces&#39;,displayName:&#39;Libraries &amp; Study Spaces&#39;,useCluster:false,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_library.png&#39;, displayName: &#39;Libraries&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_studySpace.png&#39;, displayName: &#39;Study Spaces&#39;}]});"><i></i>Libraries & Study Spaces</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_6" class="leftNav_quickLinks_computerlabsprinting" onclick="UAlberta.Maps.Exterior.addNewLayer(2,8,{layerKey:&#39;computerlabsprinting&#39;,displayName:&#39;Computer Labs &amp; Printing&#39;,useCluster:false,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_servicesComputer.png&#39;, displayName: &#39;Computer Labs and Printing&#39;}]});"><i></i>Computer Labs & Printing</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_7" class="leftNav_quickLinks_bikeracks" onclick="UAlberta.Maps.Exterior.addNewLayer(1,16,{layerKey:&#39;bikeracks&#39;,displayName:&#39;Bike Racks&#39;,useCluster:false,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_transportBike.png&#39;, displayName: &#39;Bike Racks&#39;}]});"><i></i>Bike Racks</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_8" class="leftNav_quickLinks_artsvenues" onclick="UAlberta.Maps.Exterior.addNewLayer(3,2,{layerKey:&#39;artsvenues&#39;,displayName:&#39;Arts Venues&#39;,useCluster:false,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_arts.png&#39;, displayName: &#39;Arts Venues&#39;}]});"><i></i>Arts Venues</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_9" class="leftNav_quickLinks_studentservices" onclick="UAlberta.Maps.Exterior.addNewLayer(2,128,{layerKey:&#39;studentservices&#39;,displayName:&#39;Student Services&#39;,useCluster:true,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_studentservices.png&#39;, displayName: &#39;Student Services&#39;}]});"><i></i>Student Services</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_10" class="leftNav_quickLinks_facilities" onclick="UAlberta.Maps.Exterior.addNewLayer(5,1,{layerKey:&#39;facilities&#39;,displayName:&#39;Facilities&#39;,useCluster:false,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_recreationBasketball.png&#39;, displayName: &#39;Basketball&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_recreationCurling.png&#39;, displayName: &#39;Curling&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_recreationField.png&#39;, displayName: &#39;Field&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_recreationFootball.png&#39;, displayName: &#39;Football&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_recreationGym.png&#39;, displayName: &#39;Gym&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_recreationGymnastics.png&#39;, displayName: &#39;Gymnastics&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_recreationPool.png&#39;, displayName: &#39;Pool&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_recreationSkating.png&#39;, displayName: &#39;Skating&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_recreationSoccer.png&#39;, displayName: &#39;Soccer&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_recreationTennis.png&#39;, displayName: &#39;Tennis&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_recreationTrack.png&#39;, displayName: &#39;Track&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_recreationVolleyball.png&#39;, displayName: &#39;Volleyball&#39;}]});"><i></i>Facilities</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_11" class="leftNav_quickLinks_postofficeshopping" onclick="UAlberta.Maps.Exterior.addNewLayer(2,4,{layerKey:&#39;postofficeshopping&#39;,displayName:&#39;Post Office &amp; Shopping&#39;,useCluster:true,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_servicesShopping.png&#39;, displayName: &#39;Shopping&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_servicesPost.png&#39;, displayName: &#39;Post Office&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_servicesSalon.png&#39;, displayName: &#39;Salon&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_servicesTravel.png&#39;, displayName: &#39;Travel&#39;}]});"><i></i>Post Office & Shopping</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_12" class="leftNav_quickLinks_entrances" onclick="UAlberta.Maps.Exterior.addNewLayer(1,8,{layerKey:&#39;entrances&#39;,displayName:&#39;Entrances&#39;,useCluster:false,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_entranceCarpark.png&#39;, displayName: &#39;Carpark Entrances&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_entranceManual.png&#39;, displayName: &#39;Manual Entrances&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_entrancePowered.png&#39;, displayName: &#39;Powered Door Entrances&#39;}]});"><i></i>Entrances</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_13" class="leftNav_quickLinks_museumscollections" onclick="UAlberta.Maps.Exterior.addNewLayer(3,4,{layerKey:&#39;museumscollections&#39;,displayName:&#39;Museums &amp; Collections&#39;,useCluster:false,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_museums.png&#39;, displayName: &#39;Museums and Collections&#39;}]});"><i></i>Museums & Collections</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_14" class="leftNav_quickLinks_infolinkbooths" onclick="UAlberta.Maps.Exterior.addNewLayer(2,32,{layerKey:&#39;infolinkbooths&#39;,displayName:&#39;InfoLink Booths&#39;,useCluster:false,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_servicesInfoLink.png&#39;, displayName: &#39;InfoLink Booths&#39;}]});"><i></i>InfoLink Booths</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_15" class="leftNav_quickLinks_greenspaces" onclick="UAlberta.Maps.Exterior.addNewLayer(5,2,{layerKey:&#39;greenspaces&#39;,displayName:&#39;Green Spaces&#39;,useCluster:false,titleAsDesc:true,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_greenSpaceQuad.png&#39;, displayName: &#39;Quad&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_greenSpaceWater.png&#39;, displayName: &#39;Water Feature&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_greenSpaceCommunautarie.png&#39;, displayName: &#39;Communautaire&#39;}]});"><i></i>Green Spaces</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_16" class="leftNav_quickLinks_landmarks" onclick="UAlberta.Maps.Exterior.addNewLayer(4,1,{layerKey:&#39;landmarks&#39;,displayName:&#39;Landmarks&#39;,useCluster:false,titleAsDesc:true,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_landmarkGeneral.png&#39;, displayName: &#39;General&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_landmarkGrotte.png&#39;, displayName: &#39;Grotte&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_landmarkLuther.png&#39;, displayName: &#39;Luther Statue&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_landmarkMural.png&#39;, displayName: &#39;Murals&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_landmarkObservitory.png&#39;, displayName: &#39;Observatory&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_landmarkPlaza.png&#39;, displayName: &#39;Universiade Flame Tower&#39;},{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_landmarkTuck.png&#39;, displayName: &#39;Varsity Tuck Shop&#39;}]});"><i></i>Landmarks</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_17" class="leftNav_quickLinks_pedwaysinteriorroutes" onclick="UAlberta.Maps.Exterior.addNewLayer(1,2,{layerKey:&#39;pedwaysinteriorroutes&#39;,displayName:&#39;Pedways &amp; Interior Routes&#39;,useCluster:false,titleAsDesc:false,markerScale: new google.maps.Size(24,24)});"><i></i>Pedways & Interior Routes</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_18" class="leftNav_quickLinks_all-genderwashrooms" onclick="UAlberta.Maps.Exterior.addNewLayer(7,1,{layerKey:&#39;all-genderwashrooms&#39;,displayName:&#39;All-Gender Washrooms&#39;,useCluster:true,titleAsDesc:false,markerScale: new google.maps.Size(24,24)});"><i></i>All-Gender Washrooms</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_19" class="leftNav_quickLinks_twitter" onclick="UAlberta.Maps.Exterior.addNewLayer(-1,16,{layerKey:&#39;twitter&#39;,displayName:&#39;Twitter&#39;,useCluster:true,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_twitter.png&#39;, displayName: &#39;Twitter&#39;}]});"><i></i>Twitter</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_20" class="leftNav_quickLinks_instagram" onclick="UAlberta.Maps.Exterior.addNewLayer(-1,256,{layerKey:&#39;instagram&#39;,displayName:&#39;Instagram&#39;,useCluster:true,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_instagram.png&#39;, displayName: &#39;Instagram&#39;}]});"><i></i>Instagram</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_21" class="leftNav_quickLinks_360cities" onclick="UAlberta.Maps.Exterior.addNewLayer(-1,512,{layerKey:&#39;360cities&#39;,displayName:&#39;360 Cities&#39;,useCluster:true,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_360Cities.png&#39;, displayName: &#39;360 Cities&#39;}]});"><i></i>360 Cities</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_22" class="leftNav_quickLinks_foursquare" onclick="UAlberta.Maps.Exterior.addNewLayer(-1,4,{layerKey:&#39;foursquare&#39;,displayName:&#39;FourSquare&#39;,useCluster:true,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_foursquare.png&#39;, displayName: &#39;FourSquare&#39;}]});"><i></i>FourSquare</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_23" class="leftNav_quickLinks_panoramio" onclick="UAlberta.Maps.Exterior.addNewLayer(-1,32,{layerKey:&#39;panoramio&#39;,displayName:&#39;Panoramio&#39;,useCluster:true,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_panoramio.png&#39;, displayName: &#39;Panoramio&#39;}]});"><i></i>Panoramio</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_24" class="leftNav_quickLinks_flickr" onclick="UAlberta.Maps.Exterior.addNewLayer(-1,1,{layerKey:&#39;flickr&#39;,displayName:&#39;Flickr&#39;,useCluster:true,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_flickr.png&#39;, displayName: &#39;Flickr&#39;}]});"><i></i>Flickr</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_25" class="leftNav_quickLinks_youtube" onclick="UAlberta.Maps.Exterior.addNewLayer(-1,2,{layerKey:&#39;youtube&#39;,displayName:&#39;YouTube&#39;,useCluster:true,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_youtube.png&#39;, displayName: &#39;YouTube&#39;}]});"><i></i>YouTube</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_26" class="leftNav_quickLinks_yelp" onclick="UAlberta.Maps.Exterior.addNewLayer(-1,64,{layerKey:&#39;yelp&#39;,displayName:&#39;Yelp&#39;,useCluster:true,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_yelp.png&#39;, displayName: &#39;Yelp&#39;}]});"><i></i>Yelp</a>
+                            </li>
+                        
+                            <li>
+                                <a id="leftNav_quickFinds_icons_icons_link_27" class="leftNav_quickLinks_haunted" onclick="UAlberta.Maps.Exterior.addNewLayer(6,1,{layerKey:&#39;haunted&#39;,displayName:&#39;Haunted&#39;,useCluster:false,titleAsDesc:false,markerScale: new google.maps.Size(24,24), legend: [{ icon: &#39;/~/media/uofa2/Maps/Images/Icons/icon_haloween.png&#39;, displayName: &#39;Halloween&#39;}]});"><i></i>Haunted</a>
+                            </li>
+                        
+                            </ul>
+                        
+                </div>
+                
+                <a href="Javascript:void(0)" id="leftNav_quickFinds_viewPort_next"></a>
+
+            </div>
+            
+            <!-- Buildings Tab -->
+            <div id="leftNav_buildings">
+                <ul></ul>
+            </div>
+            
+            <!-- Directions Tab -->
+            <div id="leftNav_directions" style="display: none;">
+                <div id="ums_directionPanel">
+                    <p>Like to be on time every time? Our directions make it simple!</p>
+                    <div class="leftNav_directionPanel_wrapper">
+                        <div class="leftNav_directionPanel_container">
+                            <ul>
+                                <li class="map_directions_type"><a title="By Car" onclick="UAlberta.Maps.Exterior.Directions.toggleTravelMode('car',this);" href="javascript:void(0);" class="map_directions_byCar"></a></li>
+                                <li class="map_directions_type selected"><a title="Walking" onclick="UAlberta.Maps.Exterior.Directions.toggleTravelMode('walking',this);" href="javascript:void(0);" class="map_directions_walking"></a></li>
+                                <li class="map_directions_type"><a title="Bicycling" onclick="UAlberta.Maps.Exterior.Directions.toggleTravelMode('bicycling',this);" href="javascript:void(0);" class="map_directions_bicycling"></a></li>
+                            </ul>
+                            <a id="directionsClear" title="Clear Directions" href="javascript:void(0);"></a>
+                        </div>
+                        <div class="clear"></div>
+                        <p> 
+                            <label for="directionsA">A</label>
+                            <input type="text" id="directionsA" placeholder="Depart From" />
+                            <input type="hidden" id="directionsA_position"/>
+                        </p>
+                        <p> 
+                            <label for="directionsB">B</label> 
+                            <input type="text" id="directionsB" placeholder="Destination" />
+                            <input type="hidden" id="directionsB_position"/>
+                        </p> 
+                        <a href="javascript:void(0)" class="button-link" onclick="UAlberta.Maps.Exterior.Directions.process();"></a>
+                        <a href="javascript:void(0)" class="directions_link" onclick="UAlberta.Maps.Exterior.Directions.generateLink();"></a>     
+                        <div class="ums_linkBox" id="directionsLinkBox" style="display:none;">
+                            <span><a href="javascript:void(0);" onclick="$('#directionsLinkBox').hide();">close</a></span><p>Paste link in email or IM</p>
+                            <input type="text" value="" onfocus="$(this).select();" />
+                        </div>
+                        <div id="leftNav_directions_panel"></div>  
+                    </div> 
+                </div>
+                <div id="ums_directionNotAvailable" style="display:none;">
+                    <p>Directions not available in Earth view.</p>
+                </div>
+            </div>
+            
+
+            <div class="map_printLink">
+                <span>
+                    <ul>
+                        <li><a class="ums_map_print" href="javascript:void(0);" onclick="UAlberta.Maps.Exterior.printMap();_gaq.push(['default._trackevent', 'north campus general', 'print', '', 0, false]);" title="Print"></a></li>
+                        <li>
+                            <a class="ums_map_link" href="javascript:void(0);" onclick="UAlberta.Maps.Exterior.createMapLink();" title="Link"></a>
+                            <div class="ums_linkBox" id="generalLinkBox" style="display:none;">
+                                <span><a href="javascript:void(0);" onclick="$('#generalLinkBox').hide();">close</a></span><p>Paste link in email or IM</p>
+                                <input type="text" value="" onfocus="$(this).select();" />
+                            </div>
+                       </li>
+                   </ul>
+                </span>
+            </div>
+            <div id="map_printableMaps" style="display: none;">
+                <img src="/css/custom/maps/img/pdf-icon.jpg" /><a href="" id="leftNav_pdfPrintMap" target="_blank">Map</a><span id="leftNav_pdfSeperator"> | </span><a href="" id="leftNav_pdfDATSMap" target="_blank">DATS Map</a>
+            </div>
+        </div>
+        
+        <!-- Left Menu Bar Interior -->
+        <div class="leftMenu" id="leftMenu_interior" style="display: none;">
+            <span><a href="javascript:void(0);" class="collapsed" id="leftNav_selectedBuilding">Select A Building</a></span>
+            <div class="leftMenu_list_container" style="display:none;" id="leftNav_interiorBuildingList">
+                <p>Select another building to view its interior.</p>
+                
+                        <ul>
+                            
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_0" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;adm&#39;);">Administration (ADM)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_1" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;af&#39;);">Agriculture/Forestry Centre (AF)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_2" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;bus&#39;);">Business, Alberta School of (BUS)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_3" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;a&#39;);">Arts and Convocation Hall (A)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_4" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;ash&#39;);">Assiniboia Hall (ASH)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_5" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;ath&#39;);">Athabasca Hall (ATH)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_6" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;bs&#39;);">Biological Sciences Centre (BS + CW, G, M, P, Z)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_7" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;eeb&#39;);">Brain & Aging Research Building</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_8" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;pav&#39;);">Universiade Pavilion (Butterdome) (PAV)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_9" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;cl&#39;);">Cameron Library (CL)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_10" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;ccis&#39;);">Centennial Centre for Interdisciplinary Science (CCIS)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_11" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;ccisnlt&#39;);">Centennial Centre for Interdisciplinary Science North Lecture Theatres</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_12" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;cab&#39;);">Central Academic Building (CAB)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_13" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;clareDrakeArena&#39;);">Clare Drake Arena</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_14" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;cs&#39;);">Clinical Sciences Building (CS)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_15" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;csc&#39;);">Computing Science Centre (CSC)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_16" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;ch&#39;);">Corbett Hall (CH)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_17" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;esb&#39;);">Earth Sciences (ESB)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_18" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;echa&#39;);">Edmonton Clinic Health Academy (ECHA)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_19" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;edNorth&#39;);">Education Centre North (ED)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_20" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;edSouth&#39;);">Education Centre South (ED)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_21" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;etlc&#39;);">Engineering Teaching and Learning Complex (ETLC)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_22" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;fab&#39;);">Fine Arts Building (FAB)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_23" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;gsb&#39;);">General Services Building (GSB)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_24" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;c&#39;);">Gunning/Lemieux Chemistry Centre (C)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_25" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;hflc&#39;);">Hanson Fitness & Lifestyle Centre</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_26" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;t&#39;);">Tory Building, Henry Marshall (T)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_27" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;hmr&#39;);">Heritage Medical Research Centre</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_28" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;hub&#39;);">HUB International (HUB)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_29" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;heb&#39;);">Human Ecology (HEB)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_30" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;hc&#39;);">Humanities Centre (HC)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_31" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;ind&#39;);">Industrial Design Studio (IND)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_32" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;katz&#39;);">Katz Group Centre for Pharmacy and Health Research (KATZ)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_33" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;lc&#39;);">Law Centre (LC)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_34" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;lks&#39;);">Li Ka Shing Centre for Health Research Innovation (LKS)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_35" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;lh&#39;);">Lister Centre (LH)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_36" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;mm&#39;);">Materials Management</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_37" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;mec&#39;);">Mechanical Engineering (MEC)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_38" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;ms&#39;);">Medical Sciences (MS)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_39" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;nre&#39;);">Natural Resources Engineering Facility, Markin/CNRL (NRE)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_40" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;npp&#39;);">North Power Plant (NPP)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_41" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;pb&#39;);">Pembina Hall (PB)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_42" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;rtf&#39;);">Research Transition Facility (RTF)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_43" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;rn&#39;);">Rutherford Library North (RN)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_44" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;rs&#39;);">Rutherford Library South (RS)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_45" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;sub&#39;);">Students' Union Building (SUB)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_46" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;tel&#39;);">TELUS Centre (TEL)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_47" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;tc&#39;);">Timms Centre for the Arts (TC)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_48" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;tl&#39;);">Tory Lecture Theatres (TL)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_49" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;th&#39;);">Triffo Hall (TH)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_50" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;unh&#39;);">University Hall (UNH)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_51" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;ut&#39;);">University Terrace (UT)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_52" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;vvc&#39;);">Van Vliet Complex (VVC)</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_53" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;paw&#39;);">Wilson Climbing Centre</a>
+                        </li>
+                    
+                        <li>
+                            <a id="leftNav_interiorBuildingList_list_icons_link_54" onclick="UAlberta.Maps.Exterior.switchBuilding(&#39;ent&#39;);">Enterprise Square (ENT)</a>
+                        </li>
+                    
+                        </ul>
+                    
+                
+            </div>
+            
+            <!-- 3D Building Image -->
+            <div class="leftNav_interior_buildingImage"></div>
+
+            <!-- Tab Selection -->
+            <div class="btn-group">
+                <a id="leftNav_floors_btn_int" href="javascript:void(0);" class="btn btn_selected">Floors</a>
+                <!-- <a id="leftNav_quickFinds_btn_int" href="javascript:void(0);" class="btn">Quick Finds</a>-->
+                <a id="leftNav_exit_btn" href="javascript:void(0);" class="btn">Back to Maps</a>
+            </div>
+            
+            <!-- Search Results Tab -->
+            <div id="leftNav_interior_searchResults" style="display: none;">
+                <a href="Javascript:void(0);" id="search_clear_int"><i></i></a>
+                <span>
+                    <a id="leftNav_interior_searchResults_link" href="Javascript:void(0)" class="">Search Results</a>
+                </span>
+                <div class="search_resultsContainer"></div>
+            </div>
+            
+            <!-- Floor Tab -->
+            <div id="interior_conrtols_floorSelector">
+                <ul></ul>
+            </div>
+
+            <!-- Quick Finds Tab -->
+            <div id="leftNav_quickFinds_int" style="display:none;">
+                <p>Find what you're looking for by clicking the icons below.</p>
+                
+                <a href="Javascript:void(0)" id="leftNav_quickFinds_viewPort_prev_int"></a>
+
+                <div class="leftNav_quickFinds_viewPort">
+                    
+                </div>
+                
+                <a href="Javascript:void(0)" id="leftNav_quickFinds_viewPort_next_int"></a>
+            </div>
+
+            <!-- Interior Colour Legend -->
+            <div class="interiorLegend">
+                <h2>Legend</h2>
+                <ul>
+                    <li><span class="interiorLegend_selectable interiorLegend_box"></span> Selectable Rooms</li>
+                    <li><span class="interiorLegend_selected  interiorLegend_box"></span> Selected Room</li>
+                    <li><span class="interiorLegend_stairs  interiorLegend_box"></span> Stairs and Escalators</li>
+                    <li><span class="interiorLegend_elevator  interiorLegend_box"></span>Elevators</li>
+                    <li><span class="interiorLegend_hallways  interiorLegend_box"></span> Hallways</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Left Menu Collapse Button -->
+        <div class="leftMenu_collapse_wrapper">
+            <div class="leftMenu_expand">
+                <a href="javascript:void(0);" id="leftMenu_collapse"></a>
+            </div>
+        </div>
+        
+        <!-- Legened -->
+        <div id="legended" style="display:none;"><h1 class="legened_title">Legend</h1></div>
+         
+        <!-- Interior Controls -->
+        <div id="interior_controls" style="display:none;">
+            <h2>Map Controls</h2>
+            <!-- Pan Controls -->
+            <div class="interior_controls_pan">
+                <div id="interior_conrtols_panUp"><a href="javascript:void(0);" title="Pan Up"></a></div>
+                <div id="interior_conrtols_panleft"><a href="javascript:void(0);" title="Pan Left"></a></div>
+                <div id="interior_conrtols_panRight"><a href="javascript:void(0);" title="Pan Right"></a></div>
+                <div class="clear"></div>
+                <div id="interior_conrtols_panDown"><a href="javascript:void(0);" title="Pan Down"></a></div>
+            </div>
+            
+            <!-- Rotate Controls -->
+            <div id="interior_conrtols_rotateLeft"><a href="javascript:void(0);" title="Rotate Clockwise"></a></div>
+            <div id="interior_conrtols_rotateRight"><a href="javascript:void(0);" title="Rotate Counter Clockwise"></a></div>
+            <div class="clear"></div>
+            <!-- Zoom Controls -->
+            <div class="interior_controls_zoom">
+                <div id="interior_conrtols_ZoomIn"><a href="javascript:void(0);" title="Zoom In"></a></div>
+                <div id="interior_conrtols_ZoomOut"><a href="javascript:void(0);" title="Zoom Out"></a></div>
+            </div>
+            
+            <!-- Exit Button -->
+            <div id="interior_conrtols_exit"><a href="javascript:void(0);"><i></i>Back to Maps</a></div>
+        </div>
+
+        <!-- Loading & Error Bars -->
+        <div class="bars_wrapper" id="loading_bar_area">
+            <div id="error_bar" style="display: none;">An error has occured while loading. Please try again.</div>
+        </div>
+
+        <!-- Footer Container -->
+        <div class="footer">
+            &copy; 2017 <a href="http://www.ualberta.ca">University of Alberta</a> - Maps 2.0.4
+        </div>
+        
+        
+        <div id="campus_select_dimmer">
+            <!-- Campus Select -->
+            <div id="campus_select" class="box">
+                <div class="campus_select_close"><a href="javascript:void(0);" id="campus_select_close"></a></div>
+                <h1>Select Your Campus Map</h1>
+                <p>University of Alberta has five campuses (four in Edmonton and one in Camrose) and a centre in downtown Calgary. It gives you the freedom to choose and room to grow.</p>
+                
+                <div class="box campus_box" id="north_campus">
+                    <h2>North Campus<a></a></h2>
+                    <p>Edmonton, Alberta</p>
+                </div>
+                <div class="box campus_box" id="south_campus">
+                    <h2>South Campus<a></a></h2>
+                    <p>Edmonton, Alberta</p>
+                </div>
+                <div class="box campus_box" id="augustana_campus">
+                    <h2>Augustana Campus<a></a></h2>
+                    <p>Camrose, Alberta</p>
+                </div>                
+                <div class="box campus_box" id="campus_saint_jean">
+                    <h2>Campus Saint-Jean<a></a></h2>
+                    <p>Edmonton, Alberta</p>
+                </div>
+                <div class="box campus_box" id="enterprise_square">
+                    <h2>Enterprise Square<a></a></h2>
+                    <p>Edmonton, Alberta</p>
+                </div>
+                <div class="box campus_box" id="calgary_centre">
+                    <h2>Calgary Centre<a></a></h2>
+                    <p>Calgary, Alberta</p>
+                </div>
+            </div>
+            <!-- Cluster Box -->
+            <div id="cluster_box" class="" style="display: none;">
+                <div id="cluster_box_heading" class=""><div class="cluster_box_close"><a href="javascript:void(0);" id="cluster_box_close"></a></div><span></span></div>
+                <div id="cluster_box_content" class=""></div>
+            </div>
+        </div>
+        
+        <!--[if IE ]>
+        <script type="text/javascript">
+            //Placeholder support for browsers that do not support textbox placeholders
+            $('[placeholder]').focus(function() {
+                var input = $(this);
+                if (input.val() == input.attr('placeholder')) {
+                    input.val('');
+                    input.removeClass('placeholder');
+                }
+            }).blur(function() {
+                var input = $(this);
+                if (input.val() == '' || input.val() == input.attr('placeholder')) {
+                    input.addClass('placeholder');
+                    input.val(input.attr('placeholder'));
+                }
+            }).blur();
+            $('[placeholder]').parents('form').submit(function() {
+                $(this).find('[placeholder]').each(function() {
+                    var input = $(this);
+                    if (input.val() == input.attr('placeholder')) {
+                        input.val('');
+                    }
+                });
+            });
+            </script>
+        <![endif]-->
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true&amp;key=AIzaSyDyVV8-SdSXUgMrds3ik15RrtlOa84j3cE"></script>
+        <script type="text/javascript" src="/WebResource.axd?d=Q2DLVP_8xeXBVhiHCEzgUSaCPLk0k_pSTtN0zlw8jrNEFiGFa74SV0CVuQ7Pe0Frqmmb8L_GKHyaa-C97A-a3D_AFTlzyulqxNtELK5YZLNMSZealwLuUjXpKCQ8bMIk7_KsovrXxcB1JgMim6HnNzca0oU1&t=635632983520000000"></script>
+        <script type="text/javascript" src="/WebResource.axd?d=IDJOChI5G874wscgwY2638a2b4ZoN0fF0varN5iMchJW9yUJ-x8kgMZC1jRyBrAoOrB29JYkqo6DQeXKGz7eGcE6Dtuuom9LwUIVezlZ38rcGJEYvmmZaG123tWkGCh1KRsGkfN-dLEM3eZS0&t=635632983520000000"></script>
+        <script type="text/javascript" src="/WebResource.axd?d=3_P0xzspw5bIqmQ_D0vkUfzuE-BwahPUeHjVMIulTak84FhX4IvxxivGnmgoPgRmFfSB_6l-lrcUspNSRwvQIf8pPC-ka3D7KOPr7TemaXPL9OQG46ezdHdS7VxAVhH7dXolJpoNeJEJ9G330&t=635632983520000000"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                UAlberta.Maps.Exterior.initialise("map_canvas", false, 28);
+            });
+        </script>
+    
+
+<script type="text/javascript">
+//<![CDATA[
+pageLoad_BuildingFocus=null;//]]>
+</script>
+</form>
+</body>
+</html>
