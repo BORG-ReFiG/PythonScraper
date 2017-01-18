@@ -4,6 +4,8 @@ from bs4 import BeautifulSoup
 import urllib.parse
 import os.path
 import sys
+import tldextract
+import time
 
 url = sys.argv[1]  # url to start from
 iterate = int(sys.argv[2])
@@ -11,10 +13,17 @@ depth_to_go = int(sys.argv[3])  # depth to go for
 directory = sys.argv[4]  # directory name
 if not url.startswith("http"):
     url = "http://" + url
-
-
+result = tldextract.extract(url)
+seed = result.domain
 
 # max_pages is the number of pages to crawl
+
+def checkDomain(link, seed):
+    same = False
+    link_domain = tldextract.extract(link)
+    if link_domain.domain == seed:
+        same = True
+    return same
 
 def trade_spider(max_pages):  # function(maximum number of pages to call variable)
     page = 1
@@ -54,8 +63,10 @@ def trade_spider(max_pages):  # function(maximum number of pages to call variabl
 
             num = 1
             name = "{0}.txt".format(name)  # adds the .txt to the end of the name
+            print('got this far')
             try:
                 if not os.path.isfile(name):  # if the file doesn't exist makes it
+                    print('here I am')
                     fo = open(name, "w")
 
                     fo.write('<page_url href=\"' + urls[0] + '\"></page_url>\n' + html)
@@ -87,12 +98,14 @@ def trade_spider(max_pages):  # function(maximum number of pages to call variabl
                     if size2 == 0:
                         os.remove(new_name)
                 print(urls[0])
-                for link in soup.findAll('a', href=True):
-                    link['href'] = urllib.parse.urljoin(urls[0], link['href'])
-                    if link['href'] not in visited:  # if the link is not in visited then it appends it to urls and visited
-                        if '.pdf' not in link['href'] and '.jpg' not in link['href']:#makes sure no jpg or pdfs pass
-                            urls.append(link['href'])
-                            visited.append(link['href'])
+                for link in soup.findAll('a', href=True): #this is new, it makes sure to only collect from the site we want
+                    link['href'] = urllib.parse.urljoin(urls[0], link['href']) # checks the domain name
+                    same = checkDomain(link['href'], seed)
+                    if same == True:
+                        if link['href'] not in visited:  # if the link is not in visited then it appends it to urls and visited
+                            if '.pdf' not in link['href'] and '.jpg' not in link['href']:#makes sure no jpg or pdfs pass
+                                urls.append(link['href'])
+                                visited.append(link['href'])
             except:
                 print("Can not encode file: " + urls[0])
         except:
@@ -111,6 +124,7 @@ def trade_spider(max_pages):  # function(maximum number of pages to call variabl
         size_of_directory = get_tree_size(os.curdir) / 1000000000
         print(round(size_of_directory, 5), "GB")
         print('\n')
+        time.sleep(.01)
 
 
 
