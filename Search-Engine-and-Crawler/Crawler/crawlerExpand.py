@@ -6,7 +6,6 @@ import sys
 import tldextract
 import time
 import codecs
-import time
 try:
     from os import scandir, walk
 except ImportError:
@@ -56,16 +55,19 @@ def trade_spider(max_pages):  # function(maximum number of pages to call variabl
     dsize = 0  # makes the depth already crawled 0
     depth = [dsize]
     # this checks if pg < max pg, the depth is < depth_to_go, and that urls are still available
+    i = 0
     while page <= max_pages and depth_to_go >= dsize and len(urls) > 0:
         try:
             try:
-                while (bool(html) != True):
-                    source_code = requests.get(urls[0])  # variable = requests.get(url)
+                while ((bool(html) != True) and i < 10):
+                    source_code = requests.get(urls[0], headers=headers)  # variable = requests.get(url)
                     html = source_code.text  # get source code of page
                     if html:
                         soup = BeautifulSoup(html, 'html.parser')  # variable to call beautifulsoup(variable of the source code)
                     else:
                         print('Request returned empty html')
+                        i+=1
+                i = 0
             except:
                 print('Couldn\'t request an html response ' + urls[0])
 
@@ -121,7 +123,7 @@ def trade_spider(max_pages):  # function(maximum number of pages to call variabl
                         os.remove(new_name)
                 print(urls[0])
                 for link in soup.findAll('a', href=True): #this is new, it makes sure to only collect from the site we want
-                    new_link = urllib.parse.urldefrag(link['href'])[0].rstrip('/')
+                    new_link = (urllib.parse.urldefrag(link['href'])[0]).rstrip('/')
                     new_link = urllib.parse.urljoin(urls[0], new_link)
                     if checkDomain(new_link):
                         if new_link not in visited:  # if the link is not in visited then it appends it to urls and visited
@@ -165,7 +167,5 @@ def get_tree_size(path):
 start_time = time.time()
 trade_spider(iterate)
 end_time = time.time()
-
-print (bool(html))
 
 print("Overall time: " + str((end_time - start_time)))
