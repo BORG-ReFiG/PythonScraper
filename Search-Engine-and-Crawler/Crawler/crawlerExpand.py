@@ -6,6 +6,7 @@ import sys
 import tldextract
 import time
 import codecs
+import string
 try:
     from os import scandir, walk
 except ImportError:
@@ -81,8 +82,8 @@ def request_url(url):
     return html
 
 
-# Function for cleaning up name
-# Called from create_name
+# Function for manually cleaning up name
+# Deprecated, we use format_filename instead now
 def clean_name (name):
     name = name.replace("\n", "")
     name = name.replace("\r", "")
@@ -100,29 +101,27 @@ def clean_name (name):
     # ">"
     # "^"
     # "!"
-
-
-    # def format_filename(s):
-    # Taken from: https://gist.github.com/seanh/93666
-    # """Take a string and return a valid filename constructed from the string.
-    # Uses a whitelist approach: any characters not present in valid_chars are
-    # removed. Also spaces are replaced with underscores.
-     
-    # Note: this method may produce invalid filenames such as ``, `.` or `..`
-    # When I use this method I prepend a date string like '2009_01_15_19_46_32_'
-    # and append a file extension like '.txt', so I avoid the potential of using
-    # an invalid filename.
-     
-    # """
-    # valid_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
-    # filename = ''.join(c for c in name if c in valid_chars)
-    # # Remove spaces in filename
-    # filename = filename.replace(' ','_')
-    # return filename
-
-
     name = name.strip(' ')
     return name
+
+
+# Function to create a filename out of a string
+# Called from create_name
+def format_filename(name):
+    #Taken from: https://gist.github.com/seanh/93666
+    """Take a string and return a valid filename constructed from the string.
+    Uses a whitelist approach: any characters not present in valid_chars are
+    removed. Also spaces are replaced with underscores.
+     
+    Note: this method may produce invalid filenames such as ``, `.` or `..`
+    When I use this method I prepend a date string like '2009_01_15_19_46_32_'
+    and append a file extension like '.txt', so I avoid the potential of using
+    an invalid filename."""
+    valid_chars = "-_() %s%s" % (string.ascii_letters, string.digits)
+    filename = ''.join(c for c in name if c in valid_chars)
+    # Remove spaces in filename
+    filename = filename.replace(' ','_')
+    return filename
 
 
 # Function for creating name
@@ -132,7 +131,7 @@ def create_name (soup):
     global title_number
     try:
         name = soup.title.string  # removes all the unnecessary things from title
-        name = clean_name(name)
+        name = format_filename(name)
         logging.info('Created name ' + name)
     except:
         name = "no_title_" + str(title_number)  # if no title provided give a no title with number title
