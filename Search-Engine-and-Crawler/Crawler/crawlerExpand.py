@@ -128,14 +128,12 @@ def format_filename(name):
 # Use the title of the html page as the title of the text file
 # Called from main function
 def create_name (soup):
-    global title_number
     try:
         name = soup.title.string  # removes all the unnecessary things from title
         name = format_filename(name)
         logging.info('Created name ' + name)
     except:
-        name = "no_title_" + str(title_number)  # if no title provided give a no title with number title
-        title_number += 1
+        name = "no_title_"  # if no title provided give a no title with number title
         logging.warn('Failed to create a name, using \'' + name + '\' instead')
     return name
 
@@ -169,10 +167,6 @@ def trade_spider(max_pages):
     # Also log the same into the text file
     crawled_urls.write("http://" + url_split[1] + "\n")
     crawled_urls.write("https://" + url_split[1] + "\n")
-
-    # Used when the title of the html page cannot be used.
-    # This is to make sure no two files are named the same way
-    title_number = 0
 
     # Sets the depth already crawled to 0
     dsize = 0
