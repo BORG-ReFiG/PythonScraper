@@ -7,6 +7,10 @@ import time
 import codecs
 import string
 import shutil
+import re
+from pprint import pprint
+from collections import Counter
+
 try:
     from os import scandir, walk
 except ImportError:
@@ -17,6 +21,9 @@ import logging
 
 # current time, used in the names of the folder and the logging file
 curtime = time.strftime("%Y-%m-%d-%H-%M-%S", time.gmtime())
+
+# this file should live in the same directory as the script
+keywords_file = "keywords.txt"
 
 # Arguments in order: url, total pages to look at, depth, first part of directory name
 # url to start from
@@ -84,8 +91,10 @@ if os.path.isdir(directory):
 
 
 else:
+    current_dir = os.getcwd()
     os.mkdir(target_dir)  # make a timestampted folder
     os.chdir(target_dir)  # then change directory to that folder
+    shutil.copyfile(current_dir + "/" + keywords_file, keywords_file)
     # Create a log file in the folder that was just created
     logging.basicConfig(filename=('_uniscraperlog_' + curtime + '.log'),level=logging.INFO)
     # file to log empty requests into
@@ -205,6 +214,75 @@ def test_split(max_pages):
         save_current_link()
 
 
+def extract_text(full_page):
+    """Extract text from HTML pages and Return normalized text
+    full_page - HTML source code
+    return string
+    """
+
+    # toss script and noscript tags
+    # (?is) - added to ignore case and allow new lines in text as well as support script tags with attributes.
+    # https://stackoverflow.com/questions/964459/how-to-remove-text-between-script-and-script-using-python
+    raw_text = re.sub(r'(?is)<script[^>]*>(.*?)</script>', "", full_page)
+
+    # toss iframes
+    raw_text = re.sub(r'(?is)<iframe[^>]*>(.*?)</iframe>', "", raw_text)
+
+    # toss styles
+    raw_text = re.sub(r'(?is)<style[^>]*>(.*?)</style>', "", raw_text)
+
+    # toss no script tags
+    raw_text = re.sub("<noscript>.*?</noscript>", "", raw_text)
+
+    # strip tags and html comments
+    raw_text = re.sub(r'(?is)<.*?>',"", raw_text)
+
+    # There were successive space characters to remove after stripping HTML tags out
+    raw_text = re.sub(r'\s\s+', ' ', raw_text)
+
+    # Remove html entities
+    raw_text = re.sub(r'&nbsp;', ' ', raw_text)
+    raw_text = re.sub(r'&copy;', ' ', raw_text)
+    raw_text = re.sub(r'&amp;', ' ', raw_text)
+    raw_text = re.sub(r'&ldquo;', '“', raw_text)
+    raw_text = re.sub(r'&rdquo;', '”', raw_text)
+    raw_text = re.sub(r'&rsquo;', '’', raw_text)
+    raw_text = re.sub(r'&ndash;', '–', raw_text)
+    raw_text = re.sub(r'&mdash;', '—', raw_text)
+    raw_text = re.sub(r'&hellip;', '…', raw_text)
+    raw_text = re.sub(r'&#39;', "'", raw_text)
+
+    return raw_text.lower()
+
+def tokenize_page(page_text):
+    """Create a list of all the words in the page
+    page_text - Raw text
+    return list of words
+    """
+    tokenized_words = re.findall(r'[\w]+', page_text)
+    return tokenized_words
+
+def get_file_content_as_list(file_name):
+    """Give a filename, open and read the contents into a list
+    file_name - file to be opened
+    return list of words
+    """
+    with open(file_name, 'r') as file_name_handle:
+        return file_name_handle.read().splitlines()
+
+def count_keywords(list_of_tokens, list_of_target_words):
+    """Counts how many instances of the keywords were found
+    list_of_tokens - The list of words as haystack
+    list_of_target_words - The list of words as needle
+    return number of words, list of keywords found
+    """
+    num_target_words = 0
+    matched_words = []
+    for token in list_of_tokens: # Goes through the tokens in the list
+        if token in list_of_target_words: # For each one it checks if it is in the target list
+            num_target_words += 1
+            matched_words.append(token)
+    return num_target_words, matched_words # Note that we are returning a tuple (2 values)
 
 def save_current_link ():
     global dsize
@@ -218,33 +296,26 @@ def save_current_link ():
         logging.warn('Error while requesting an html response ' + plannedURLsArray[0])
 
     if html:
+        plain_text = extract_text(html)
+        page_words = tokenize_page(plain_text)
+
+        keywords = get_file_content_as_list(keywords_file)
+        keywords = [x.lower() for x in keywords] # lowercase keywords
+
+        found_keywords = count_keywords(page_words, keywords)
+
+        found_keywords_counted = dict(Counter(found_keywords[1]))
+        pprint(found_keywords_counted, indent=2)
+
         # Gets the name for the file to store the html text in
         name = create_name(html)
-        # Adds the .txt to the end of the name
-        name = "{0}.txt".format(name)
-        try:
-            # Check if file with given name exists
-            if os.path.isfile(name):
-                # If exists, add timestamp to name to make it unique.
-                name = name[:name.find(".")] + "_" + str(time.time()) + ".txt"
 
-            # Open/create the file with that name
-            fo = codecs.open(name, "w", "utf-8-sig")
-            # Write URL to that file
-            fo.write("<page_url href=\"")
-            fo.write(plannedURLsArray[0])
-            fo.write("\"></page_url>\n")
-            # Append the html to the file
-            fo.write(html)
-            # Close the pipe to the file
-            fo.close()
-            # Log the creation of the file
-            logging.info('Created file ' + name)
+        # Log the creation of keywords
+        logging.info('Created keywords for file ' + name)
 
-            #find and process all links
-            process_links(html, plannedURLsArray[0])
-        except:
-            logging.warning("Can not encode file: " + plannedURLsArray[0])
+        #find and process all links
+        process_links(html, plannedURLsArray[0])
+
     # Else: html does not exist or is empty. Log error
     else:
         logging.warning('Request for ' + url + ' returned empty html')
