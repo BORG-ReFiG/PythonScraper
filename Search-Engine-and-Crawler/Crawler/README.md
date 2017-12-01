@@ -20,6 +20,9 @@ pip install tldextract
 pip install html5lib
 ```
 
+### keywords
+Create a `keywords.txt` file on this directory with a list of keywords to look for. Each keyword is on a new line.
+
 ### Sample usage
 ```
 python diverse.py [URL] 10 50 lefolder
