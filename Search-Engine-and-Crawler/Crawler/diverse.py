@@ -8,6 +8,7 @@ import codecs
 import string
 import shutil
 import re
+import csv
 from pprint import pprint
 from collections import Counter
 
@@ -24,6 +25,9 @@ curtime = time.strftime("%Y-%m-%d-%H-%M-%S", time.gmtime())
 
 # this file should live in the same directory as the script
 keywords_file = "keywords.txt"
+
+# the output file of all observed keyword frequencies
+csv_file_name  = "results.csv"
 
 # Arguments in order: url, total pages to look at, depth, first part of directory name
 # url to start from
@@ -284,28 +288,80 @@ def count_keywords(list_of_tokens, list_of_target_words):
             matched_words.append(token)
     return num_target_words, matched_words # Note that we are returning a tuple (2 values)
 
+def write_csv(output_file, keywords_header, keywords_x_freqs):
+    """Write a CSV file in the format url, <keyword1>, <keyword2>, <keyword3>, ...
+    output_file - the name of created CSV file
+    keywords_header - list with all the keywords to create header row of CSV
+    keywords_x_freqs - dictionary list with keywords and frequencies
+    return boolean
+    """
+    try:
+        if os.path.exists(output_file):
+            append_write = 'a' # append if already exists
+        else:
+            append_write = 'w' # make a new file if not
+
+        with open(csv_file_name, append_write) as f:
+           # Using dictionary keys as fieldnames for the CSV file header
+           writer = csv.DictWriter(f, keywords_header)
+           if append_write == 'w':
+               writer.writeheader()
+
+           for d in keywords_x_freqs:
+              writer.writerow(d)
+        return True
+    except Exception as e:
+        logging.error('Something bad happend while writing CSV:' + str(e))
+        return False
+
 def save_current_link ():
     global dsize
     global page
 
     html = ''
+    current_url = plannedURLsArray[0]
     # Try to get the html of the URL
     try:
-        html = request_url(plannedURLsArray[0])
+        html = request_url(current_url)
     except:
-        logging.warn('Error while requesting an html response ' + plannedURLsArray[0])
+        logging.warn('Error while requesting an html response ' + current_url)
 
     if html:
         plain_text = extract_text(html)
         page_words = tokenize_page(plain_text)
 
+        # read keywords from file into a list
         keywords = get_file_content_as_list(keywords_file)
-        keywords = [x.lower() for x in keywords] # lowercase keywords
+        # make the keywords lowercase
+        keywords = [x.lower() for x in keywords]
+        # make keywords dictionary with zero frequency as value
+        all_keywords = dict((el,0) for el in keywords)
 
-        found_keywords = count_keywords(page_words, keywords)
+        # counts keywords in page
+        found_count, found_keywords = count_keywords(page_words, keywords)
 
-        found_keywords_counted = dict(Counter(found_keywords[1]))
-        pprint(found_keywords_counted, indent=2)
+        found_keywords_freq_dict = Counter(found_keywords)
+        all_keywords_dict = Counter(all_keywords)
+        # combine both dicts to have uniform dictionary for all pages
+        all_keywords_dict.update(found_keywords_freq_dict)
+        # after merging, sort the resulting dictionary based on keys to make
+        # a tuples list that is always uniform for every page
+        sorted_keywords_list = sorted(all_keywords_dict.items())
+
+        # create a sorted dictionary list
+        my_d = []
+        my_d.append({x:y for x,y in sorted_keywords_list})
+
+        # extract a sorted list of keywords to write as CSV headers
+        headers = [str(x) for x, y in sorted_keywords_list]
+        # prepend url header onto the keywords list
+        headers.insert(0, u'url')
+        logging.info(headers)
+
+        # prepend the current URL onto the frequencies dict object
+        my_d[0]['url']= current_url
+
+        write_csv(csv_file_name, headers, my_d)
 
         # Gets the name for the file to store the html text in
         name = create_name(html)
@@ -314,7 +370,7 @@ def save_current_link ():
         logging.info('Created keywords for file ' + name)
 
         #find and process all links
-        process_links(html, plannedURLsArray[0])
+        process_links(html, current_url)
 
     # Else: html does not exist or is empty. Log error
     else:
