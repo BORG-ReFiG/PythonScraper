@@ -31,9 +31,13 @@ depth_to_go = int(sys.argv[3])
 directory = sys.argv[4]
 target_dir = directory + "_" + curtime
 
-
+# RegEx that is used to filter searches for URLs on any given page.
+#Used in is_relevant_link_from_soup and is_relevant_link_from_html functions
 filter_regex = re.compile(".*([Pp]rogram|[Aa]dmission).*")
 
+# Var to choose mode
+# "soup" uses BeautifulSoup to assign a name to a page and to search the page for URLs
+# "no_soup" uses a string search – splits the page into strings using "href=" as a partition limiter, then goes from there
 mode = "no_soup" # soup or no_soup
 
 
@@ -51,34 +55,36 @@ headers.update (
     }
 )
 
-#os.mkdir(target_dir)  # make a timestampted folder
-# Check if the original directory exists
+# Checks if the directory with the given name already exists
+# If it does, tries to continue a script run that was interrupted, using already existing lists of visited_urls and planned_urls
+# If it doesn't, starts a new script run
 if os.path.isdir(directory):
-    #shutil.copy(directory + "/_planned_urls.txt", target_dir)
-    #shutil.copy(directory + "/_empty_requests.txt", target_dir)
-    #shutil.copy(directory + "/_visited_urls.txt", target_dir)
-    #shutil.copy(directory + "/_crawled_urls.txt", target_dir)
+    # Continuing a previous script run
+
+    # Copy the contents of the existing directory to a new timestamped one
     shutil.copytree(directory, target_dir)
     os.chdir(target_dir)  # then change directory to that folder
     
-    #count number visited
+    # Open the visited_urls text file and count the number of lines in it – that's how many pages the script visited throughout its previous runs
     with open("_visited_urls.txt") as f:
         for i, l in enumerate(f, start=1):
             pass
     page = i
-
-    #create array of planned
+ 
+    # Open the file with planned urls and add them to the array of planned urls
     with open("_planned_urls.txt") as f:
         content = f.readlines()
         #remove whitespace characters like `\n` at the end of each line
         planned = content[page-1:]
         plannedURLsArray = [x.strip() for x in planned]
 
+    # Open the file with crawled urls and add them to the array of crawled urls
     with open("_crawled_urls.txt") as f:
         content = f.readlines()
         #remove whitespace characters like `\n` at the end of each line
         crawledURLsArray = [x.strip() for x in content]
 
+    # Create a new log file
     logging.basicConfig(filename=('_uniscraperlog_' + curtime + '.log'),level=logging.INFO)
     # file to log empty requests into
     empty_request_log = codecs.open("_empty_requests.txt", "a", "utf-8-sig")
@@ -91,6 +97,7 @@ if os.path.isdir(directory):
 
 
 else:
+    # Start a new script run
     os.mkdir(target_dir)  # make a timestampted folder
     os.chdir(target_dir)  # then change directory to that folder
     # Create a log file in the folder that was just created
@@ -156,7 +163,9 @@ def format_filename(name):
 
 # Function for creating name
 # Use the title of the html page as the title of the text file
-# Called from main function
+# Called from process_current_link
+# Uses string search to locate the <title> tag
+# Parameter html is a string
 def create_name_from_html (html):
     name_list = (html.partition("</title")[0]).split("<title") #grab part of html before </title
     name_part = name_list[-1] #grab part of html after <title
@@ -170,6 +179,11 @@ def create_name_from_html (html):
         logging.warn('Failed to create a name, using \'' + name + '\' instead')
     return name
 
+# Function for creating name
+# Use the title of the html page as the title of the text file
+# Called from process_current_link
+# Uses Beautiful Soup to locate the <title> tag
+# Parameter soup is a soup object
 def create_name_from_soup (soup):
     name = soup.title.string
     if name:
@@ -195,7 +209,8 @@ def dequote(s):
     return s
 
 
-#Function that takes link, saves the contents to text file call href_split
+# Function that takes link, saves the contents to text file call href_split
+# Main function
 def crawl(max_pages):
     logging.info("Crawling through domain '" + seed + "'")
 
@@ -221,7 +236,7 @@ def crawl(max_pages):
         process_current_link()
 
 
-
+# Function that grabs the first link in the list of planned urls, requests the page and processes it
 def process_current_link ():
     global page
 
@@ -229,8 +244,9 @@ def process_current_link ():
     # Try to get the html of the URL
     html = request_url(plannedURLsArray[0])
 
-    if html:
-        #Soupify
+    if html: #if the request returned an html
+        # Soupify
+        # For now it soupifies the link regardless of the mode, because it uses soup later to extract visible text from the page
         soup = BeautifulSoup(html, 'html5lib')
         
         if mode=="no_soup":
@@ -286,44 +302,36 @@ def process_current_link ():
 
     # Increment page count
     page += 1
-    # Checks the size of the folder. Prints the amount of data collected in GB to the console and log file
-    if page%10 == 0:
-        size_of_directory = get_tree_size(os.curdir) / 1000000000
-        print("Size: ", str(round(size_of_directory, 5)), "GB")
+    # Every 50 pages checks the size of the folder. Prints the amount of data collected in MB to the console and log file
+    if page%50 == 0:
+        size_of_directory = get_tree_size(os.curdir) / 1000000
+        print("Size: ", str(round(size_of_directory, 5)), "MB")
         print('\n')
-        logging.info("Size: " + str(round(size_of_directory, 5)) + "GB")
+        logging.info("Size: " + str(round(size_of_directory, 5)) + "MB")
         # Prints in the log file the length of time the crawler has been running in seconds
         logging.info("Has been running for " + str(time.time() - start_time) + " seconds")
     # Time delay in seconds to prevent crashing the server
     time.sleep(.01)
 
 
-#Function for splitting html into links
-def href_split (html):
-    links = []
-    if html.partition('<body')[2]:
-        html = html.partition('<body')[2]
-    link_strings = html.split(' href=')
-    for lnk in link_strings[1:]:
-        href = lnk.partition('>')[0]
-        href = href.partition(' ')[0]
-        href = dequote(href)
-        links.append(href)
-    return links
-
-
-#input is a soup element
+# checks that the text content of the link matches the filter_regex
+# input parameter is a soup element!!!
 def is_relevant_link_from_soup(link):
     if link.find(string=filter_regex):
         return True
     return False
     #return True #Uncomment to grab all links
 
+# takes soup of a page, finds all links on it
+# for each link checks if it's relevant
+# for each relevant link, saves it to the planned urls array (if it hasn't been crawled yet)
+# and to the crawled urls array (so that we don't save it a second time later)
 def process_links_from_soup (soup, cur_domain):
     for lnk in soup.findAll('a', href=True):
         if is_relevant_link_from_soup(lnk):
             new_link = (urllib.parse.urldefrag(lnk['href'])[0]).rstrip('/')
             new_link = urllib.parse.urljoin(cur_domain, new_link)
+            # if the link is in our main domain
             if checkDomain(new_link):
                 # if the link is not in crawledURLsArray then it appends it to urls and crawledURLsArray
                 if new_link not in crawledURLsArray:
@@ -350,6 +358,8 @@ def process_links_from_soup (soup, cur_domain):
                         crawled_urls.write("https://" + http_split[1])
                         crawled_urls.write("\n")
 
+# checks that the text content of the link matches the filter_regex
+# input parameter is a string
 def is_relevant_link_from_html(link):
     if filter_regex.match(link):
         return True
@@ -360,9 +370,9 @@ def is_relevant_link_from_html(link):
 def process_links_from_html (html, cur_domain):
     if html.partition('<body')[2]:
         html = html.partition('<body')[2]
-    link_strings = html.split('href=')
+    link_strings = html.split('href=') # split the page into sections using "href=" as a delimiter
     for lnk in link_strings[1:]:
-        href = lnk.partition('</a')[0]
+        href = lnk.partition('</a')[0] # grab all text before the "</a" – this var now contains text after an href parameter and before a closing tag, and thus includes the text content of the link
         if is_relevant_link_from_html(href):
             href = href.partition('>')[0]
             href = href.partition(' ')[0]
@@ -399,7 +409,8 @@ def process_links_from_html (html, cur_domain):
 
 
 
-#Function to extract text elements from an HTML and return them as an array of BeautifulSoup 
+# Function to extract text elements from an HTML and return them as an array of BeautifulSoup
+# called from process_current_link
 def extract_text(soup):
     data = soup.findAll(text=True)
     result = filter(is_visible_html_element, data)
@@ -409,6 +420,9 @@ def extract_text(soup):
             all_text += t + "\n"
     return all_text
  
+
+# check that the given soup element is a visible text element
+# called from extract_text
 def is_visible_html_element(element):
     if element.parent.name in ['style', 'script', '[document]', 'head', 'title']:
         return False
@@ -434,6 +448,7 @@ def get_tree_size(path):
     return total
 
 
+# Shut down gracefully and log it
 def shut_down():
     global start_time
     global logging
