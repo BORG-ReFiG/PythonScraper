@@ -7,6 +7,8 @@ import tldextract
 import time
 import codecs
 import string
+import shutil
+import re
 try:
     from os import scandir, walk
 except ImportError:
@@ -26,7 +28,13 @@ iterate = int(sys.argv[2])
 # depth to go for
 depth_to_go = int(sys.argv[3])
 # directory name
-directory = sys.argv[4] + "_" + curtime
+directory = sys.argv[4]
+target_dir = directory + "_" + curtime
+
+
+filter_regex = re.compile(".*([Pp]rogram|[Aa]dmission).*")
+
+mode = "no_soup" # soup or no_soup
 
 
 # Checks if the url includes http at the front
@@ -43,22 +51,61 @@ headers.update (
     }
 )
 
-# Check if the directory exists
-if not os.path.isdir(directory):
-    os.mkdir(directory)  # if it doesnt then make it
-os.chdir(directory)  # then change directory to that folder
+#os.mkdir(target_dir)  # make a timestampted folder
+# Check if the original directory exists
+if os.path.isdir(directory):
+    #shutil.copy(directory + "/_planned_urls.txt", target_dir)
+    #shutil.copy(directory + "/_empty_requests.txt", target_dir)
+    #shutil.copy(directory + "/_visited_urls.txt", target_dir)
+    #shutil.copy(directory + "/_crawled_urls.txt", target_dir)
+    shutil.copytree(directory, target_dir)
+    os.chdir(target_dir)  # then change directory to that folder
+    
+    #count number visited
+    with open("_visited_urls.txt") as f:
+        for i, l in enumerate(f, start=1):
+            pass
+    page = i
 
-# Create a log file in the folder that was just created
-logging.basicConfig(filename=('_uniscraperlog_' + curtime + '.log'),level=logging.INFO)
-# file to log empty requests into
-empty_request_log = codecs.open("_empty_requests.txt", "w", "utf-8-sig")
-# file to log planned urls into - URLs in the queue, that are planned to go to next (checked against visited)
-planned_urls = codecs.open("_planned_urls.txt", "w", "utf-8-sig")
-# file to log visited urls into - URLs that have been requested and have the html
-visited_urls = codecs.open("_visited_urls.txt", "w", "utf-8-sig")
-# file to log crawled urls into - URLs that crawler will "check" against to see if needs logging
-crawled_urls = codecs.open("_crawled_urls.txt", "w", "utf-8-sig")
+    #create array of planned
+    with open("_planned_urls.txt") as f:
+        content = f.readlines()
+        #remove whitespace characters like `\n` at the end of each line
+        planned = content[page-1:]
+        plannedURLsArray = [x.strip() for x in planned]
 
+    with open("_crawled_urls.txt") as f:
+        content = f.readlines()
+        #remove whitespace characters like `\n` at the end of each line
+        crawledURLsArray = [x.strip() for x in content]
+
+    logging.basicConfig(filename=('_uniscraperlog_' + curtime + '.log'),level=logging.INFO)
+    # file to log empty requests into
+    empty_request_log = codecs.open("_empty_requests.txt", "a", "utf-8-sig")
+    # file to log planned urls into - URLs in the queue, that are planned to go to next (checked against visited)
+    planned_urls = codecs.open("_planned_urls.txt", "a", "utf-8-sig")
+    # file to log visited urls into - URLs that have been requested and have the html
+    visited_urls = codecs.open("_visited_urls.txt", "a", "utf-8-sig")
+    # file to log crawled urls into - URLs that crawler will "check" against to see if needs logging
+    crawled_urls = codecs.open("_crawled_urls.txt", "a", "utf-8-sig")
+
+
+else:
+    os.mkdir(target_dir)  # make a timestampted folder
+    os.chdir(target_dir)  # then change directory to that folder
+    # Create a log file in the folder that was just created
+    logging.basicConfig(filename=('_uniscraperlog_' + curtime + '.log'),level=logging.INFO)
+    # file to log empty requests into
+    empty_request_log = codecs.open("_empty_requests.txt", "w", "utf-8-sig")
+    # file to log planned urls into - URLs in the queue, that are planned to go to next (checked against visited)
+    planned_urls = codecs.open("_planned_urls.txt", "w", "utf-8-sig")
+    plannedURLsArray = []
+    # file to log visited urls into - URLs that have been requested and have the html
+    visited_urls = codecs.open("_visited_urls.txt", "w", "utf-8-sig")
+    # file to log crawled urls into - URLs that crawler will "check" against to see if needs logging
+    crawled_urls = codecs.open("_crawled_urls.txt", "w", "utf-8-sig")
+    crawledURLsArray = []
+    page = 1
 
 # Function that checks if the link provided is in the same domain as the seed
 def checkDomain(link):
@@ -76,50 +123,33 @@ def request_url(url):
     visited_urls.write(url)
     visited_urls.write("\n")
     # Use requests module to get html from url as an object
-    source_code = requests.get(url, headers=headers)  # variable = requests.get(url)
-    # Get source code of page as text
-    html = source_code.text
-    return html
-
-
-# Function for manually cleaning up name
-# Deprecated, we use format_filename instead now
-def clean_name (name):
-    name = name.replace("\n", "")
-    name = name.replace("\r", "")
-    name = name.replace("\t", "")
-    name = name.replace("|", "")
-    name = name.replace(":", "")
-    name = name.replace("?", "")
-    name = name.replace("'", "")
-
-    # "/"
-    # "\\"
-    # "*"
-    # "\""
-    # "<"
-    # ">"
-    # "^"
-    # "!"
-    name = name.strip(' ')
-    return name
-
-
+    html = ''
+    try:
+        r = requests.get(url, headers=headers)
+        if r.ok:
+            if "text/html" in r.headers["content-type"]:    
+                html = r.text
+                return html
+        return None
+    except KeyboardInterrupt:
+        print("\n\nScript interrupted by user. Shutting down.")
+        logging.info("Script interrupted by user")
+        shut_down()
+    except Exception:
+        logging.exception("Couldn\'t request " + url)
+        return None
+    
 # Function to create a filename out of a string
 # Called from create_name
 def format_filename(name):
     #Taken from: https://gist.github.com/seanh/93666
     """Take a string and return a valid filename constructed from the string.
     Uses a whitelist approach: any characters not present in valid_chars are
-    removed. Also spaces are replaced with underscores.
-     
-    Note: this method may produce invalid filenames such as ``, `.` or `..`
-    When I use this method I prepend a date string like '2009_01_15_19_46_32_'
-    and append a file extension like '.txt', so I avoid the potential of using
-    an invalid filename."""
+    removed. Also spaces are replaced with underscores."""
     valid_chars = "-_() %s%s" % (string.ascii_letters, string.digits)
     filename = ''.join(c for c in name if c in valid_chars)
     # Remove spaces in filename
+    filename = filename.strip()
     filename = filename.replace(' ','_')
     return filename
 
@@ -127,169 +157,269 @@ def format_filename(name):
 # Function for creating name
 # Use the title of the html page as the title of the text file
 # Called from main function
-def create_name (soup):
-    try:
-        name = soup.title.string  # removes all the unnecessary things from title
-        name = format_filename(name)
+def create_name_from_html (html):
+    name_list = (html.partition("</title")[0]).split("<title") #grab part of html before </title
+    name_part = name_list[-1] #grab part of html after <title
+    name = name_part.split(">")[-1]
+    if name:
+    # removes invalid characters from title
+        name = format_filename(name) + '__' + str(time.time())
         logging.info('Created name ' + name)
-    except:
-        name = "no_title_"  # if no title provided give a no title with number title
+    else:
+        name = "no_title_" + str(time.time()) # if no title provided give a no title with a timestamp
+        logging.warn('Failed to create a name, using \'' + name + '\' instead')
+    return name
+
+def create_name_from_soup (soup):
+    name = soup.title.string
+    if name:
+    # removes invalid characters from title
+        name = format_filename(name) + '__' + str(time.time())
+        logging.info('Created name ' + name)
+    else:
+        name = "no_title_" + str(time.time()) # if no title provided give a no title with a timestamp
         logging.warn('Failed to create a name, using \'' + name + '\' instead')
     return name
 
 
-# Function for creating file
+#Function for deleting paired single or double quotes
+def dequote(s):
+    """
+    If a string has single or double quotes around it, remove them.
+    Make sure the pair of quotes match.
+    If a matching pair of quotes is not found, return the string unchanged.
+    """
+    if (len(s)>= 2 and s[0] == s[-1]) and s.startswith(("'", '"')):
+        s = s[1:-1]
+    s = s.strip('"\'')
+    return s
 
 
-
-# Function for saving links
-
-
-# Main function.
-# max_pages is the number of pages to crawl (given as the second argument)
-def trade_spider(max_pages):
+#Function that takes link, saves the contents to text file call href_split
+def crawl(max_pages):
     logging.info("Crawling through domain '" + seed + "'")
-    page = 1
 
-    # Array that holds the queue to be visited later
-    plannedURLsArray = [url]
-    # Logging the urls
-    planned_urls.write(url)
-    planned_urls.write("\n")
+    if page == 1:
+        # Array that holds the queue to be visited later
+        plannedURLsArray.append(url)
+        # Logging the urls
+        planned_urls.write(url)
+        planned_urls.write("\n")
 
-    # Gets the root of the url
-    url_split = url.split("://", 1)
-    # Array that holds urls that have been found.
-    # This is the array that all new URLs are checked against to prevent repeating.
-    # Record URL with both http and https prefixes
-    crawledURLsArray = ["http://" + url_split[1]]
-    crawledURLsArray.append("https://" + url_split[1])
-    # Also log the same into the text file
-    crawled_urls.write("http://" + url_split[1] + "\n")
-    crawled_urls.write("https://" + url_split[1] + "\n")
+        # Gets the root of the url
+        url_split = url.split("://", 1)
+        # Array that holds urls that have been found.
+        # This is the array that all new URLs are checked against to prevent repeating.
+        # Record URL with both http and https prefixes
+        crawledURLsArray.append("http://" + url_split[1])
+        crawledURLsArray.append("https://" + url_split[1])
+        # Also log the same into the text file
+        crawled_urls.write("http://" + url_split[1] + "\n")
+        crawled_urls.write("https://" + url_split[1] + "\n")
 
-    # Sets the depth already crawled to 0
-    dsize = 0
-    # Create an array of queue size on each level of the tree. Used to stop the crawler at a certain depth.
-    # Alas, it appears to be broken...
-    depth = [dsize]
-    # Checks if the crawler has gone over the max number of pages
-    # Also checks if the depth has gone over the max depth
-    # Also checks if there are still URLs in the queue
-    while page <= max_pages and dsize <= depth_to_go and len(plannedURLsArray) > 0:
-        # Empty html variable, just in case
-        html = ''
-        # Try to get the html of the URL
-        try:
-            html = request_url(plannedURLsArray[0])
-        except:
-            logging.warn('Error while requesting an html response ' + plannedURLsArray[0])
-        # Checks if html exists and is not empty
-        if html:
-            # Uses module to parse html into an obejct (a tree of nodes). Nodes are tags, attributes, ect.
-            # May need to be re-thought! Very memory heavy. ???
-            soup = BeautifulSoup(html, 'html5lib')
+    while page <= max_pages and len(plannedURLsArray) > 0:
+        process_current_link()
+
+
+
+def process_current_link ():
+    global page
+
+    print(plannedURLsArray[0])
+    # Try to get the html of the URL
+    html = request_url(plannedURLsArray[0])
+
+    if html:
+        #Soupify
+        soup = BeautifulSoup(html, 'html5lib')
+        
+        if mode=="no_soup":
             # Gets the name for the file to store the html text in
-            name = create_name(soup)
-            # Adds the .txt to the end of the name
-            name = "{0}.txt".format(name)
+            name = create_name_from_html(html)
+            #find and process all links
+            process_links_from_html(html, plannedURLsArray[0])
+        else:
+            name = create_name_from_soup(soup)
+            process_links_from_soup(soup, plannedURLsArray[0])
 
+        # Adds the .txt to the end of the name
+        name = "{0}.txt".format(name)
+
+        # Find only visible text
+        visible_text = extract_text(soup)
+
+        if visible_text: #save it as a text file
             try:
-                # Check if file with given name exists
-                if os.path.isfile(name):
-                    # If exists, add timestamp to name to make it unique.
-                    name = name[:name.find(".")] + "_" + str(time.time()) + ".txt"
-                
-                # Open/create the file with that name
+                # Create and open the file with that name
                 fo = codecs.open(name, "w", "utf-8-sig")
                 # Write URL to that file
                 fo.write("<page_url href=\"")
                 fo.write(plannedURLsArray[0])
                 fo.write("\"></page_url>\n")
                 # Append the html to the file
-                fo.write(html)
+                fo.write(visible_text)
                 # Close the pipe to the file
                 fo.close()
                 # Log the creation of the file
                 logging.info('Created file ' + name)
 
-                #print(plannedURLsArray[0])
-                # Looks for tables with content (hopefully programs and courses)
-                # ACALOG-specific: find all tables with class "block_n2_and_content"
-                for table in soup.findAll('table', class_='block_n2_and_content'):
-                # Old code: look for all <a> (links) in soup
-                #for link in soup.findAll('a', href=True): #Untab the lines below if you uncomment this
-                    # Make sure to only collect from the site we want
-                    for link in table.findAll('a', href=True):
-                        # Collects the href string and stores the link as a tuple
-                        # It stores the URL without a #thing and without an ending slash
-                        new_link = (urllib.parse.urldefrag(link['href'])[0]).rstrip('/')
-                        # ACALOG-specific: removes ACALOG print-friendly format descriptor
-                        #new_link = new_link.rstrip('&print')
-                        # Smart function for relative links on the page. Joins given path and current URL. 
-                        new_link = urllib.parse.urljoin(plannedURLsArray[0], new_link)
-                        # Checks if the just found link is in the same domain
-                        if checkDomain(new_link):
-                            # if the link is not in crawledURLsArray then it appends it to urls and crawledURLsArray
-                            if new_link not in crawledURLsArray:
-                                # Ensures no jpg or pdfs are stored and that no mailto: links are stored.
-                                if new_link.startswith("http") and '.pdf' not in new_link and '.jpg' not in new_link:
-                                    #???TODO: add checks for www.domain.com and https://
-                                    # Adds new link to array
-                                    plannedURLsArray.append(new_link)
-                                    # Adds new link to queue file
-                                    planned_urls.write(new_link)
-                                    planned_urls.write("\n")
-
-                                    # Remove the front of the URL (http or https)
-                                    http_split = new_link.split("://", 1)
-                                    # Add all possible link variations to file of URLs that have been looked at
-                                    # Adds new link to array
-                                    crawledURLsArray.append("http://" + http_split[1])
-                                    # Adds new link to already looked at file
-                                    crawled_urls.write("http://" + http_split[1])
-                                    crawled_urls.write("\n")
-                                    # Adds new link to array
-                                    crawledURLsArray.append("https://" + http_split[1])
-                                    # Adds new link to already looked at file
-                                    crawled_urls.write("https://" + http_split[1])
-                                    crawled_urls.write("\n")
-            except:
-                logging.warning("Can not encode file: " + plannedURLsArray[0])
-        # Else: html does not exist or is empty. Log error
+            except KeyboardInterrupt:
+                print("\n\nScript interrupted by user. Shutting down.")
+                logging.info("Script interrupted by user")
+                shut_down()
+            except Exception:
+                logging.exception("Can not encode file: " + plannedURLsArray[0])
         else:
-            logging.warning('Request for ' + url + ' returned empty html')
-            empty_request_log.write(url)
-            empty_request_log.write("\n")
-        # Prints to console.
-        # Update on what URL is being examined
-        print(plannedURLsArray[0])
-        # Update on the depth it is at
-        print("depth:", dsize)
-        # Update on the total number of pages
-        print("iterations:", page, "pages")
-        print("\n")
-        # Deletes the currently looked at URL from the queue
-        plannedURLsArray.pop(0)
-        # SUPER BROKEN???
-        # Supposed to check if given depth has been reached
-        # Should look at the plannedURLsArray instead of the crawled one
-        if page >= depth[dsize]:
-            depth.append(len(crawledURLsArray))
-            dsize += 1
+            print('No visible text in ' + url)
+            logging.warning('No visible text in ' + url)
+    # Else: html does not exist or is empty. Log error
+    else:
+        logging.warning('Request for ' + url + ' returned empty html')
+        empty_request_log.write(url)
+        empty_request_log.write("\n")
 
-        # Increment page count
-        page += 1
-        # Checks the size of the folder. Prints the amount of data collected in GB to the console and log file
-        if page%100 == 0:
-            size_of_directory = get_tree_size(os.curdir) / 1000000000
-            print("Size: ", round(size_of_directory, 5), "GB")
-            print('\n')
-            logging.info("Size: " + round(size_of_directory, 5) + "GB")
-            # Prints in the log file the length of time the crawler has been running in seconds
-            logging.info("Has been running for " + str(time.time() - start_time) + " seconds")
-        # Time delay in seconds to prevent crashing the server
-        time.sleep(.01)
+    # Update on the total number of pages
+    print("iterations:", page, "pages")
+    print("\n")
+    # Deletes the currently looked at URL from the queue
+    plannedURLsArray.pop(0)
+
+    # Increment page count
+    page += 1
+    # Checks the size of the folder. Prints the amount of data collected in GB to the console and log file
+    if page%10 == 0:
+        size_of_directory = get_tree_size(os.curdir) / 1000000000
+        print("Size: ", str(round(size_of_directory, 5)), "GB")
+        print('\n')
+        logging.info("Size: " + str(round(size_of_directory, 5)) + "GB")
+        # Prints in the log file the length of time the crawler has been running in seconds
+        logging.info("Has been running for " + str(time.time() - start_time) + " seconds")
+    # Time delay in seconds to prevent crashing the server
+    time.sleep(.01)
+
+
+#Function for splitting html into links
+def href_split (html):
+    links = []
+    if html.partition('<body')[2]:
+        html = html.partition('<body')[2]
+    link_strings = html.split(' href=')
+    for lnk in link_strings[1:]:
+        href = lnk.partition('>')[0]
+        href = href.partition(' ')[0]
+        href = dequote(href)
+        links.append(href)
+    return links
+
+
+#input is a soup element
+def is_relevant_link_from_soup(link):
+    if link.find(string=filter_regex):
+        return True
+    return False
+    #return True #Uncomment to grab all links
+
+def process_links_from_soup (soup, cur_domain):
+    for lnk in soup.findAll('a', href=True):
+        if is_relevant_link_from_soup(lnk):
+            new_link = (urllib.parse.urldefrag(lnk['href'])[0]).rstrip('/')
+            new_link = urllib.parse.urljoin(cur_domain, new_link)
+            if checkDomain(new_link):
+                # if the link is not in crawledURLsArray then it appends it to urls and crawledURLsArray
+                if new_link not in crawledURLsArray:
+                    # Ensures no jpg or pdfs are stored and that no mailto: links are stored.
+                    if new_link.startswith("http") and '.pdf' not in new_link and '.jpg' not in new_link:
+                        #???TODO: add checks for www.domain.com and https://
+                        # Adds new link to array
+                        plannedURLsArray.append(new_link)
+                        # Adds new link to queue file
+                        planned_urls.write(new_link)
+                        planned_urls.write("\n")
+
+                        # Remove the front of the URL (http or https)
+                        http_split = new_link.split("://", 1)
+                        # Add all possible link variations to file of URLs that have been looked at
+                        # Adds new link to array
+                        crawledURLsArray.append("http://" + http_split[1])
+                        # Adds new link to already looked at file
+                        crawled_urls.write("http://" + http_split[1])
+                        crawled_urls.write("\n")
+                        # Adds new link to array
+                        crawledURLsArray.append("https://" + http_split[1])
+                        # Adds new link to already looked at file
+                        crawled_urls.write("https://" + http_split[1])
+                        crawled_urls.write("\n")
+
+def is_relevant_link_from_html(link):
+    if filter_regex.match(link):
+        return True
+    return False
+    #return True #Uncomment to grab all links
+
+#Take an array of links, run the split on each and add the results to the appropriate arrays and files
+def process_links_from_html (html, cur_domain):
+    if html.partition('<body')[2]:
+        html = html.partition('<body')[2]
+    link_strings = html.split('href=')
+    for lnk in link_strings[1:]:
+        href = lnk.partition('</a')[0]
+        if is_relevant_link_from_html(href):
+            href = href.partition('>')[0]
+            href = href.partition(' ')[0]
+            href = dequote(href)
+            new_link = (urllib.parse.urldefrag(href)[0]).rstrip('/')
+            new_link = urllib.parse.urljoin(cur_domain, new_link)
+            if checkDomain(new_link):
+                # if the link is not in crawledURLsArray then it appends it to urls and crawledURLsArray
+                if new_link not in crawledURLsArray:
+                    # Ensures no jpg or pdfs are stored and that no mailto: links are stored.
+                    if new_link.startswith("http") and '.pdf' not in new_link and '.jpg' not in new_link:
+                        #???TODO: add checks for www.domain.com and https://
+                        # Adds new link to array
+                        plannedURLsArray.append(new_link)
+                        # Adds new link to queue file
+                        planned_urls.write(new_link)
+                        planned_urls.write("\n")
+
+                        # Remove the front of the URL (http or https)
+                        http_split = new_link.split("://", 1)
+                        # Add all possible link variations to file of URLs that have been looked at
+                        # Adds new link to array
+                        crawledURLsArray.append("http://" + http_split[1])
+                        # Adds new link to already looked at file
+                        crawled_urls.write("http://" + http_split[1])
+                        crawled_urls.write("\n")
+                        # Adds new link to array
+                        crawledURLsArray.append("https://" + http_split[1])
+                        # Adds new link to already looked at file
+                        crawled_urls.write("https://" + http_split[1])
+                        crawled_urls.write("\n")
+
+
+
+
+
+#Function to extract text elements from an HTML and return them as an array of BeautifulSoup 
+def extract_text(soup):
+    data = soup.findAll(text=True)
+    result = filter(is_visible_html_element, data)
+    all_text = ""
+    for t in result:
+        if t.strip():
+            all_text += t + "\n"
+    return all_text
+ 
+def is_visible_html_element(element):
+    if element.parent.name in ['style', 'script', '[document]', 'head', 'title']:
+        return False
+    elif re.match('<!--.*-->', str(element.encode('utf-8'))):
+        return False
+    return True
+
+
+
+
+
 
 # Return total size of files in given path and subdirs by going through the tree.
 # Recursive.
@@ -303,18 +433,40 @@ def get_tree_size(path):
             total += entry.stat(follow_symlinks=False).st_size
     return total
 
+
+def shut_down():
+    global start_time
+    global logging
+    global empty_request_log
+    global visited_urls
+    global planned_urls
+    global crawled_urls
+
+    # Get the time that the command finished
+    end_time = time.time()
+    # Print overall time taken to console
+    print("Overall time: " + str((end_time - start_time)))
+    # Log overall time and save to main log file
+    logging.info("Overall time: " + str((end_time - start_time)))
+    # Close all the things/pipes to files
+    empty_request_log.close()
+    visited_urls.close()
+    planned_urls.close()
+    crawled_urls.close()
+    sys.exit()
+
+
 # Get the time that the command was run
 start_time = time.time()
-# Call main function
-trade_spider(iterate)
-# Get the time that the command finished
-end_time = time.time()
-# Print overall time taken to console
-print("Overall time: " + str((end_time - start_time)))
-# Log overall time and save to main log file
-logging.info("Overall time: " + str((end_time - start_time)))
-# Close all the things/pipes to files
-empty_request_log.close()
-visited_urls.close()
-planned_urls.close()
-crawled_urls.close()
+
+try:
+    # Call main function
+    crawl(iterate)
+    shut_down()
+except KeyboardInterrupt:
+    print("\n\nScript interrupted by user. Shutting down.")
+    logging.info("Script interrupted by user")
+    shut_down()
+except Exception:
+    logging.exception("Error while running script")
+    
