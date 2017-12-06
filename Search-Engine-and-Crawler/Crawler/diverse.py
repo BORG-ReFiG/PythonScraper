@@ -356,9 +356,11 @@ def save_current_link ():
         headers = [str(x) for x, y in sorted_keywords_list]
         # prepend url header onto the keywords list
         headers.insert(0, u'url')
+        headers.insert(1, u'frequency_sum')
         logging.info(headers)
 
         # prepend the current URL onto the frequencies dict object
+        my_d[0]['frequency_sum']= sum(my_d[0].values())
         my_d[0]['url']= current_url
 
         write_csv(csv_file_name, headers, my_d)
