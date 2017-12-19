@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 import urllib.parse
-import os.path
 import os
 import sys
 import tldextract
