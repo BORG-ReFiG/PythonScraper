@@ -7,6 +7,7 @@ virtualenv -p python3.5 env3.5
 ```
 pip install requests
 pip install bs4
+pip install pandas
 ```
 
 ### keywords

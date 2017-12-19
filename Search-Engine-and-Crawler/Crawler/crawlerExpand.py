@@ -10,6 +10,7 @@ import string
 import shutil
 import re
 from collections import Counter
+import pandas as pd
 try:
     from os import scandir, walk
 except ImportError:
@@ -508,6 +509,11 @@ def shut_down():
     global visited_urls
     global planned_urls
     global crawled_urls
+
+    df = pd.read_csv(csv_file_name)
+    df = df.sort_values(['frequency_sum'], ascending=[0])
+    sorted_csv_file_name = "results_sorted.csv"
+    df.to_csv(sorted_csv_file_name, index=False)
 
     # Get the time that the command finished
     end_time = time.time()
