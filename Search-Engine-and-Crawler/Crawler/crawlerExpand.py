@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import urllib.parse
 import os.path
+import os
 import sys
 import tldextract
 import time
@@ -9,16 +10,25 @@ import codecs
 import string
 import shutil
 import re
+from collections import Counter
 try:
     from os import scandir, walk
 except ImportError:
     from scandir import scandir, walk
 import logging
 
+from utils import get_file_content_as_list, count_keywords, write_csv
+
 #Pay attention to robots.txt
 
 # current time, used in the names of the folder and the logging file
 curtime = time.strftime("%Y-%m-%d-%H-%M-%S", time.gmtime())
+
+# this file should live in the same directory as the script
+keywords_file = "keywords.txt"
+
+# the output file of all observed keyword frequencies
+csv_file_name  = "results.csv"
 
 # Arguments in order: url, total pages to look at, depth, first part of directory name
 # url to start from
@@ -64,13 +74,13 @@ if os.path.isdir(directory):
     # Copy the contents of the existing directory to a new timestamped one
     shutil.copytree(directory, target_dir)
     os.chdir(target_dir)  # then change directory to that folder
-    
+
     # Open the visited_urls text file and count the number of lines in it – that's how many pages the script visited throughout its previous runs
     with open("_visited_urls.txt") as f:
         for i, l in enumerate(f, start=1):
             pass
     page = i
- 
+
     # Open the file with planned urls and add them to the array of planned urls
     with open("_planned_urls.txt") as f:
         content = f.readlines()
@@ -97,9 +107,11 @@ if os.path.isdir(directory):
 
 
 else:
+    current_dir = os.getcwd()
     # Start a new script run
     os.mkdir(target_dir)  # make a timestampted folder
     os.chdir(target_dir)  # then change directory to that folder
+    shutil.copyfile(current_dir + "/" + keywords_file, keywords_file) # jump into working directory
     # Create a log file in the folder that was just created
     logging.basicConfig(filename=('_uniscraperlog_' + curtime + '.log'),level=logging.INFO)
     # file to log empty requests into
@@ -134,7 +146,7 @@ def request_url(url):
     try:
         r = requests.get(url, headers=headers)
         if r.ok:
-            if "text/html" in r.headers["content-type"]:    
+            if "text/html" in r.headers["content-type"]:
                 html = r.text
                 return html
         return None
@@ -145,7 +157,7 @@ def request_url(url):
     except Exception:
         logging.exception("Couldn\'t request " + url)
         return None
-    
+
 # Function to create a filename out of a string
 # Called from create_name
 def format_filename(name):
@@ -243,12 +255,13 @@ def process_current_link ():
     print(plannedURLsArray[0])
     # Try to get the html of the URL
     html = request_url(plannedURLsArray[0])
+    current_url = plannedURLsArray[0]
 
     if html: #if the request returned an html
         # Soupify
         # For now it soupifies the link regardless of the mode, because it uses soup later to extract visible text from the page
         soup = BeautifulSoup(html, 'html5lib')
-        
+
         if mode=="no_soup":
             # Gets the name for the file to store the html text in
             name = create_name_from_html(html)
@@ -263,6 +276,46 @@ def process_current_link ():
 
         # Find only visible text
         visible_text = extract_text(soup)
+
+        from pprint import pprint
+        # read keywords from file into a list
+        keywords = get_file_content_as_list(keywords_file)
+        # make the keywords lowercase
+        keywords = [x.lower() for x in keywords]
+        # make keywords dictionary with zero frequency as value
+        all_keywords = dict((el,0) for el in keywords)
+
+        visible_text_list = visible_text.splitlines()
+        visible_text_list = [x.lower() for x in visible_text_list]
+
+        # counts keywords in page
+        found_count, found_keywords = count_keywords(visible_text_list, keywords)
+
+        found_keywords_freq_dict = Counter(found_keywords)
+
+        all_keywords_dict = Counter(all_keywords)
+        # combine both dicts to have uniform dictionary for all pages
+        all_keywords_dict.update(found_keywords_freq_dict)
+        # after merging, sort the resulting dictionary based on keys to make
+        # a tuples list that is always uniform for every page
+        sorted_keywords_list = sorted(all_keywords_dict.items())
+
+        # create a sorted dictionary list
+        final_csv_dict = []
+        final_csv_dict.append({x:y for x,y in sorted_keywords_list})
+
+        # extract a sorted list of keywords to write as CSV headers
+        headers = [str(x) for x, y in sorted_keywords_list]
+        # prepend url header onto the keywords list
+        headers.insert(0, u'url')
+        headers.insert(1, u'frequency_sum')
+        logging.info(headers)
+
+        # prepend the current URL onto the frequencies dict object
+        final_csv_dict[0]['frequency_sum']= sum(final_csv_dict[0].values())
+        final_csv_dict[0]['url']= current_url
+
+        write_csv(csv_file_name, headers, final_csv_dict)
 
         if visible_text: #save it as a text file
             try:
@@ -419,7 +472,7 @@ def extract_text(soup):
         if t.strip():
             all_text += t + "\n"
     return all_text
- 
+
 
 # check that the given soup element is a visible text element
 # called from extract_text
@@ -484,4 +537,3 @@ except KeyboardInterrupt:
     shut_down()
 except Exception:
     logging.exception("Error while running script")
-    
