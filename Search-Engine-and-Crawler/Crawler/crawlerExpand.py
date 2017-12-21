@@ -43,7 +43,8 @@ target_dir = directory + "_" + curtime
 
 # RegEx that is used to filter searches for URLs on any given page.
 #Used in is_relevant_link_from_soup and is_relevant_link_from_html functions
-filter_regex = re.compile(".*([Pp]rogram|[Aa]dmission).*")
+filter_regex = re.compile(".*([Pp]rogram|[Aa]dmission|[Cc]ertificate|[Dd]egree|[Dd]iploma|[Ff]aculty|[Ss]chool|[Dd]epartment).*")
+filter_title_regex = re.compile(".*[Pp]rograms.*")
 
 # Var to choose mode
 # "soup" uses BeautifulSoup to assign a name to a page and to search the page for URLs
@@ -61,7 +62,7 @@ seed = tldextract.extract(url).domain
 headers = requests.utils.default_headers()
 headers.update (
     {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:51.0) Gecko/20100101 Firefox/51.0',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36',
     }
 )
 
@@ -127,9 +128,20 @@ else:
     page = 1
 
 # Function that checks if the link provided is in the same domain as the seed
-def checkDomain(link):
-    link_domain = tldextract.extract(link)
-    return (link_domain.domain == seed)
+def checkDomain(new_link, cur_link):
+    new_link_domain = tldextract.extract(new_link).domain
+    # 1) check if new_link is in seed, if yes -> OK
+    if (new_link_domain == seed):
+        return True
+    # 2) check if cur_link is in seed (you came from the seed even if you're in a different domain now), if yes -> OK
+    cur_link_domain = tldextract.extract(cur_link).domain
+    if (cur_link_domain == seed):
+        return True
+    # 3) check if the new link is in the same domain as the cur link (you're still in the same domain, even though it's different from seed), if yes -> OK
+    if (new_link_domain == cur_link_domain):
+        return True
+    # otherwise, you're trying to leave a domain that's already not the seed, you should STOP
+    return False
 
 
 # Fuction for requesting url
@@ -147,8 +159,7 @@ def request_url(url):
         r = requests.get(url, headers=headers)
         if r.ok:
             if "text/html" in r.headers["content-type"]:
-                html = r.text
-                return html
+                return r
         return None
     except KeyboardInterrupt:
         print("\n\nScript interrupted by user. Shutting down.")
@@ -248,28 +259,33 @@ def crawl(max_pages):
         process_current_link()
 
 
+def is_title_page_relevant(soup):
+    return True if soup.find('title', string=filter_title_regex) else False
+
 # Function that grabs the first link in the list of planned urls, requests the page and processes it
 def process_current_link ():
     global page
 
     print(plannedURLsArray[0])
     # Try to get the html of the URL
-    html = request_url(plannedURLsArray[0])
-    current_url = plannedURLsArray[0]
+    r = request_url(plannedURLsArray[0])
 
-    if html: #if the request returned an html
+    if r: #if the request returned an html
+        html = r.text
+        current_url = r.url
         # Soupify
         # For now it soupifies the link regardless of the mode, because it uses soup later to extract visible text from the page
         soup = BeautifulSoup(html, 'html5lib')
+        grab_all = is_title_page_relevant(soup)
 
         if mode=="no_soup":
             # Gets the name for the file to store the html text in
             name = create_name_from_html(html)
             #find and process all links
-            process_links_from_html(html, plannedURLsArray[0])
+            process_links_from_html(html, current_url, grab_all)
         else:
             name = create_name_from_soup(soup)
-            process_links_from_soup(soup, plannedURLsArray[0])
+            process_links_from_soup(soup, current_url, grab_all)
 
         # Adds the .txt to the end of the name
         name = "{0}.txt".format(name)
@@ -309,7 +325,7 @@ def process_current_link ():
         # prepend url header onto the keywords list
         headers.insert(0, u'url')
         headers.insert(1, u'frequency_sum')
-        logging.info(headers)
+        #logging.info(headers)
 
         # prepend the current URL onto the frequencies dict object
         final_csv_dict[0]['frequency_sum']= sum(final_csv_dict[0].values())
@@ -323,7 +339,7 @@ def process_current_link ():
                 fo = codecs.open(name, "w", "utf-8-sig")
                 # Write URL to that file
                 fo.write("<page_url href=\"")
-                fo.write(plannedURLsArray[0])
+                fo.write(current_url)
                 fo.write("\"></page_url>\n")
                 # Append the html to the file
                 fo.write(visible_text)
@@ -337,7 +353,7 @@ def process_current_link ():
                 logging.info("Script interrupted by user")
                 shut_down()
             except Exception:
-                logging.exception("Can not encode file: " + plannedURLsArray[0])
+                logging.exception("Can not encode file: " + current_url)
         else:
             print('No visible text in ' + url)
             logging.warning('No visible text in ' + url)
@@ -379,13 +395,15 @@ def is_relevant_link_from_soup(link):
 # for each link checks if it's relevant
 # for each relevant link, saves it to the planned urls array (if it hasn't been crawled yet)
 # and to the crawled urls array (so that we don't save it a second time later)
-def process_links_from_soup (soup, cur_domain):
+def process_links_from_soup (soup, cur_link, grab_all=False):
+    # check if the title of the current page matches the filter_title_regex
     for lnk in soup.findAll('a', href=True):
-        if is_relevant_link_from_soup(lnk):
+        # if not, check if the the link itself is relevant
+        if (grab_all or is_relevant_link_from_soup(lnk)):
             new_link = (urllib.parse.urldefrag(lnk['href'])[0]).rstrip('/')
-            new_link = urllib.parse.urljoin(cur_domain, new_link)
+            new_link = urllib.parse.urljoin(cur_link, new_link)
             # if the link is in our main domain
-            if checkDomain(new_link):
+            if checkDomain(new_link, cur_link):
                 # if the link is not in crawledURLsArray then it appends it to urls and crawledURLsArray
                 if new_link not in crawledURLsArray:
                     # Ensures no jpg or pdfs are stored and that no mailto: links are stored.
@@ -420,19 +438,20 @@ def is_relevant_link_from_html(link):
     #return True #Uncomment to grab all links
 
 #Take an array of links, run the split on each and add the results to the appropriate arrays and files
-def process_links_from_html (html, cur_domain):
+def process_links_from_html (html, cur_link, grab_all=False):
+    print("grabbing all: ", str(grab_all))
     if html.partition('<body')[2]:
         html = html.partition('<body')[2]
     link_strings = html.split('href=') # split the page into sections using "href=" as a delimiter
     for lnk in link_strings[1:]:
         href = lnk.partition('</a')[0] # grab all text before the "</a" – this var now contains text after an href parameter and before a closing tag, and thus includes the text content of the link
-        if is_relevant_link_from_html(href):
+        if (grab_all or is_relevant_link_from_html(href)):
             href = href.partition('>')[0]
             href = href.partition(' ')[0]
             href = dequote(href)
             new_link = (urllib.parse.urldefrag(href)[0]).rstrip('/')
-            new_link = urllib.parse.urljoin(cur_domain, new_link)
-            if checkDomain(new_link):
+            new_link = urllib.parse.urljoin(cur_link, new_link)
+            if checkDomain(new_link, cur_link):
                 # if the link is not in crawledURLsArray then it appends it to urls and crawledURLsArray
                 if new_link not in crawledURLsArray:
                     # Ensures no jpg or pdfs are stored and that no mailto: links are stored.
