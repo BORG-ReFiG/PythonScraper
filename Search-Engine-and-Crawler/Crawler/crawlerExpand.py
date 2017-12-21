@@ -30,6 +30,10 @@ keywords_file = "keywords.txt"
 # the output file of all observed keyword frequencies
 csv_file_name  = "results.csv"
 
+# this should be a file input later but for now it's an array
+# an array of popular domains that university websites link to but we don't want to crawl
+ignore_domains = ["youtube", "facebook", "instagram", "twitter", "linkedin", "google", "pinterest", "snapchat"]
+
 # Arguments in order: url, total pages to look at, depth, first part of directory name
 # url to start from
 url = sys.argv[1]
@@ -130,6 +134,9 @@ else:
 # Function that checks if the link provided is in the same domain as the seed
 def checkDomain(new_link, cur_link):
     new_link_domain = tldextract.extract(new_link).domain
+    # 0) check whether new_link is in the list of popular domains that we don't want to crawl, if yes -> IGNORE IT
+    if new_link_domain in ignore_domains:
+        return False
     # 1) check if new_link is in seed, if yes -> OK
     if (new_link_domain == seed):
         return True
@@ -545,6 +552,7 @@ def shut_down():
     visited_urls.close()
     planned_urls.close()
     crawled_urls.close()
+
     sys.exit()
 
 
