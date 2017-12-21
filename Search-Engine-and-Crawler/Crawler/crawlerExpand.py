@@ -313,8 +313,9 @@ def process_current_link ():
 
         # counts keywords in page
         found_count, found_keywords = count_keywords(visible_text_list, keywords)
+        found_keywords_as_dict = dict((x, y) for x, y in found_keywords)
 
-        found_keywords_freq_dict = Counter(found_keywords)
+        found_keywords_freq_dict = Counter(found_keywords_as_dict)
 
         all_keywords_dict = Counter(all_keywords)
         # combine both dicts to have uniform dictionary for all pages

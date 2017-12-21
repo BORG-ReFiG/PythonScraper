@@ -28,8 +28,8 @@ def count_keywords(list_of_tokens, list_of_target_words):
         # found_what = [m.group(0) for l in list_of_target_words for m in [regex.search(l)] if m]
         found_what = [m.group(1) for l in list_of_tokens for m in [regex.search(l)] if m]
         if len(found_what) > 0:  # For each one it checks if it is in the target list
-            num_target_words += 1
-            matched_words.append(token)
+            num_target_words = len(found_what)
+            matched_words.append((token, num_target_words))
     return num_target_words, matched_words  # Note that we are returning a tuple (2 values)
 
 
