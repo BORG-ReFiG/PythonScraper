@@ -25,7 +25,7 @@ from utils import get_file_content_as_list, count_keywords, write_csv
 curtime = time.strftime("%Y-%m-%d-%H-%M-%S", time.gmtime())
 
 # this file should live in the same directory as the script
-keywords_file = "keywords.txt"
+keywords_file = "keywords_game.txt"
 
 # the output file of all observed keyword frequencies
 csv_file_name  = "results.csv"
@@ -48,7 +48,7 @@ target_dir = directory + "_" + curtime
 # RegEx that is used to filter searches for URLs on any given page.
 #Used in is_relevant_link_from_soup and is_relevant_link_from_html functions
 filter_regex = re.compile(".*([Pp]rogram|[Aa]dmission|[Cc]ertificate|[Dd]egree|[Dd]iploma|[Ff]aculty|[Ss]chool|[Dd]epartment).*")
-filter_title_regex = re.compile(".*[Pp]rograms.*")
+filter_title_regex = re.compile(".*([Pp]rogram|[Aa]dmission|[Cc]ourse).*")
 
 # Var to choose mode
 # "soup" uses BeautifulSoup to assign a name to a page and to search the page for URLs
@@ -471,19 +471,22 @@ def process_links_from_html (html, cur_link, grab_all=False):
                         planned_urls.write(new_link)
                         planned_urls.write("\n")
 
-                        # Remove the front of the URL (http or https)
-                        http_split = new_link.split("://", 1)
-                        # Add all possible link variations to file of URLs that have been looked at
-                        # Adds new link to array
-                        crawledURLsArray.append("http://" + http_split[1])
-                        # Adds new link to already looked at file
-                        crawled_urls.write("http://" + http_split[1])
-                        crawled_urls.write("\n")
-                        # Adds new link to array
-                        crawledURLsArray.append("https://" + http_split[1])
-                        # Adds new link to already looked at file
-                        crawled_urls.write("https://" + http_split[1])
-                        crawled_urls.write("\n")
+                        try:
+                            # Remove the front of the URL (http or https)
+                            http_split = new_link.split("://", 1)
+                            # Add all possible link variations to file of URLs that have been looked at
+                            # Adds new link to array
+                            crawledURLsArray.append("http://" + http_split[1])
+                            # Adds new link to already looked at file
+                            crawled_urls.write("http://" + http_split[1])
+                            crawled_urls.write("\n")
+                            # Adds new link to array
+                            crawledURLsArray.append("https://" + http_split[1])
+                            # Adds new link to already looked at file
+                            crawled_urls.write("https://" + http_split[1])
+                            crawled_urls.write("\n")
+                        except IndexError as e:
+                            logging.info(str(e))
 
 
 

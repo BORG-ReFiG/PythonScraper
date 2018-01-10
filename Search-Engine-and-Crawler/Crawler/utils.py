@@ -20,11 +20,13 @@ def count_keywords(list_of_tokens, list_of_target_words):
     return number of words, list of keywords found
 
     Inspiration: http://www.cademuir.eu/blog/2011/10/20/python-searching-for-a-string-within-a-list-list-comprehension/
+    https://developmentality.wordpress.com/2011/09/22/python-gotcha-word-boundaries-in-regular-expressions/
     """
     num_target_words = 0
     matched_words = []
     for token in list_of_target_words:  # Goes through the tokens in the list
-        regex = re.compile(".*({}).*".format(token))
+        # regex = re.compile(".*({}).*".format(token)) # does match in-word substrings
+        regex = re.compile(".*(\\b{}\\b).*".format(token)) # match strictly whole words only
         # found_what = [m.group(0) for l in list_of_target_words for m in [regex.search(l)] if m]
         found_what = [m.group(1) for l in list_of_tokens for m in [regex.search(l)] if m]
         if len(found_what) > 0:  # For each one it checks if it is in the target list

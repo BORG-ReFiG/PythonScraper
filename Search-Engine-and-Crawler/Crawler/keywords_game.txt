@@ -1,4 +1,5 @@
 Games
+Game studies
 Games studies
 game programming
 game engine scripting
@@ -23,3 +24,15 @@ web games
 mobile game
 serious games
 critical games
+game
+digital
+media
+communication
+visual
+animation
+interactive
+3D
+entertainment
+graphic
+storytelling
+virtual
