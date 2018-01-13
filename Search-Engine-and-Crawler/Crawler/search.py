@@ -29,7 +29,7 @@ def main():
     # a list
     all_txt_files = glob.glob(
         os.path.join(current_working_dir,
-                     "{}_*/*.*.txt".format(folder_name)),
+                     "{}*/*.*.txt".format(folder_name)),
         recursive=False
     )
 
