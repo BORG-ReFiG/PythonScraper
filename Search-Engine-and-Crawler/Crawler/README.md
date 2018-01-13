@@ -44,5 +44,5 @@ their frequency and sorted.
 
 ####  Help documentation
 ```
-./search -h
+./search.py -h
 ```
