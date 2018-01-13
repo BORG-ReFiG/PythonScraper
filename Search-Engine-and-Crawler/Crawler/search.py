@@ -16,36 +16,7 @@ logger = logging.getLogger(__name__)
 
 def main():
 
-    parser = argparse.ArgumentParser(
-        description='Generate a sorted CSV file with keyword frequencies'
-        ' from scraped web pages.'
-    )
-
-    parser.add_argument(
-        '-f',
-        '--folder',
-        dest='folder_name',
-        default=None,
-        required=True,
-        help='Name of directory with scraped pages (mandatory)'
-    )
-    parser.add_argument(
-        '-k',
-        '--keywords_file',
-        dest='keywords_file',
-        default=None,
-        required=True,
-        help='File with keywords to search for in the directory (mandatory)'
-    )
-
-    args = parser.parse_args()
-    folder_name = args.folder_name
-    keywords_file = args.keywords_file
-
     current_working_dir = os.getcwd()  # current directory we are standing on
-    # the output files of all observed keyword frequencies
-    csv_file_name = "{}_results.csv".format(folder_name)
-    sorted_csv_file_name = "{}_results_sorted.csv".format(folder_name)
 
     # with every run, remove any older result CSVs for the folder
     try:
@@ -122,8 +93,8 @@ def main():
             write_csv(csv_file_name, headers, final_csv_dict)
             pbar.update(1)
 
-    sort_csv(csv_file_name, sorted_csv_file_name)
     pbar.close()
+    sort_csv(csv_file_name, sorted_csv_file_name)
 
 
 def sort_csv(csv_input, csv_output):
@@ -209,10 +180,44 @@ def write_csv(output_file, keywords_header, keywords_x_freqs):
         return False
 
 if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser(
+        description='Generate a sorted CSV file with keyword frequencies'
+        ' from scraped web pages.'
+    )
+
+    parser.add_argument(
+        '-f',
+        '--folder',
+        dest='folder_name',
+        default=None,
+        required=True,
+        help='Name of directory with scraped pages (mandatory)'
+    )
+    parser.add_argument(
+        '-k',
+        '--keywords_file',
+        dest='keywords_file',
+        default=None,
+        required=True,
+        help='File with keywords to search for in the directory (mandatory)'
+    )
+
+    # these are module global variables and can be access by any function in
+    # this module
+    args = parser.parse_args()
+    folder_name = args.folder_name
+    keywords_file = args.keywords_file
+
+    # the output files of all observed keyword frequencies
+    csv_file_name = "{}_results.csv".format(folder_name)
+    sorted_csv_file_name = "{}_results_sorted.csv".format(folder_name)
+
     try:
         main()
     except KeyboardInterrupt as e:
         logger.info("Script interrupted by user")
+        sort_csv(csv_file_name, sorted_csv_file_name)
         try:
             sys.exit(0)
         except SystemExit:
