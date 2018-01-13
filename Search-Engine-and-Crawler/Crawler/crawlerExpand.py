@@ -9,15 +9,12 @@ import codecs
 import string
 import shutil
 import re
-from collections import Counter
-import pandas as pd
+
 try:
     from os import scandir, walk
 except ImportError:
     from scandir import scandir, walk
 import logging
-
-from utils import get_file_content_as_list, count_keywords, write_csv
 
 #Pay attention to robots.txt
 
@@ -26,9 +23,6 @@ curtime = time.strftime("%Y-%m-%d-%H-%M-%S", time.gmtime())
 
 # this file should live in the same directory as the script
 keywords_file = "keywords_game.txt"
-
-# the output file of all observed keyword frequencies
-csv_file_name  = "results.csv"
 
 # this should be a file input later but for now it's an array
 # an array of popular domains that university websites link to but we don't want to crawl
@@ -300,47 +294,6 @@ def process_current_link ():
         # Find only visible text
         visible_text = extract_text(soup)
 
-        from pprint import pprint
-        # read keywords from file into a list
-        keywords = get_file_content_as_list(keywords_file)
-        # make the keywords lowercase
-        keywords = [x.lower() for x in keywords]
-        # make keywords dictionary with zero frequency as value
-        all_keywords = dict((el,0) for el in keywords)
-
-        visible_text_list = visible_text.splitlines()
-        visible_text_list = [x.lower() for x in visible_text_list]
-
-        # counts keywords in page
-        found_count, found_keywords = count_keywords(visible_text_list, keywords)
-        found_keywords_as_dict = dict((x, y) for x, y in found_keywords)
-
-        found_keywords_freq_dict = Counter(found_keywords_as_dict)
-
-        all_keywords_dict = Counter(all_keywords)
-        # combine both dicts to have uniform dictionary for all pages
-        all_keywords_dict.update(found_keywords_freq_dict)
-        # after merging, sort the resulting dictionary based on keys to make
-        # a tuples list that is always uniform for every page
-        sorted_keywords_list = sorted(all_keywords_dict.items())
-
-        # create a sorted dictionary list
-        final_csv_dict = []
-        final_csv_dict.append({x:y for x,y in sorted_keywords_list})
-
-        # extract a sorted list of keywords to write as CSV headers
-        headers = [str(x) for x, y in sorted_keywords_list]
-        # prepend url header onto the keywords list
-        headers.insert(0, u'url')
-        headers.insert(1, u'frequency_sum')
-        #logging.info(headers)
-
-        # prepend the current URL onto the frequencies dict object
-        final_csv_dict[0]['frequency_sum']= sum(final_csv_dict[0].values())
-        final_csv_dict[0]['url']= current_url
-
-        write_csv(csv_file_name, headers, final_csv_dict)
-
         if visible_text: #save it as a text file
             try:
                 # Create and open the file with that name
@@ -539,11 +492,6 @@ def shut_down():
     global visited_urls
     global planned_urls
     global crawled_urls
-
-    df = pd.read_csv(csv_file_name)
-    df = df.sort_values(['frequency_sum'], ascending=[0])
-    sorted_csv_file_name = "results_sorted.csv"
-    df.to_csv(sorted_csv_file_name, index=False)
 
     # Get the time that the command finished
     end_time = time.time()
