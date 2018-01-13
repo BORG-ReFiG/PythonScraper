@@ -299,9 +299,7 @@ def process_current_link ():
                 # Create and open the file with that name
                 fo = codecs.open(name, "w", "utf-8-sig")
                 # Write URL to that file
-                fo.write("<page_url href=\"")
-                fo.write(current_url)
-                fo.write("\"></page_url>\n")
+                fo.write(current_url + "\n")
                 # Append the html to the file
                 fo.write(visible_text)
                 # Close the pipe to the file
