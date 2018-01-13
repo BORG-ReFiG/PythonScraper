@@ -16,7 +16,7 @@ game critique
 gaming
 game art
 game AI
-video games
+video game
 computer games
 console games
 mobile games
@@ -27,7 +27,6 @@ critical games
 game
 digital
 media
-communication
 visual
 animation
 interactive
