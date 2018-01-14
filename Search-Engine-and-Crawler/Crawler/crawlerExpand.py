@@ -9,6 +9,7 @@ import codecs
 import string
 import shutil
 import re
+import uuid
 
 try:
     from os import scandir, walk
@@ -183,11 +184,15 @@ def format_filename(name):
     """Take a string and return a valid filename constructed from the string.
     Uses a whitelist approach: any characters not present in valid_chars are
     removed. Also spaces are replaced with underscores."""
-    valid_chars = "-_() %s%s" % (string.ascii_letters, string.digits)
-    filename = ''.join(c for c in name if c in valid_chars)
-    # Remove spaces in filename
-    filename = filename.strip()
-    filename = filename.replace(' ','_')
+    try:
+        valid_chars = "-_() %s%s" % (string.ascii_letters, string.digits)
+        filename = ''.join(c for c in name if c in valid_chars)
+        # Remove spaces in filename
+        filename = filename.strip()
+        filename = filename.replace(' ','_')
+    except TypeError as e:
+        filename = uuid.uuid4()
+        logging.error("Got and error: {}".format(str(e)))
     return filename
 
 
