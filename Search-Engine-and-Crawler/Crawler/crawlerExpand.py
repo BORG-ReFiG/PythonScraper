@@ -215,14 +215,15 @@ def create_name_from_html (html):
 # Uses Beautiful Soup to locate the <title> tag
 # Parameter soup is a soup object
 def create_name_from_soup (soup):
-    name = soup.title.string
-    if name:
-    # removes invalid characters from title
+    try:
+        name = soup.title.string
+        # removes invalid characters from title
         name = format_filename(name) + '__' + str(time.time())
         logging.info('Created name ' + name)
-    else:
+    except AttributeError as e:
         name = "no_title_" + str(time.time()) # if no title provided give a no title with a timestamp
         logging.warn('Failed to create a name, using \'' + name + '\' instead')
+        logging.error(str(e))
     return name
 
 
