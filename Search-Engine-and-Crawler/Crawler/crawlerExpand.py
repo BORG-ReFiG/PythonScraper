@@ -191,7 +191,7 @@ def format_filename(name):
         filename = filename.strip()
         filename = filename.replace(' ','_')
     except TypeError as e:
-        filename = uuid.uuid4()
+        filename = str(uuid.uuid4())
         logging.error("Got and error: {}".format(str(e)))
     return filename
 
