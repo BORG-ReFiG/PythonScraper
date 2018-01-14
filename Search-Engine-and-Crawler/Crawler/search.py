@@ -106,11 +106,12 @@ def main():
                 logger.info("Final dictionary appended!")
 
                 # prepend the current URL onto the frequencies dict object
-                final_csv_dict[0]['frequency_sum'] = sum(final_csv_dict[0].values())
+                freq_sum = sum(final_csv_dict[0].values())
+                final_csv_dict[0]['frequency_sum'] = freq_sum
                 final_csv_dict[0]['url'] = current_url
 
                 # ignore zero frequency_sum...
-                if final_csv_dict[0]['frequency_sum'] == 0:
+                if freq_sum == 0:
                     pbar.update(1)
                     continue
 
