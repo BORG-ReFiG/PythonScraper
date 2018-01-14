@@ -17,6 +17,7 @@ gaming
 game art
 game AI
 video game
+video games|20
 computer games
 console games
 mobile games

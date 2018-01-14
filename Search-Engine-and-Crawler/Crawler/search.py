@@ -45,53 +45,63 @@ def main():
     keywords = [x.lower() for x in keywords]
     # make keywords dictionary with zero frequency as value
     all_keywords = dict((strip_weights(el)[0], 0) for el in keywords)
+    all_keywords_dict = Counter(all_keywords)
+
+    sorted_keywords_list = sorted(all_keywords_dict.items())
+
+    # extract a sorted list of keywords to write as CSV headers
+    headers = [str(x) for x, y in sorted_keywords_list]
+    # prepend url header onto the keywords list
+    headers.insert(0, u'url')
+    headers.insert(1, u'frequency_sum')
 
     pbar = tqdm(total=len(all_txt_files))
     tqdm.write("Found {} files to search. Please wait.".
                format(len(all_txt_files)))
-    for idx, txt_file in enumerate(all_txt_files):
-        with open(txt_file) as fp:
-            visible_text_list = fp.readlines()
-            current_url = visible_text_list[0].strip().rstrip()
-            num_digits = len(str(len(all_txt_files)))
-            tqdm.write("{0:0{width}d}) Done! {1}".
-                       format(idx+1, current_url, width=num_digits))
 
-            visible_text_list = [x.lower() for x in visible_text_list]
+    with open(csv_file_name, 'a+', encoding="utf-8") as f:
+        # Using dictionary keys as fieldnames for the CSV file header
+        writer = csv.DictWriter(f, headers)
+        writer.writeheader()
 
-            # counts keywords in page
-            found_count, found_keywords = count_keywords(
-                visible_text_list,
-                keywords
-            )
-            found_keywords_as_dict = dict((x, y) for x, y in found_keywords)
+        for idx, txt_file in enumerate(all_txt_files):
+            with open(txt_file) as fp:
+                visible_text_list = fp.readlines()
+                current_url = visible_text_list[0].strip().rstrip()
+                num_digits = len(str(len(all_txt_files)))
+                tqdm.write("{0:0{width}d}) Done! {1}".
+                           format(idx+1, current_url, width=num_digits))
 
-            found_keywords_freq_dict = Counter(found_keywords_as_dict)
+                visible_text_list = [x.lower() for x in visible_text_list]
 
-            all_keywords_dict = Counter(all_keywords)
-            # combine both dicts to have uniform dictionary for all pages
-            all_keywords_dict.update(found_keywords_freq_dict)
-            # after merging, sort the resulting dictionary based on keys to
-            # make a tuples list that is always uniform for every page
-            sorted_keywords_list = sorted(all_keywords_dict.items())
+                # counts keywords in page
+                found_count, found_keywords = count_keywords(
+                    visible_text_list,
+                    keywords
+                )
+                found_keywords_as_dict = dict((x, y) for x, y in found_keywords)
 
-            # create a sorted dictionary list
-            final_csv_dict = []
-            final_csv_dict.append({x: y for x, y in sorted_keywords_list})
+                found_keywords_freq_dict = Counter(found_keywords_as_dict)
 
-            # extract a sorted list of keywords to write as CSV headers
-            headers = [str(x) for x, y in sorted_keywords_list]
-            # prepend url header onto the keywords list
-            headers.insert(0, u'url')
-            headers.insert(1, u'frequency_sum')
-            # logger.info(headers)
+                all_keywords_dict = Counter(all_keywords)
+                # combine both dicts to have uniform dictionary for all pages
+                all_keywords_dict.update(found_keywords_freq_dict)
+                # after merging, sort the resulting dictionary based on keys to
+                # make a tuples list that is always uniform for every page
+                sorted_keywords_list = sorted(all_keywords_dict.items())
 
-            # prepend the current URL onto the frequencies dict object
-            final_csv_dict[0]['frequency_sum'] = sum(final_csv_dict[0].values())
-            final_csv_dict[0]['url'] = current_url
+                # create a sorted dictionary list
+                final_csv_dict = []
+                final_csv_dict.append({x: y for x, y in sorted_keywords_list})
 
-            write_csv(csv_file_name, headers, final_csv_dict)
-            pbar.update(1)
+                # prepend the current URL onto the frequencies dict object
+                final_csv_dict[0]['frequency_sum'] = sum(final_csv_dict[0].values())
+                final_csv_dict[0]['url'] = current_url
+
+                for d in final_csv_dict:
+                    writer.writerow(d)
+
+                pbar.update(1)
 
     pbar.close()
     sort_csv(csv_file_name, sorted_csv_file_name)
@@ -152,32 +162,6 @@ def count_keywords(list_of_tokens, list_of_target_words):
             matched_words.append((weighted_token, num_target_words))
     return num_target_words, matched_words  # Note that we are returning a tuple (2 values)
 
-
-def write_csv(output_file, keywords_header, keywords_x_freqs):
-    """Write a CSV file in the format url, <keyword1>, <keyword2>, <keyword3>, ...
-    output_file - the name of created CSV file
-    keywords_header - list with all the keywords to create header row of CSV
-    keywords_x_freqs - dictionary list with keywords and frequencies
-    return boolean
-    """
-    try:
-        if os.path.exists(output_file):
-            append_write = 'a'  # append if already exists
-        else:
-            append_write = 'w'  # make a new file if not
-
-        with open(output_file, append_write, encoding="utf-8") as f:
-            # Using dictionary keys as fieldnames for the CSV file header
-            writer = csv.DictWriter(f, keywords_header)
-            if append_write == 'w':
-                writer.writeheader()
-
-            for d in keywords_x_freqs:
-                writer.writerow(d)
-        return True
-    except Exception as e:
-        logger.error('Something bad happend while writing CSV:' + str(e))
-        return False
 
 if __name__ == "__main__":
 
