@@ -28,7 +28,7 @@ machine.
 
 #### Sample usage
 ```
-python crawlerExpand.py [URL] 10 50 lefolder
+python crawlerExpand.py [URL] 10 50 myuni
 ```
 
 ### search.py

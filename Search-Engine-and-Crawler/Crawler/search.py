@@ -6,12 +6,18 @@ import csv
 import logging
 import os
 import glob
+import time
 from collections import Counter
 import pandas as pd
 from tqdm import tqdm
 
 
 logger = logging.getLogger(__name__)
+
+# current time, used in the names of the folder and the logging file
+curtime = time.strftime("%Y-%m-%d-%H-%M-%S", time.gmtime())
+# Create a new log file
+logging.basicConfig(filename=('_unisearchlog_' + curtime + '.log'),level=logging.DEBUG)
 
 
 def main():
@@ -63,15 +69,17 @@ def main():
         # Using dictionary keys as fieldnames for the CSV file header
         writer = csv.DictWriter(f, headers)
         writer.writeheader()
+        logger.info("CSV headers written")
 
         for idx, txt_file in enumerate(all_txt_files):
             with open(txt_file) as fp:
                 visible_text_list = fp.readlines()
                 current_url = visible_text_list[0].strip().rstrip()
                 num_digits = len(str(len(all_txt_files)))
-                tqdm.write("{0:0{width}d}) Done! {1}".
+                tqdm.write("[{0:0{width}d}] {1}".
                            format(idx+1, current_url, width=num_digits))
 
+                logger.info("Working on: {}".format(current_url))
                 visible_text_list = [x.lower() for x in visible_text_list]
 
                 # counts keywords in page
@@ -79,6 +87,7 @@ def main():
                     visible_text_list,
                     keywords
                 )
+                logger.info("Keywords found: {}".format(found_count))
                 found_keywords_as_dict = dict((x, y) for x, y in found_keywords)
 
                 found_keywords_freq_dict = Counter(found_keywords_as_dict)
@@ -86,6 +95,7 @@ def main():
                 all_keywords_dict = Counter(all_keywords)
                 # combine both dicts to have uniform dictionary for all pages
                 all_keywords_dict.update(found_keywords_freq_dict)
+                logger.info("Keywords search results merged!")
                 # after merging, sort the resulting dictionary based on keys to
                 # make a tuples list that is always uniform for every page
                 sorted_keywords_list = sorted(all_keywords_dict.items())
@@ -93,13 +103,20 @@ def main():
                 # create a sorted dictionary list
                 final_csv_dict = []
                 final_csv_dict.append({x: y for x, y in sorted_keywords_list})
+                logger.info("Final dictionary appended!")
 
                 # prepend the current URL onto the frequencies dict object
                 final_csv_dict[0]['frequency_sum'] = sum(final_csv_dict[0].values())
                 final_csv_dict[0]['url'] = current_url
 
+                # ignore zero frequency_sum...
+                if final_csv_dict[0]['frequency_sum'] == 0:
+                    pbar.update(1)
+                    continue
+
                 for d in final_csv_dict:
                     writer.writerow(d)
+                logger.info("Row written successfully!")
 
                 pbar.update(1)
 
