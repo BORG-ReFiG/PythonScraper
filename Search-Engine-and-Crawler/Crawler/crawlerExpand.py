@@ -378,7 +378,7 @@ def process_links_from_soup (soup, cur_link, grab_all=False):
                 # if the link is not in crawledURLsArray then it appends it to urls and crawledURLsArray
                 if new_link not in crawledURLsArray:
                     # Ensures no jpg or pdfs are stored and that no mailto: links are stored.
-                    if new_link.startswith("http") and '.pdf' not in new_link and '.jpg' not in new_link:
+                    if new_link.startswith("http") and '.pdf' not in new_link and '.jpg' not in new_link and '.mp3' not in new_link:
                         #???TODO: add checks for www.domain.com and https://
                         # Adds new link to array
                         plannedURLsArray.append(new_link)
@@ -426,7 +426,7 @@ def process_links_from_html (html, cur_link, grab_all=False):
                 # if the link is not in crawledURLsArray then it appends it to urls and crawledURLsArray
                 if new_link not in crawledURLsArray:
                     # Ensures no jpg or pdfs are stored and that no mailto: links are stored.
-                    if new_link.startswith("http") and '.pdf' not in new_link and '.jpg' not in new_link:
+                    if new_link.startswith("http") and '.pdf' not in new_link and '.jpg' not in new_link and '.mp3' not in new_link:
                         #???TODO: add checks for www.domain.com and https://
                         # Adds new link to array
                         plannedURLsArray.append(new_link)
