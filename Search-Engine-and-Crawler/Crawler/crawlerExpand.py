@@ -41,7 +41,7 @@ directory = sys.argv[4]
 target_dir = directory + "_" + curtime
 
 # RegEx that is used to filter searches for URLs on any given page.
-#Used in is_relevant_link_from_soup and is_relevant_link_from_html functions
+# Used in is_relevant_link_from_soup and is_relevant_link_from_html functions
 filter_regex = re.compile(".*([Pp]rogram|[Aa]dmission|[Cc]ertificate|[Dd]egree|[Dd]iploma|[Ff]aculty|[Ss]chool|[Dd]epartment).*")
 filter_title_regex = re.compile(".*([Pp]rogram|[Aa]dmission|[Cc]ourse).*")
 
@@ -129,7 +129,7 @@ else:
 # Function that checks if the link provided is in the same domain as the seed
 def checkDomain(new_link, cur_link):
     new_link_domain = tldextract.extract(new_link).domain
-    
+
     """Decided to not do the can-go-one-domain-away-from-the-seed rule for now. Commented it out.
     # 0) check whether new_link is in the list of popular domains that we don't want to crawl, if yes -> IGNORE IT
     if new_link_domain in ignore_domains:
@@ -138,7 +138,7 @@ def checkDomain(new_link, cur_link):
     # 1) check if new_link is in seed, if yes -> OK
     if (new_link_domain == seed):
         return True
-    
+
     """
     # 2) check if cur_link is in seed (you came from the seed even if you're in a different domain now), if yes -> OK
     cur_link_domain = tldextract.extract(cur_link).domain
@@ -206,7 +206,7 @@ def create_name_from_html (html):
     name_part = name_list[-1] #grab part of html after <title
     name = name_part.split(">")[-1]
     if name:
-    # removes invalid characters from title
+        # removes invalid characters from title
         name = format_filename(name) + '__' + str(time.time())
         logging.info('Created name ' + name)
     else:
