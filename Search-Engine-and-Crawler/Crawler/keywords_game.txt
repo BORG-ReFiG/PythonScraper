@@ -1,35 +1,36 @@
-Games
-Game studies
-Games studies
-game programming
+Games|10
+Game studies|50
+Games studies|50
+game programming|10
 game engine scripting
-Game Design
+Game Design|50
 game writing
 game production
 games and learning
 game research
+game development|50
 games and society
-Game studies
-game(s) studies
+Game studies|50
+game(s) studies|50
 game analysis
 game critique
-gaming
+gaming|30
 game art
-game AI
-video game
-video games|20
-computer games
+game AI|50
+video game|40
+video games|40
+computer games|50
 console games
-mobile games
+mobile games|20
 web games
 mobile game
-serious games
+serious games|50
 critical games
-game
+game|20
 digital
 media
 visual
-animation
+animation|50
 interactive
 3D
 entertainment
