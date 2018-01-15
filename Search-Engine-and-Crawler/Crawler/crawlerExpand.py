@@ -48,7 +48,7 @@ filter_title_regex = re.compile(".*([Pp]rogram|[Aa]dmission|[Cc]ourse).*")
 # Var to choose mode
 # "soup" uses BeautifulSoup to assign a name to a page and to search the page for URLs
 # "no_soup" uses a string search – splits the page into strings using "href=" as a partition limiter, then goes from there
-mode = "no_soup" # soup or no_soup
+mode = "soup" # soup or no_soup
 
 
 # Checks if the url includes http at the front
@@ -288,7 +288,7 @@ def process_current_link ():
         current_url = r.url
         # Soupify
         # For now it soupifies the link regardless of the mode, because it uses soup later to extract visible text from the page
-        soup = BeautifulSoup(html, 'html5lib')
+        soup = BeautifulSoup(html, 'html.parser')
         grab_all = is_title_page_relevant(soup)
 
         if mode=="no_soup":
@@ -452,12 +452,28 @@ def process_links_from_html (html, cur_link, grab_all=False):
                             logging.info(str(e))
 
 
+def extract_text(soup):
+    """Extract text from HTML pages and Return normalized text
+    https://stackoverflow.com/questions/30565404/remove-all-style-scripts-and-html-tags-from-an-html-page
+    return string
+    """
+    for script in soup(["script", "style"]): # remove all javascript and stylesheet code
+        script.extract()
+    # get text, the separator keeps the paragraphs their usual short
+    # https://stackoverflow.com/a/38861217
+    text = soup.get_text(separator="\n")
+    # break into lines and remove leading and trailing space on each
+    lines = (line.strip() for line in text.splitlines())
+    # break multi-headlines into a line each
+    chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+    # drop blank lines
+    return '\n'.join(chunk for chunk in chunks if chunk)
 
 
 
 # Function to extract text elements from an HTML and return them as an array of BeautifulSoup
 # called from process_current_link
-def extract_text(soup):
+def _extract_text(soup):
     data = soup.findAll(text=True)
     result = filter(is_visible_html_element, data)
     all_text = ""
