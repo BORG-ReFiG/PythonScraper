@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import argparse
+import signal
 import sys
 import re
 import csv
@@ -14,10 +15,24 @@ from tqdm import tqdm
 
 logger = logging.getLogger(__name__)
 
+
+class TookTooDamnLongException(Exception):   # Custom exception class
+    pass
+
+
+def toodamnlong_handler(signum, frame):   # Custom signal handler
+    raise TookTooDamnLongException
+
+
+# Change the behavior of SIGALRM
+signal.signal(signal.SIGALRM, toodamnlong_handler)
+
 # current time, used in the names of the folder and the logging file
 curtime = time.strftime("%Y-%m-%d-%H-%M-%S", time.gmtime())
 # Create a new log file
-logging.basicConfig(filename=('_unisearchlog_' + curtime + '.log'),level=logging.DEBUG)
+logging.basicConfig(filename=('_unisearchlog_' + curtime + '.log'),
+                    level=logging.DEBUG
+                    )
 
 
 def main():
@@ -72,6 +87,9 @@ def main():
         logger.info("CSV headers written")
 
         for idx, txt_file in enumerate(all_txt_files):
+            # Start the timer.
+            # Once [patience] seconds are over, a SIGALRM signal is sent.
+            signal.alarm(patience)
             with open(txt_file) as fp:
                 visible_text_list = fp.readlines()
                 current_url = visible_text_list[0].strip().rstrip()
@@ -82,11 +100,26 @@ def main():
                 logger.info("Working on: {}".format(current_url))
                 visible_text_list = [x.lower() for x in visible_text_list]
 
-                # counts keywords in page
-                found_count, found_keywords = count_keywords(
-                    visible_text_list,
-                    keywords
-                )
+                # This try/except loop ensures that
+                # you'll catch TookTooDamnLongException when it's sent.
+                # https://stackoverflow.com/questions/25027122/break-the-function-after-certain-time
+                try:
+                    # counts keywords in page
+                    found_count, found_keywords = count_keywords(
+                        visible_text_list,
+                        keywords
+                    )
+                except TookTooDamnLongException:
+                    # TODO: Keep a record of pages that took forever to search
+                    tqdm.write("[{0:0{width}d}] Aarrrgh! "
+                               "TOOK TOO DAMN LONG TO SEARCH! {1}".
+                               format(idx+1, current_url, width=num_digits))
+                    logger.warn("TTDL >>> {} <<<".format(current_url))
+                    pbar.update(1)
+                    # continue the for loop if count_keywords takes more
+                    # than [patience] seconds
+                    continue
+
                 logger.info("Keywords found: {}".format(found_count))
                 found_keywords_as_dict = dict((x, y) for x, y in found_keywords)
 
@@ -204,12 +237,22 @@ if __name__ == "__main__":
         required=True,
         help='File with keywords to search for in the directory (mandatory)'
     )
+    parser.add_argument(
+        '-p',
+        '--patience',
+        dest='patience',
+        default=30,
+        required=False,
+        help="Number of seconds you can give per-page-search. Life is too" \
+        " short to parse unabridged web pages. Default is 30. Bye"
+    )
 
     # these are module global variables and can be access by any function in
     # this module
     args = parser.parse_args()
     folder_name = args.folder_name
     keywords_file = args.keywords_file
+    patience = int(args.patience)
 
     # the output files of all observed keyword frequencies
     csv_file_name = "{}_results.csv".format(folder_name)
