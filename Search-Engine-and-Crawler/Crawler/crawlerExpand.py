@@ -42,7 +42,7 @@ target_dir = directory + "_" + curtime
 
 # RegEx that is used to filter searches for URLs on any given page.
 # Used in is_relevant_link_from_soup and is_relevant_link_from_html functions
-filter_regex = re.compile(".*([Pp]rogram|[Aa]dmission|[Cc]ertificate|[Dd]egree|[Dd]iploma|[Ff]aculty|[Ss]chool|[Dd]epartment|[Uu]ndergrad|[Gr]grad).*")
+filter_regex = re.compile(".*([Pp]rogram|[Aa]dmission|[Cc]ertificate|[Dd]egree|[Dd]iploma|[Ff]aculty|[Ss]chool|[Dd]epartment|[Uu]ndergrad|[Gr]rad).*")
 filter_title_regex = re.compile(".*([Pp]rogram|[Aa]dmission|[Cc]ourse).*")
 
 # Var to choose mode
