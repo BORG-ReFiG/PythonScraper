@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import argparse
 import sys
 import re
@@ -67,7 +68,7 @@ def main():
     tqdm.write("Found {} files to search. Please wait.".
                format(len(all_txt_files)))
 
-    with open(csv_file_name, 'a+', encoding="utf-8") as f:
+    with open(csv_file_name, 'a+', encoding="utf-8-sig") as f:
         # Using dictionary keys as fieldnames for the CSV file header
         writer = csv.DictWriter(f, headers)
         writer.writeheader()
@@ -75,7 +76,7 @@ def main():
 
         for idx, txt_file in enumerate(all_txt_files):
 
-            with open(txt_file) as fp:
+            with open(txt_file, "r", encoding="utf-8-sig") as fp:
                 visible_text_list = fp.readlines()
                 current_url = visible_text_list[0].strip().rstrip()
                 num_digits = len(str(len(all_txt_files)))
