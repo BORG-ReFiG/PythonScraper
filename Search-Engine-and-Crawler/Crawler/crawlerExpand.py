@@ -164,9 +164,10 @@ def request_url(url):
     # Use requests module to get html from url as an object
     html = ''
     try:
-        r = requests.get(url, headers=headers)
-        if r.ok:
-            if "text/html" in r.headers["content-type"]:
+        head = requests.head(url, headers=headers)
+        if head.ok and ("text/html" in head.headers["content-type"]):
+            r = requests.get(url, headers=headers)
+            if r.ok:
                 return r
         return None
     except KeyboardInterrupt:
@@ -378,7 +379,7 @@ def process_links_from_soup (soup, cur_link, grab_all=False):
                 # if the link is not in crawledURLsArray then it appends it to urls and crawledURLsArray
                 if new_link not in crawledURLsArray:
                     # Ensures no jpg or pdfs are stored and that no mailto: links are stored.
-                    if new_link.startswith("http") and '.pdf' not in new_link and '.jpg' not in new_link and '.mp3' not in new_link:
+                    if new_link.startswith("http") and ('.pdf' not in new_link) and ('.jpg' not in new_link) and ('.mp3' not in new_link):
                         #???TODO: add checks for www.domain.com and https://
                         # Adds new link to array
                         plannedURLsArray.append(new_link)
@@ -388,17 +389,19 @@ def process_links_from_soup (soup, cur_link, grab_all=False):
 
                         # Remove the front of the URL (http or https)
                         http_split = new_link.split("://", 1)
-                        # Add all possible link variations to file of URLs that have been looked at
-                        # Adds new link to array
-                        crawledURLsArray.append("http://" + http_split[1])
-                        # Adds new link to already looked at file
-                        crawled_urls.write("http://" + http_split[1])
-                        crawled_urls.write("\n")
-                        # Adds new link to array
-                        crawledURLsArray.append("https://" + http_split[1])
-                        # Adds new link to already looked at file
-                        crawled_urls.write("https://" + http_split[1])
-                        crawled_urls.write("\n")
+
+                        if len(http_split)>1:
+                            # Add all possible link variations to file of URLs that have been looked at
+                            # Adds new link to array
+                            crawledURLsArray.append("http://" + http_split[1])
+                            # Adds new link to already looked at file
+                            crawled_urls.write("http://" + http_split[1])
+                            crawled_urls.write("\n")
+                            # Adds new link to array
+                            crawledURLsArray.append("https://" + http_split[1])
+                            # Adds new link to already looked at file
+                            crawled_urls.write("https://" + http_split[1])
+                            crawled_urls.write("\n")
 
 # checks that the text content of the link matches the filter_regex
 # input parameter is a string
