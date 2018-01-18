@@ -43,7 +43,7 @@ target_dir = directory + "_" + curtime
 
 # RegEx that is used to filter searches for URLs on any given page.
 # Used in is_relevant_link_from_soup and is_relevant_link_from_html functions
-filter_regex = re.compile(".*([Pp]rogram|[Aa]dmission|[Cc]ertificate|[Dd]egree|[Dd]iploma|[Ff]aculty|[Ss]chool|[Dd]epartment|[Uu]ndergrad|[Gr]rad).*")
+filter_regex = re.compile(".*([Pp]rogram|[Aa]dmission|[Cc]ertificate|[Dd]egree|[Dd]iploma|[Ff]aculty|[Ss]chool|[Dd]epartment|[Uu]ndergrad|[Gr]rad|[Ss]chool).*")
 filter_title_regex = re.compile(".*([Pp]rogram|[Aa]dmission|[Cc]ourse).*")
 
 # Var to choose mode
@@ -165,10 +165,9 @@ def request_url(url):
     # Use requests module to get html from url as an object
     html = ''
     try:
-        head = requests.head(url, headers=headers)
-        if head.ok and ("text/html" in head.headers["content-type"]):
-            r = requests.get(url, headers=headers)
-            if r.ok:
+        r = requests.get(url, headers=headers)
+        if r.ok:
+            if "text/html" in r.headers["content-type"]:
                 return r
         return None
     except KeyboardInterrupt:
@@ -253,6 +252,7 @@ def crawl(max_pages):
     logging.info("Crawling through domain '" + seed + "'")
 
     if page == 1:
+
         # Array that holds the queue to be visited later
         plannedURLsArray.append(url)
         # Logging the urls
@@ -375,34 +375,35 @@ def process_links_from_soup (soup, cur_link, grab_all=False):
         if (grab_all or is_relevant_link_from_soup(lnk)):
             new_link = (urllib.parse.urldefrag(lnk['href'])[0]).rstrip('/')
             new_link = urllib.parse.urljoin(cur_link, new_link)
-            # if the link is in our main domain
-            if checkDomain(new_link, cur_link):
-                # if the link is not in crawledURLsArray then it appends it to urls and crawledURLsArray
-                if new_link not in crawledURLsArray:
-                    # Ensures no jpg or pdfs are stored and that no mailto: links are stored.
-                    if new_link.startswith("http") and ('.pdf' not in new_link) and ('.jpg' not in new_link) and ('.mp3' not in new_link):
-                        #???TODO: add checks for www.domain.com and https://
-                        # Adds new link to array
-                        plannedURLsArray.append(new_link)
-                        # Adds new link to queue file
-                        planned_urls.write(new_link)
-                        planned_urls.write("\n")
-
-                        # Remove the front of the URL (http or https)
-                        http_split = new_link.split("://", 1)
-
-                        if len(http_split)>1:
-                            # Add all possible link variations to file of URLs that have been looked at
+            if this_is_not_media(new_link):
+                # if the link is in our main domain
+                if checkDomain(new_link, cur_link):
+                    # if the link is not in crawledURLsArray then it appends it to urls and crawledURLsArray
+                    if new_link not in crawledURLsArray:
+                        # Ensures no jpg or pdfs are stored and that no mailto: links are stored.
+                        if new_link.startswith("http") and ('.pdf' not in new_link) and ('.jpg' not in new_link) and ('.mp3' not in new_link):
+                            #???TODO: add checks for www.domain.com and https://
                             # Adds new link to array
-                            crawledURLsArray.append("http://" + http_split[1])
-                            # Adds new link to already looked at file
-                            crawled_urls.write("http://" + http_split[1])
-                            crawled_urls.write("\n")
-                            # Adds new link to array
-                            crawledURLsArray.append("https://" + http_split[1])
-                            # Adds new link to already looked at file
-                            crawled_urls.write("https://" + http_split[1])
-                            crawled_urls.write("\n")
+                            plannedURLsArray.append(new_link)
+                            # Adds new link to queue file
+                            planned_urls.write(new_link)
+                            planned_urls.write("\n")
+
+                            # Remove the front of the URL (http or https)
+                            http_split = new_link.split("://", 1)
+
+                            if len(http_split)>1:
+                                # Add all possible link variations to file of URLs that have been looked at
+                                # Adds new link to array
+                                crawledURLsArray.append("http://" + http_split[1])
+                                # Adds new link to already looked at file
+                                crawled_urls.write("http://" + http_split[1])
+                                crawled_urls.write("\n")
+                                # Adds new link to array
+                                crawledURLsArray.append("https://" + http_split[1])
+                                # Adds new link to already looked at file
+                                crawled_urls.write("https://" + http_split[1])
+                                crawled_urls.write("\n")
 
 # checks that the text content of the link matches the filter_regex
 # input parameter is a string
@@ -411,6 +412,16 @@ def is_relevant_link_from_html(link):
         return True
     return False
     #return True #Uncomment to grab all links
+
+def this_is_not_media(new_link):
+    path = urllib.parse.urlparse(new_link).path
+    ext = os.path.splitext(path)[1]
+    unwanted = ['.mp3', '.mp4', '.doc', '.docx', '.pdf', '.jpg', '.jpg', '.css']
+    if ext not in unwanted and new_link.startswith("http"):
+        return True
+    else:
+        return False
+
 
 #Take an array of links, run the split on each and add the results to the appropriate arrays and files
 def process_links_from_html (html, cur_link, grab_all=False):
@@ -426,34 +437,35 @@ def process_links_from_html (html, cur_link, grab_all=False):
             href = dequote(href)
             new_link = (urllib.parse.urldefrag(href)[0]).rstrip('/')
             new_link = urllib.parse.urljoin(cur_link, new_link)
-            if checkDomain(new_link, cur_link):
-                # if the link is not in crawledURLsArray then it appends it to urls and crawledURLsArray
-                if new_link not in crawledURLsArray:
-                    # Ensures no jpg or pdfs are stored and that no mailto: links are stored.
-                    if new_link.startswith("http") and '.pdf' not in new_link and '.jpg' not in new_link and '.mp3' not in new_link:
-                        #???TODO: add checks for www.domain.com and https://
-                        # Adds new link to array
-                        plannedURLsArray.append(new_link)
-                        # Adds new link to queue file
-                        planned_urls.write(new_link)
-                        planned_urls.write("\n")
+            if this_is_not_media(new_link):
+                if checkDomain(new_link, cur_link):
+                    # if the link is not in crawledURLsArray then it appends it to urls and crawledURLsArray
+                    if new_link not in crawledURLsArray:
+                        # Ensures no jpg or pdfs are stored and that no mailto: links are stored.
+                        if new_link.startswith("http") and '.pdf' not in new_link and '.jpg' not in new_link and '.mp3' not in new_link:
+                            #???TODO: add checks for www.domain.com and https://
+                            # Adds new link to array
+                            plannedURLsArray.append(new_link)
+                            # Adds new link to queue file
+                            planned_urls.write(new_link)
+                            planned_urls.write("\n")
 
-                        try:
-                            # Remove the front of the URL (http or https)
-                            http_split = new_link.split("://", 1)
-                            # Add all possible link variations to file of URLs that have been looked at
-                            # Adds new link to array
-                            crawledURLsArray.append("http://" + http_split[1])
-                            # Adds new link to already looked at file
-                            crawled_urls.write("http://" + http_split[1])
-                            crawled_urls.write("\n")
-                            # Adds new link to array
-                            crawledURLsArray.append("https://" + http_split[1])
-                            # Adds new link to already looked at file
-                            crawled_urls.write("https://" + http_split[1])
-                            crawled_urls.write("\n")
-                        except IndexError as e:
-                            logging.info(str(e))
+                            try:
+                                # Remove the front of the URL (http or https)
+                                http_split = new_link.split("://", 1)
+                                # Add all possible link variations to file of URLs that have been looked at
+                                # Adds new link to array
+                                crawledURLsArray.append("http://" + http_split[1])
+                                # Adds new link to already looked at file
+                                crawled_urls.write("http://" + http_split[1])
+                                crawled_urls.write("\n")
+                                # Adds new link to array
+                                crawledURLsArray.append("https://" + http_split[1])
+                                # Adds new link to already looked at file
+                                crawled_urls.write("https://" + http_split[1])
+                                crawled_urls.write("\n")
+                            except IndexError as e:
+                                logging.info(str(e))
 
 
 def extract_text(soup):
