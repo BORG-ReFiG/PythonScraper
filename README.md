@@ -20,6 +20,9 @@ pip install tldextract
 pip install html5
 pip install pandas
 pip install tqdm
+pip install grequests
+pip install validators
+pip install tld
 ```
 
 ### keywords
@@ -55,3 +58,9 @@ their frequency and sorted.
 ```
 ./search.py -h
 ```
+
+
+####  Linux / MacOS / Windows Gotchas!
+
+
+https://stackoverflow.com/questions/19425857/env-python-r-no-such-file-or-directory
