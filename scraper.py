@@ -5,6 +5,7 @@ import sys
 import re
 import urllib.parse
 import logging
+import logging.handlers
 import os
 import time
 import codecs
@@ -24,13 +25,7 @@ from tld.utils import update_tld_names
 
 # update_tld_names() https://stackoverflow.com/a/22228140
 logger = logging.getLogger(__name__)
-
-# current time, used in the names of the folder and the logging file
-curtime = time.strftime("%Y-%m-%d-%H-%M-%S", time.gmtime())
-# Create a new log file
-logging.basicConfig(filename=('_uniscraperlog_' + curtime + '.log'),
-                    level=logging.DEBUG
-                    )
+logger.setLevel(logging.DEBUG)
 
 # https://github.com/tqdm/tqdm/issues/481
 tqdm.monitor_interval = 0
@@ -67,14 +62,34 @@ def main():
                 with ChDir(batch_website):
                     start_page = get_start_page()
 
+            setup_rotating_log(batch_website, seed)
+
             with ChDir(batch_website):
                 crawl(seed, pbar[idx], start_page, planned_urls_array, crawled_urls_array, website, max_pages)
         overall_prog.update(1)
 
+def setup_rotating_log(batch_website, seed):
+    with ChDir(batch_website):
+        # current time, used in the names of the folder and the logging file
+        curtime = time.strftime("%Y-%m-%d-%H-%M-%S", time.gmtime())
+        logs_dir = "logs"
+        if not os.path.exists(logs_dir):
+            os.mkdir(logs_dir)
+
+        log_file_name = '_uniscraperlog_{}_{}.log'.format(seed, curtime)
+        path_to_log_file = os.path.join(logs_dir, log_file_name)
+        # add a rotating logfile handler
+        handler = logging.handlers.RotatingFileHandler(
+            path_to_log_file,
+            maxBytes=2097152,  # 2 MB
+            backupCount=100
+        )
+        logger.addHandler(handler)
+
 def crawl(seed, prog_upd, start_page, planned_urls_array, crawled_urls_array, website, max_pages):
     """Function that takes link, saves the contents to text file call href_split
     """
-    logging.info("Crawling through domain '" + seed + "'")
+    logger.info("Crawling through domain '" + seed + "'")
     tqdm.write("++++++++++Crawling through domain {}+++++++++++".format(seed))
     visited_urls, planned_urls, crawled_urls = setup_crawler_files()
 
@@ -166,20 +181,20 @@ def process_current_link(page, prog_upd, link, seed, visited_urls, crawled_urls_
                 # Close the pipe to the file
                 fo.close()
                 # Log the creation of the file
-                logging.info('Created file ' + name)
+                logger.info('Created file ' + name)
 
             except KeyboardInterrupt:
                 tqdm.write("Script interrupted by user. Shutting down.")
-                logging.info("Script interrupted by user")
+                logger.info("Script interrupted by user")
                 shut_down()
             except Exception:
-                logging.exception("Can not encode file: " + current_url)
+                logger.exception("Can not encode file: " + current_url)
         else:
             tqdm.write("No visible text in {}".format(link))
-            logging.warning('No visible text in ' + link)
+            logger.warning('No visible text in ' + link)
     # Else: html does not exist or is empty. Log error
     else:
-        logging.warning('Request for ' + link + ' returned empty html')
+        logger.warning('Request for ' + link + ' returned empty html')
         empty_request_log.write(link)
         empty_request_log.write("\n")
 
@@ -194,7 +209,7 @@ def process_current_link(page, prog_upd, link, seed, visited_urls, crawled_urls_
     if page % 50 == 0:
         size_of_directory = get_tree_size(os.curdir) / 1000000
         tqdm.write("Size: {} MB".format(str(round(size_of_directory, 5))))
-        logging.info("Size: " + str(round(size_of_directory, 5)) + "MB")
+        logger.info("Size: " + str(round(size_of_directory, 5)) + "MB")
     # Time delay in seconds to prevent crashing the server
     time.sleep(.01)
     return page
@@ -261,7 +276,7 @@ def process_links_from_html(html, prog_upd, cur_link, seed, crawled_urls_array, 
                                 crawled_urls.write("https://" + http_split[1])
                                 crawled_urls.write("\n")
                             except IndexError as e:
-                                logging.info(str(e))
+                                logger.info(str(e))
 
     return
 
@@ -288,7 +303,7 @@ def add_to_crawled_urls_list(new_link, crawled_urls_array, crawled_urls):
                 crawled_urls.write("https://" + http_split[1])
                 crawled_urls.write("\n")
             except IndexError as e:
-                logging.info(str(e))
+                logger.info(str(e))
 
 def add_to_planned_urls_list(new_link, planned_urls_array, planned_urls):
     # Adds new link to array
@@ -322,10 +337,10 @@ def create_name_from_html (html):
     if name:
         # removes invalid characters from title
         name = format_filename(name) + '__' + str(time.time())
-        logging.info('Created name ' + name)
+        logger.info('Created name ' + name)
     else:
         name = "no_title_" + str(time.time()) # if no title provided give a no title with a timestamp
-        logging.warn('Failed to create a name, using \'' + name + '\' instead')
+        logger.warn('Failed to create a name, using \'' + name + '\' instead')
     return name
 
 def format_filename(name):
@@ -341,7 +356,7 @@ def format_filename(name):
         filename = filename.replace(' ','_')
     except TypeError as e:
         filename = str(uuid.uuid4())
-        logging.error("Got and error: {}".format(str(e)))
+        logger.error("Got and error: {}".format(str(e)))
     return filename
 
 def is_relevant_link_from_html(link):
@@ -395,7 +410,7 @@ def request_url(url, visited_urls):
     )
 
     # Log that this URL is being saved
-    logging.info('Requesting ' + url)
+    logger.info('Requesting ' + url)
     visited_urls.write(url)
     visited_urls.write("\n")
     # Use requests module to get html from url as an object
@@ -409,18 +424,24 @@ def request_url(url, visited_urls):
     except requests.exceptions.Timeout:
         # Maybe set up for a retry, or continue in a retry loop
         print("\nTook too long to get the page.")
-        logging.info("Took too long to get the page.")
+        logger.info("Took too long to get the page.")
     except requests.exceptions.RequestException as e:
         # catastrophic error. bail.
         print("\nCannot get the page.")
-        logging.info("Cannot get the page.")
+        logger.info("Cannot get the page.")
     except KeyboardInterrupt:
         print("\n\nScript interrupted by user. Shutting down.")
-        logging.info("Script interrupted by user")
+        logger.info("Script interrupted by user")
         shut_down()
     except Exception:
-        logging.exception("Couldn\'t request " + url)
+        logger.exception("Couldn\'t request " + url)
         return None
+
+def exception(request, exception):
+    print("Problem: {}: {}".format(request.url, exception))
+
+def request_urls(urls_list):
+    results = grequests.map((grequests.get(u) for u in urls_list), exception_handler=exception, size=5)
 
 def get_start_page():
     """Open the visited_urls text file and count the number of lines
@@ -437,6 +458,7 @@ def get_start_page():
 class ChDir(object):
     """
     Step into a directory context on which to operate on.
+    https://pythonadventures.wordpress.com/2013/12/15/chdir-a-context-manager-for-switching-working-directories/
     """
     def __init__(self, path):
         self.old_dir = os.getcwd()
