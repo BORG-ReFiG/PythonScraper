@@ -9,7 +9,6 @@ import logging.handlers
 import os
 import time
 import codecs
-import requests
 import string
 from bs4 import BeautifulSoup
 import tldextract
@@ -22,6 +21,7 @@ import validators
 import grequests
 from tld import get_tld
 from tld.utils import update_tld_names
+import requests
 
 # update_tld_names() https://stackoverflow.com/a/22228140
 logger = logging.getLogger(__name__)
@@ -201,7 +201,7 @@ def process_current_link(page, prog_upd, link, seed, visited_urls, crawled_urls_
     # Update on the total number of pages
     num_digits = len(str(max_pages))
     grab_blurb = "grabbing ALL links" if grab_all else "grabbing key links"
-    tqdm.write("[{0:0{width}d}]:[{1}] – {2}".format(page, grab_blurb.ljust(18), link, width=num_digits))
+    tqdm.write("[{0:0{width}d}]:[{1}] - {2}".format(page, grab_blurb.ljust(18), link, width=num_digits))
 
     # Increment page count
     page += 1
@@ -420,6 +420,7 @@ def request_url(url, visited_urls):
         if r.ok:
             if "text/html" in r.headers["content-type"]:
                 return r
+        logger.info(str(r))
         return None
     except requests.exceptions.Timeout:
         # Maybe set up for a retry, or continue in a retry loop
@@ -449,7 +450,7 @@ def get_start_page():
     throughout its previous runs
     """
     i = 1
-    with open("_visited_urls.txt") as f:
+    with open("_visited_urls.txt", "r", encoding="utf-8-sig") as f:
         for i, l in enumerate(f, start=1):
             pass
         page = i
