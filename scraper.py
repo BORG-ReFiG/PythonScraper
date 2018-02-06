@@ -50,7 +50,7 @@ def main():
         seed = tldextract.extract(website).domain
 
         pbar = {}
-        pbar[idx] = tqdm(total=max_pages, unit="page", desc=website)
+        pbar[idx] = tqdm(total=max_pages, unit="page", desc=website, ascii=True)
         if validators.url(website):
             batch_website = "{}_{}".format(batch_name, get_tld(website))
             if not os.path.exists(batch_website):
