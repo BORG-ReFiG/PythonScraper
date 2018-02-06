@@ -201,7 +201,7 @@ def process_current_link(page, prog_upd, link, seed, visited_urls, crawled_urls_
     # Update on the total number of pages
     num_digits = len(str(max_pages))
     grab_blurb = "grabbing ALL links" if grab_all else "grabbing key links"
-    tqdm.write("[{0:0{width}d}]:[{1}] - {2}".format(page, grab_blurb.ljust(18), link, width=num_digits))
+    tqdm.write("[{0:0{width}d}]:[{1}] - {2}".format(page, grab_blurb.ljust(18), link.encode("ascii", "ignore"), width=num_digits))
 
     # Increment page count
     page += 1
