@@ -62,11 +62,13 @@ def main():
                 with ChDir(batch_website):
                     start_page = get_start_page()
 
-            setup_rotating_log(batch_website, seed)
+            handler = setup_rotating_log(batch_website, seed)
 
             with ChDir(batch_website):
                 crawl(seed, pbar[idx], start_page, planned_urls_array, crawled_urls_array, website, max_pages)
         overall_prog.update(1)
+        handler.close()
+        logger.removeHandler(handler)
 
 def setup_rotating_log(batch_website, seed):
     with ChDir(batch_website):
@@ -85,6 +87,7 @@ def setup_rotating_log(batch_website, seed):
             backupCount=100
         )
         logger.addHandler(handler)
+        return handler
 
 def crawl(seed, prog_upd, start_page, planned_urls_array, crawled_urls_array, website, max_pages):
     """Function that takes link, saves the contents to text file call href_split
