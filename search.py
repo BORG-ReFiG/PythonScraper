@@ -48,6 +48,11 @@ def main():
                      format(folder_name))
         sys.exit()
 
+    # read boost terms from file into a list
+    boost_terms = get_file_content_as_list('boost_terms.txt')
+    # make the terms lowercase
+    boost_terms = [x.lower() for x in boost_terms]
+
     # read keywords from file into a list
     keywords = get_file_content_as_list(keywords_file)
     # make the keywords lowercase
@@ -62,7 +67,9 @@ def main():
     headers = [str(x) for x, y in sorted_keywords_list]
     # prepend url header onto the keywords list
     headers.insert(0, u'url')
-    headers.insert(1, u'frequency_sum')
+    headers.insert(1, u'freq_boost_sum')
+    headers.insert(2, u'frequency_sum')
+    headers.insert(3, u'boost_sum')
 
     pbar = tqdm(total=len(all_txt_files))
     tqdm.write("Found {} files to search. Please wait.".
@@ -90,10 +97,16 @@ def main():
                 # you'll catch TookTooDamnLongException when it's sent.
                 # https://stackoverflow.com/questions/25027122/break-the-function-after-certain-time
                 # counts keywords in page
-                found_count, found_keywords = count_keywords(
+                found_count, found_keywords, broad_terms_sum = count_keywords(
                     visible_text_list,
+                    boost_terms,
                     keywords
                 )
+
+                if broad_terms_sum < 1:
+                    # if none of the terms exist, don't event bother
+                    pbar.update(1)
+                    continue
 
                 logger.info("Keywords found: {}".format(found_count))
                 found_keywords_as_dict = dict((x, y) for x, y in found_keywords)
@@ -115,7 +128,10 @@ def main():
 
                 # prepend the current URL onto the frequencies dict object
                 freq_sum = sum(final_csv_dict[0].values())
-                final_csv_dict[0]['frequency_sum'] = freq_sum
+                boost_multiplied = broad_terms_sum*10
+                final_csv_dict[0]['boost_sum'] = boost_multiplied
+                final_csv_dict[0]['frequency_sum'] = freq_sum+boost_multiplied
+                final_csv_dict[0]['freq_boost_sum'] = (freq_sum+boost_multiplied)+boost_multiplied
                 final_csv_dict[0]['url'] = current_url
 
                 # ignore zero frequency_sum...
@@ -138,7 +154,13 @@ def sort_csv(csv_input, csv_output):
     summation to the lowest.
     """
     df = pd.read_csv(csv_input)
-    df = df.sort_values(['frequency_sum'], ascending=[0])
+    df = df.sort_values(['freq_boost_sum'], ascending=[0])
+
+    # remove duplicates
+    print(df.shape)
+    df.drop_duplicates(subset=['url'], keep='first', inplace=True)
+    print(df.shape)
+
     df.to_csv(csv_output, index=False)
 
 
@@ -165,16 +187,20 @@ def get_file_content_as_list(file_name):
         return file_name_handle.read().splitlines()
 
 
-def count_keywords(list_of_tokens, list_of_target_words):
+def count_keywords(list_of_tokens, list_of_boost_terms, list_of_target_words):
     """Counts how many instances of the keywords were found
     list_of_tokens - The list of words as haystack
-    list_of_target_words - The list of words as needle
+    boost_terms - The list of broader terms to check for after keywords search.
+    E.g. if words "program", "academic" appear then boost this page further.
+    keywords - The list of words as needle
     return number of words, list of keywords found
 
     Inspiration: http://www.cademuir.eu/blog/2011/10/20/python-searching-for-a-string-within-a-list-list-comprehension/
     https://developmentality.wordpress.com/2011/09/22/python-gotcha-word-boundaries-in-regular-expressions/
     """
     num_target_words = 0
+    total_weights_sum = 0
+    num_target_terms = 0
     matched_words = []
     for token in list_of_target_words:  # Goes through the tokens in the list
         weighted_token, token_weight = strip_weights(token)
@@ -185,8 +211,32 @@ def count_keywords(list_of_tokens, list_of_target_words):
         found_what = [m.group(1) for l in list_of_tokens for m in [regex.search(l)] if m]
         if len(found_what) > 0:  # For each one it checks if it is in the target list
             num_target_words = len(found_what)*int(token_weight)
+            total_weights_sum = total_weights_sum + int(token_weight)
             matched_words.append((weighted_token, num_target_words))
-    return num_target_words, matched_words  # Note that we are returning a tuple (2 values)
+
+    if total_weights_sum > len(found_what):  # check that
+        num_target_terms, matched_terms = relevancy_boost(list_of_tokens, list_of_boost_terms)
+        # print(num_target_terms, matched_terms)
+
+    return num_target_words, matched_words, num_target_terms  # Note that we are returning a tuple (2 values)
+
+
+def relevancy_boost(list_of_tokens, boost_terms):
+    num_target_words = 0
+    total_terms_count = 0
+    matched_words = []
+    for term in boost_terms:  # Goes through the tokens in the list
+        weighted_term, term_weight = strip_weights(term)
+
+        # regex = re.compile(".*({}).*".format(token)) # does match in-word substrings
+        regex = re.compile(".*(\\b{}\\b).*".format(weighted_term)) # match strictly whole words only
+        # found_what = [m.group(0) for l in list_of_target_words for m in [regex.search(l)] if m]
+        found_what = [m.group(1) for l in list_of_tokens for m in [regex.search(l)] if m]
+        if len(found_what) > 0:  # For each one it checks if it is in the target list
+            num_target_words = len(found_what)*int(term_weight)
+            total_terms_count = total_terms_count + len(found_what)
+            matched_words.append((weighted_term, num_target_words))
+    return total_terms_count, matched_words  # Note that we are returning a tuple (2 values)
 
 
 if __name__ == "__main__":
@@ -195,7 +245,6 @@ if __name__ == "__main__":
         description='Generate a sorted CSV file with keyword frequencies'
         ' from scraped web pages.'
     )
-
     parser.add_argument(
         '-f',
         '--folder',

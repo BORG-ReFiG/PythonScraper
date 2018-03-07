@@ -1,0 +1,10 @@
+Program
+Admission
+Certificate
+Degree
+Diploma
+Faculty
+School
+Department
+Undergrad
+Grad
